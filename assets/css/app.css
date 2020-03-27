@@ -1,3 +1,15 @@
 /* This file is for your main application css. */
 
-@import "./phoenix.css";
+@import "~bootstrap/scss/bootstrap";
+
+.alert {
+  margin-bottom: 0;
+}
+
+.alert:empty {
+  display: none;
+}
+
+main {
+  margin-top: 1rem;
+}
