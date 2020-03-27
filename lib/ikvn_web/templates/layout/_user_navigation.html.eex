@@ -1,7 +1,7 @@
 <%= if @current_user do %>
   <div class="btn-group navbar-nav">
     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <%= @current_user.nickname %>
+      <%= nickname(@current_user) %>
     </button>
 
     <div class="dropdown-menu dropdown-menu-right">
@@ -12,7 +12,7 @@
 <% else %>
   <div class="btn-group navbar-nav">
     <a class="btn btn-primary" href="/auth/facebook">
-      <i class="fa fa-github"></i>
+      <i class="fab fa-facebook"></i>
       <%= gettext "Sign in" %>
     </a>
   </div>

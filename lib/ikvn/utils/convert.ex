@@ -1,4 +1,4 @@
-defmodule Ikvn.Utils do
+defmodule Ikvn.Utils.Convert do
   def map_from_struct(%_{} = struct) do
     struct
     |> Map.from_struct()

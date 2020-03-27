@@ -7,6 +7,7 @@ defmodule Ikvn.Account.Link do
 
   schema "links" do
     field :uid, :string
+    field :provider, :string
     field :data, :map
 
     belongs_to :user, User
@@ -16,9 +17,9 @@ defmodule Ikvn.Account.Link do
 
   def create_changeset(%Link{} = link, attrs) do
     link
-    |> cast(attrs, [:uid, :user_id])
-    |> validate_required([:uid, :user_id])
-    |> unique_constraint(:uid)
+    |> cast(attrs, [:uid, :provider, :user_id])
+    |> validate_required([:uid, :provider, :user_id])
+    |> unique_constraint(:uid, name: :links_uid_provider_index)
     |> foreign_key_constraint(:user_id)
   end
 

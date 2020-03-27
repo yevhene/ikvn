@@ -6,6 +6,11 @@ import css from "../css/app.css"
 // Bootstrap
 import "bootstrap"
 
+// FontAwesome
+import { library } from '@fortawesome/fontawesome'
+import { faFacebook } from '@fortawesome/fontawesome-free-brands'
+library.add(faFacebook)
+
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
 // in "webpack.config.js".

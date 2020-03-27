@@ -2,12 +2,10 @@
 
 <ul>
   <li>
-    <strong><%= gettext "nickname" %>:</strong>
+    <strong><%= gettext "Nickname" %>:</strong>
     <%= @user.nickname %>
   </li>
 </ul>
-
-<span><%= link gettext("Edit"), to: Routes.profile_path(@conn, :edit) %></span>
 
 <hr />
 <span><%= link gettext("Back"), to: "/" %></span>

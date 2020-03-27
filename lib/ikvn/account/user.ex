@@ -1,6 +1,7 @@
 defmodule Ikvn.Account.User do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ikvn.Utils.Validation
 
   alias Ikvn.Account.Link
   alias Ikvn.Account.User
@@ -18,6 +19,7 @@ defmodule Ikvn.Account.User do
     user
     |> cast(attrs, [:nickname])
     |> validate_required([:nickname])
+    |> forbid_change(:nickname)
     |> unique_constraint(:nickname)
   end
 end

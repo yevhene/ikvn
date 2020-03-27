@@ -1,10 +1,13 @@
 defmodule Ikvn.Account do
   import Ecto.Query, warn: false
+  import IkvnWeb.Gettext
+
+  require Logger
 
   alias Ikvn.Account.Link
   alias Ikvn.Account.User
   alias Ikvn.Repo
-  alias Ikvn.Utils
+  alias Ikvn.Utils.Convert
 
   def get_user!(id), do: Repo.get!(User, id)
 
@@ -20,15 +23,14 @@ defmodule Ikvn.Account do
   end
 
   def authenticate(%Ueberauth.Auth{} = auth) do
-    IO.inspect auth
-    data = auth |> Utils.map_from_struct()
+    data = auth |> Convert.map_from_struct()
 
     with {:ok, user, link} <- user_from_auth(auth),
          {:ok, _link} <- update_link_data(link, data)
     do
       {:ok, user}
     else
-      _ -> {:error, :authentication_failed}
+      _ -> {:error, gettext("Authentication failed")}
     end
   end
 
@@ -53,12 +55,18 @@ defmodule Ikvn.Account do
     case  Link |> Repo.get_by(uid: uid) |> Repo.preload(:user) do
       %Link{} = link -> {:ok, link.user, link}
       _ ->
-        with {:ok, user} <- create_user(),
-             {:ok, link} <- create_link(%{
-               uid: uid, prvider: provider, user_id: user.id
+        try do
+          Repo.transaction(fn ->
+            {:ok, user} = create_user()
+            {:ok, link} = create_link(%{
+               uid: uid, provider: to_string(provider), user_id: user.id
              })
-        do
-          {:ok, user, link}
+            {:ok, user, link}
+          end)
+        rescue
+          e ->
+            Logger.error inspect(e)
+            {:error, e}
         end
     end
   end
