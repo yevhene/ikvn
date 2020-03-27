@@ -1,8 +1,8 @@
 defmodule IkvnWeb.Guardian do
   use Guardian, otp_app: :ikvn
 
-  alias Ikvn.Repo
   alias Ikvn.Account.User
+  alias Ikvn.Repo
 
   def subject_for_token(%User{id: id}, _claims), do: {:ok, id}
   def subject_for_token(_, _), do: {:error, :cannot_serialize_resource}

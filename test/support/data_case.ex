@@ -16,6 +16,8 @@ defmodule Ikvn.DataCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL
+
   using do
     quote do
       alias Ikvn.Repo
@@ -28,10 +30,10 @@ defmodule Ikvn.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Ikvn.Repo)
+    :ok = SQL.Sandbox.checkout(Ikvn.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Ikvn.Repo, {:shared, self()})
+      SQL.Sandbox.mode(Ikvn.Repo, {:shared, self()})
     end
 
     :ok

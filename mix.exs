@@ -44,7 +44,8 @@ defmodule Ikvn.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:ueberauth_facebook, "~> 0.8"},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 2.0"},
+      {:credo, "~> 1.2", only: [:dev, :test], runtime: false}
     ]
   end
 
