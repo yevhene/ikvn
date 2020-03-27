@@ -1,0 +1,13 @@
+<h2><%= gettext "Profile" %></h2>
+
+<ul>
+  <li>
+    <strong><%= gettext "nickname" %>:</strong>
+    <%= @user.nickname %>
+  </li>
+</ul>
+
+<span><%= link gettext("Edit"), to: Routes.profile_path(@conn, :edit) %></span>
+
+<hr />
+<span><%= link gettext("Back"), to: "/" %></span>

@@ -1,0 +1,99 @@
+## "msgid"s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove "msgid"s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use "mix gettext.extract --merge" or "mix gettext.merge"
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+"Plural-Forms: nplurals=2\n"
+
+#, elixir-format
+#: lib/ikvn_web/guardian/error_handler.ex:16
+msgid "Authorization failed: %{reason}"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/profile/edit.html.eex:6
+#: lib/ikvn_web/templates/profile/show.html.eex:13
+msgid "Back"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/auth_controller.ex:29
+msgid "Could not authenticate. Error: %{reason}"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/profile/show.html.eex:10
+msgid "Edit"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/profile/edit.html.eex:1
+msgid "Edit Profile"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/auth_controller.ex:14
+msgid "Failed to authenticate"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/profile/_form.html.eex:9
+msgid "Nickname"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/profile/_form.html.eex:4
+msgid "Oops, something went wrong! Please check the errors below."
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/plug/identify_current_user.ex:22
+msgid "Please fill your profile"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/layout/_user_navigation.html.eex:8
+#: lib/ikvn_web/templates/profile/show.html.eex:1
+msgid "Profile"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/profile_controller.ex:22
+msgid "Profile updated successfully"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/layout/_user_navigation.html.eex:9
+msgid "Sign Out"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/layout/_user_navigation.html.eex:16
+msgid "Sign in"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/session_controller.ex:9
+msgid "Signed out"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/profile/_form.html.eex:15
+msgid "Submit"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/auth_controller.ex:22
+msgid "Successfully authenticated"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/profile/show.html.eex:5
+msgid "nickname"
+msgstr ""

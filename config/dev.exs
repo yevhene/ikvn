@@ -2,12 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :ikvn, Ikvn.Repo,
-  username: "postgres",
-  password: "postgres",
   database: "ikvn_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
 # For development, we disable any cache and enable
 # debugging and code reloading.

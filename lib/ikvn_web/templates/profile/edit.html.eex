@@ -1,0 +1,6 @@
+<h2><%= gettext "Edit Profile" %></h2>
+
+<%= render "_form.html", Map.put(assigns, :action, Routes.profile_path(@conn, :update)) %>
+
+<hr />
+<span><%= link gettext("Back"), to: Routes.profile_path(@conn, :show) %></span>

@@ -1,0 +1,19 @@
+<%= if @current_user do %>
+  <div class="btn-group navbar-nav">
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= @current_user.nickname %>
+    </button>
+
+    <div class="dropdown-menu dropdown-menu-right">
+      <%= link gettext("Profile"), to: Routes.profile_path(@conn, :show), class: "dropdown-item" %>
+      <%= link gettext("Sign Out"), to: Routes.session_path(@conn, :delete), method: "delete", class: "dropdown-item" %>
+    </div>
+  </div>
+<% else %>
+  <div class="btn-group navbar-nav">
+    <a class="btn btn-primary" href="/auth/facebook">
+      <i class="fa fa-github"></i>
+      <%= gettext "Sign in" %>
+    </a>
+  </div>
+<% end %>

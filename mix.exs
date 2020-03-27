@@ -20,7 +20,7 @@ defmodule Ikvn.MixProject do
   def application do
     [
       mod: {Ikvn.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ueberauth_facebook]
     ]
   end
 
@@ -42,7 +42,9 @@ defmodule Ikvn.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:ueberauth_facebook, "~> 0.8"},
+      {:guardian, "~> 2.0"}
     ]
   end
 
@@ -56,7 +58,8 @@ defmodule Ikvn.MixProject do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      localize: ["gettext.extract", "gettext.merge priv/gettext"]
     ]
   end
 end
