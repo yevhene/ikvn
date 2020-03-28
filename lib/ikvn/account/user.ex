@@ -5,6 +5,7 @@ defmodule Ikvn.Account.User do
 
   alias Ikvn.Account.Link
   alias Ikvn.Account.User
+  alias Ikvn.Game.Participation
 
   schema "users" do
     field :nickname, :string
@@ -12,6 +13,7 @@ defmodule Ikvn.Account.User do
     field :permissions, {:array, :string}
 
     has_many :links, Link
+    has_many :participations, Participation
 
     timestamps(type: :utc_datetime)
   end

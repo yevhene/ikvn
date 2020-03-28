@@ -8,6 +8,7 @@
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "phoenix": "file:../deps/phoenix",

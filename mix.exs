@@ -46,7 +46,9 @@ defmodule Ikvn.MixProject do
       {:ueberauth_facebook, "~> 0.8"},
       {:guardian, "~> 2.0"},
       {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
-      {:exgravatar, "~> 2.0"}
+      {:exgravatar, "~> 2.0"},
+      {:earmark, "~> 1.4.3"},
+      {:ecto_enum, "~> 1.4"}
     ]
   end
 

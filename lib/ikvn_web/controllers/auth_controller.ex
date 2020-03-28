@@ -19,7 +19,6 @@ defmodule IkvnWeb.AuthController do
     case Account.authenticate(oauth) do
       {:ok, user} ->
         conn
-        |> clear_flash()
         |> put_flash(:info, gettext "Successfully authenticated")
         |> sign_in(user)
         |> redirect(to: "/")

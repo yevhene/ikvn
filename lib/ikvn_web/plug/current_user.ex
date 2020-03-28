@@ -1,6 +1,6 @@
 defmodule IkvnWeb.Plug.CurrentUser do
-  import Guardian.Plug, only: [current_resource: 1]
-  import Plug.Conn, only: [assign: 3]
+  import Guardian.Plug
+  import Plug.Conn
 
   def init(opts), do: opts
 

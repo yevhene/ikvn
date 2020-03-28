@@ -1,0 +1,8 @@
+<%= link(to: Routes.admin_tournament_path(@conn, :new), class: "card card-inverse card-primary p-3 text-center") do %>
+  <p><i class="fas fa-plus-circle" aria-hidden="true"></i></p>
+  <footer>
+    <small>
+      <%= gettext "New Tournament" %>
+    </small>
+  </footer>
+<% end %>

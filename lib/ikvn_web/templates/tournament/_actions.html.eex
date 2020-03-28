@@ -1,0 +1,8 @@
+<%= if @current_user do %>
+  <%= if @participation.role == :admin do %>
+    <%= link to: Routes.admin_tournament_path(@conn, :show, @tournament), class: "btn btn-primary actions" do %>
+      <i class="fas fa-cogs" aria-hidden="true"></i>
+      <%= gettext "Settings" %>
+    <% end %>
+  <% end %>
+<% end %>

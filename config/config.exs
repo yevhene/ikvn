@@ -14,6 +14,9 @@ end
 config :ikvn,
   ecto_repos: [Ikvn.Repo]
 
+config :ikvn, Ikvn.Repo,
+  migration_timestamps: [type: :utc_datetime]
+
 # Configures the endpoint
 config :ikvn, IkvnWeb.Endpoint,
   url: [host: "localhost"],

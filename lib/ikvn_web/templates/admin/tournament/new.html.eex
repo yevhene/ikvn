@@ -1,0 +1,6 @@
+<h2><%= gettext "New Tournament" %></h2>
+
+<%= render "_form.html", Map.put(assigns, :action, Routes.admin_tournament_path(@conn, :create)) %>
+
+<hr />
+<span><%= link gettext("Back"), to: Routes.tournament_path(@conn, :index) %></span>

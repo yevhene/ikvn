@@ -1,7 +1,7 @@
 defmodule IkvnWeb.Plug.IdentifyCurrentUser do
   import IkvnWeb.Gettext
-  import Phoenix.Controller, only: [put_flash: 3, redirect: 2, get_format: 1]
-  import Plug.Conn, only: [halt: 1, send_resp: 3]
+  import Phoenix.Controller
+  import Plug.Conn
   alias IkvnWeb.Router.Helpers, as: Routes
 
   def init(opts), do: opts
@@ -19,6 +19,7 @@ defmodule IkvnWeb.Plug.IdentifyCurrentUser do
     case get_format(conn) do
       "html" ->
         conn
+        |> clear_flash()
         |> put_flash(:info, gettext "Please fill your profile")
         |> redirect(to: Routes.profile_path(conn, :edit))
         |> halt()

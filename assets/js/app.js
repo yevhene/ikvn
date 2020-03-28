@@ -9,7 +9,8 @@ import "bootstrap"
 // FontAwesome
 import { library } from '@fortawesome/fontawesome'
 import { faFacebook } from '@fortawesome/fontawesome-free-brands'
-library.add(faFacebook)
+import { faPlusCircle, faCogs } from '@fortawesome/fontawesome-free-solid'
+library.add(faFacebook, faPlusCircle, faCogs)
 
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured

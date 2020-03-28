@@ -1,0 +1,31 @@
+<div class="jumbotron">
+  <h2><%= gettext "Open Electric KVN Championship!" %></h2>
+</div>
+
+<%= if length(@future_tournaments) > 0 do %>
+  <h5><%= gettext "Future Tournaments" %></h5>
+
+  <div class="card-columns">
+    <%= render_many(@future_tournaments, IkvnWeb.TournamentView, "_tournament.html", assigns) %>
+  </div>
+
+  <hr />
+<% end %>
+
+<div class="card-columns">
+  <%= render_many(@active_tournaments, IkvnWeb.TournamentView, "_tournament.html", assigns) %>
+
+  <%= if can?(@current_user, :create_tournament) do %>
+    <%= render "_new_button.html", assigns %>
+  <% end %>
+</div>
+
+<%= if length(@finished_tournaments) > 0 do %>
+  <hr />
+
+  <h5><%= gettext "Finished Tournaments" %></h5>
+
+  <div class="card-columns">
+    <%= render_many(@finished_tournaments, IkvnWeb.TournamentView, "_tournament.html", assigns) %>
+  </div>
+<% end %>

@@ -10,10 +10,18 @@
   display: none;
 }
 
+form .alert {
+  margin-bottom: 1rem;
+}
+
 main {
   margin-top: 1rem;
 }
 
 .navbar-nav .navbar-gravatar {
   margin-right: 0.5rem;
+}
+
+.actions {
+  margin-left: 1rem;
 }

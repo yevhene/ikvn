@@ -27,11 +27,36 @@ defmodule IkvnWeb.Router do
     plug Guardian.Plug.EnsureAuthenticated
   end
 
+  pipeline :can_create_tournament do
+    plug IkvnWeb.Plug.CheckPermission, permission: :create_tournament
+  end
+
+  pipeline :tournament do
+    plug IkvnWeb.Plug.LoadTournament
+  end
+
+  pipeline :admin do
+    plug IkvnWeb.Plug.AuthorizeAdmin
+  end
+
   scope "/", IkvnWeb do
     pipe_through [:browser, :guardian, :require_login, :identify]
 
     resources "/profile", ProfileController,
       only: [:show], singleton: true
+
+    scope "/admin", Admin, as: :admin do
+      pipe_through [:can_create_tournament]
+
+      resources "/tournaments", TournamentController, only: [:new, :create]
+    end
+
+    scope "/admin", Admin, as: :admin do
+      pipe_through [:tournament, :admin]
+
+      resources "/tournaments", TournamentController,
+        except: [:index, :new, :create]
+    end
   end
 
   scope "/", IkvnWeb do
@@ -46,7 +71,13 @@ defmodule IkvnWeb.Router do
   scope "/", IkvnWeb do
     pipe_through [:browser, :guardian, :identify]
 
-    get "/", PageController, :index
+    resources "/", TournamentController, only: [:index]
+
+    scope "/" do
+      pipe_through [:tournament]
+
+      resources "/tournaments", TournamentController, only: [:show]
+    end
   end
 
   scope "/auth", IkvnWeb do

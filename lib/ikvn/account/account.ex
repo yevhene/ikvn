@@ -9,8 +9,6 @@ defmodule Ikvn.Account do
   alias Ikvn.Repo
   alias Ikvn.Utils.MapUtils
 
-  def get_user!(id), do: Repo.get!(User, id)
-
   def change_user_profile(%User{} = user) do
     user
     |> User.profile_changeset(%{})
