@@ -4,17 +4,17 @@ defmodule IkvnWeb.Guardian.ErrorHandler do
   import Plug.Conn, only: [halt: 1, send_resp: 3]
   import IkvnWeb.Guardian.Plug, only: [sign_out: 1]
 
-  def auth_error(conn, {_type, {_kind, reason}}, _opts) do
+  require Logger
+
+  def auth_error(conn, details, _opts) do
     format = conn.private.phoenix_format
+    Logger.error inspect(details)
 
     case format do
       "html" ->
         conn
         |> sign_out
-        |> put_flash(
-          :error,
-          gettext("Authorization failed: %{reason}", reason: reason)
-        )
+        |> put_flash(:error, gettext("Authentication failed"))
         |> redirect(to: "/")
         |> halt()
 

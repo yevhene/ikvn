@@ -7,7 +7,7 @@ defmodule Ikvn.Account do
   alias Ikvn.Account.Link
   alias Ikvn.Account.User
   alias Ikvn.Repo
-  alias Ikvn.Utils.Convert
+  alias Ikvn.Utils.MapUtils
 
   def get_user!(id), do: Repo.get!(User, id)
 
@@ -23,7 +23,7 @@ defmodule Ikvn.Account do
   end
 
   def authenticate(%Ueberauth.Auth{} = auth) do
-    data = auth |> Convert.map_from_struct()
+    data = auth |> MapUtils.map_from_struct()
 
     with {:ok, user, link} <- user_from_auth(auth),
          {:ok, _link} <- update_link_data(link, data)
@@ -34,8 +34,9 @@ defmodule Ikvn.Account do
     end
   end
 
-  defp create_user do
+  defp create_user(attrs) do
     %User{}
+    |> User.create_changeset(attrs)
     |> Repo.insert()
   end
 
@@ -51,13 +52,14 @@ defmodule Ikvn.Account do
     |> Repo.update()
   end
 
-  defp user_from_auth(%{uid: uid, provider: provider}) do
+  defp user_from_auth(%{uid: uid, provider: provider, extra: extra}) do
     case  Link |> Repo.get_by(uid: uid) |> Repo.preload(:user) do
       %Link{} = link -> {:ok, link.user, link}
       _ ->
         try do
+          email = extra |> MapUtils.dig([:raw_info, :user, "email"])
           Repo.transaction(fn ->
-            {:ok, user} = create_user()
+            {:ok, user} = create_user(%{email: email})
             {:ok, link} = create_link(%{
                uid: uid, provider: to_string(provider), user_id: user.id
              })

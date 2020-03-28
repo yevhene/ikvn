@@ -3,8 +3,9 @@ defmodule Ikvn.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :nickname, :string
-      add :is_admin, :boolean, default: false
+      add :nickname, :text
+      add :email, :text
+      add :permissions, {:array, :text}, default: []
 
       timestamps(type: :utc_datetime)
     end

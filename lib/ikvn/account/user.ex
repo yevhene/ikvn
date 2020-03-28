@@ -8,17 +8,23 @@ defmodule Ikvn.Account.User do
 
   schema "users" do
     field :nickname, :string
-    field :is_admin, :boolean
+    field :email, :string
+    field :permissions, {:array, :string}
 
     has_many :links, Link
 
     timestamps(type: :utc_datetime)
   end
 
+  def create_changeset(%User{} = user, attrs) do
+    user
+    |> cast(attrs, [:email])
+  end
+
   def profile_changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:nickname])
-    |> validate_required([:nickname])
+    |> cast(attrs, [:nickname, :email])
+    |> validate_required([:nickname, :email])
     |> forbid_change(:nickname)
     |> unique_constraint(:nickname)
   end

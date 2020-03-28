@@ -11,13 +11,8 @@ msgid ""
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/guardian/error_handler.ex:16
-msgid "Authorization failed: %{reason}"
-msgstr ""
-
-#, elixir-format
 #: lib/ikvn_web/templates/profile/edit.html.eex:6
-#: lib/ikvn_web/templates/profile/show.html.eex:11
+#: lib/ikvn_web/templates/profile/show.html.eex:17
 msgid "Back"
 msgstr ""
 
@@ -79,7 +74,7 @@ msgid "Signed out"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/profile/_form.html.eex:18
+#: lib/ikvn_web/templates/profile/_form.html.eex:30
 msgid "Submit"
 msgstr ""
 
@@ -89,21 +84,42 @@ msgid "Successfully authenticated"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn/account.ex:33
+#: lib/ikvn/account.ex:33 lib/ikvn_web/guardian/error_handler.ex:17
 msgid "Authentication failed"
-msgstr ""
-
-#, elixir-format
-#: lib/ikvn_web/views/layout_view.ex:5
-msgid "Please set your nickname"
-msgstr ""
-
-#, elixir-format
-#: lib/ikvn_web/templates/profile/_form.html.eex:13
-msgid "You can not change this in the future"
 msgstr ""
 
 #, elixir-format
 #: lib/ikvn/utils/validation.ex:10
 msgid "You cannot change this field"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/profile/show.html.eex:14
+msgid "Edit"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/profile/_form.html.eex:18
+#: lib/ikvn_web/templates/profile/show.html.eex:9
+msgid "Email"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/profile/_form.html.eex:13
+msgid "You can set it only once"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/profile/_form.html.eex:23
+msgid "It will be used for important messages"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/profile/_form.html.eex:24
+msgid "and for your gravatar"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/views/layout_view.ex:5
+msgid "Unknown"
 msgstr ""

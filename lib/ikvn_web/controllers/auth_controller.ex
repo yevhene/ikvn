@@ -19,6 +19,7 @@ defmodule IkvnWeb.AuthController do
     case Account.authenticate(oauth) do
       {:ok, user} ->
         conn
+        |> clear_flash()
         |> put_flash(:info, gettext "Successfully authenticated")
         |> sign_in(user)
         |> redirect(to: "/")
@@ -26,7 +27,7 @@ defmodule IkvnWeb.AuthController do
         conn
         |> put_flash(
           :error,
-          gettext("Could not authenticate. Error: %{reason}", reason: reason)
+          gettext("Error: %{reason}", reason: reason)
         )
         |> redirect(to: "/")
     end

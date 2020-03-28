@@ -13,3 +13,7 @@
 main {
   margin-top: 1rem;
 }
+
+.navbar-nav .navbar-gravatar {
+  margin-right: 0.5rem;
+}
