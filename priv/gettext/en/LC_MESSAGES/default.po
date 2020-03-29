@@ -235,12 +235,7 @@ msgid "Staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:103
-msgid "User \"%{nickname}\" is already participate"
-msgstr ""
-
-#, elixir-format
-#: lib/ikvn/game/game.ex:123
+#: lib/ikvn/game/game.ex:108
 msgid "User \"%{nickname}\" is not exist"
 msgstr ""
 
@@ -255,26 +250,26 @@ msgid "Really?"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:21
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:23
 msgid "User successfully added to staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:145
+#: lib/ikvn/game/game.ex:130
 msgid "Can't delete the Creator from staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:38
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:43
 msgid "User successfully deleted from staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:116
-msgid "Can't add User \"{nickname}\" to Staff. Contact Admin"
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:26
+msgid "User can't be added to staff. Reason: %{reason}"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:42
-msgid "User can't be deleted from staff. Contact Admin"
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:46
+msgid "User can't be removed from staff. Reason: %{reason}"
 msgstr ""

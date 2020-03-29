@@ -98,27 +98,12 @@ defmodule Ikvn.Game do
   def create_staff(nickname, role, tournament, creator) do
     case Account.find_user(nickname) do
       %User{} = user ->
-        case get_user_participation(user, tournament) do
-          %Participation{} ->
-            {:error, gettext(
-              "User \"%{nickname}\" is already participate",
-              nickname: nickname
-            )}
-          _ ->
-            case create_participation(%{
-              tournament_id: tournament.id,
-              user_id: user.id,
-              role: role,
-              creator_id: creator.id
-            }) do
-              {:ok, participation} -> {:ok, participation}
-              _ ->
-                {:error, gettext(
-                  "Can't add User \"{nickname}\" to Staff. Contact Admin",
-                  nickname: nickname
-                )}
-            end
-        end
+        create_participation(%{
+          tournament_id: tournament.id,
+          user_id: user.id,
+          role: role,
+          creator_id: creator.id
+        })
       _ ->
         {:error, gettext(
           "User \"%{nickname}\" is not exist", nickname: nickname

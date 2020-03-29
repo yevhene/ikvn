@@ -1,6 +1,8 @@
 defmodule IkvnWeb.Admin.StaffController do
   use IkvnWeb, :controller
 
+  import Ikvn.Utils.Validation
+
   alias Ikvn.Game
 
   plug :load_resource when action in [:delete]
@@ -19,16 +21,19 @@ defmodule IkvnWeb.Admin.StaffController do
       {:ok, _participation} ->
         conn
         |> put_flash(:info, gettext "User successfully added to staff")
-        |> redirect(to:
-          Routes.admin_tournament_staff_path(conn, :index, tournament)
-        )
+      {:error, %Ecto.Changeset{} = changeset} ->
+        conn
+        |> put_flash(:error, gettext(
+          "User can't be added to staff. Reason: %{reason}",
+          reason: fetch_errors(changeset)
+        ))
       {:error, error} ->
         conn
         |> put_flash(:error, error)
-        |> redirect(to:
-          Routes.admin_tournament_staff_path(conn, :index, tournament)
-        )
     end
+    |> redirect(to:
+      Routes.admin_tournament_staff_path(conn, :index, tournament)
+    )
   end
 
   def delete(conn, _params) do
@@ -36,11 +41,12 @@ defmodule IkvnWeb.Admin.StaffController do
       {:ok, _staff} ->
         conn
         |> put_flash(:info, gettext "User successfully deleted from staff")
-      {:error, %Ecto.Changeset{} = _changeset} ->
+      {:error, %Ecto.Changeset{} = changeset} ->
         conn
-        |> put_flash(:error,
-          gettext "User can't be deleted from staff. Contact Admin"
-        )
+        |> put_flash(:error, gettext(
+          "User can't be removed from staff. Reason: %{reason}",
+          reason: fetch_errors(changeset)
+        ))
       {:error, error} ->
         conn
         |> put_flash(:error, error)

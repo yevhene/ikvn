@@ -14,4 +14,10 @@ defmodule Ikvn.Utils.Validation do
       end
     end)
   end
+
+  def fetch_errors(%Ecto.Changeset{errors: errors}) do
+    Enum.join(Enum.map(Keyword.values(errors), fn {error, _} ->
+      Gettext.dpgettext(IkvnWeb.Gettext, "errors", nil, error, [])
+    end), ", ")
+  end
 end

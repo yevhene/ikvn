@@ -235,12 +235,7 @@ msgid "Staff"
 msgstr "Персонал"
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:103
-msgid "User \"%{nickname}\" is already participate"
-msgstr "Користувач \"%{nickname}\" вже бере участь"
-
-#, elixir-format
-#: lib/ikvn/game/game.ex:123
+#: lib/ikvn/game/game.ex:108
 msgid "User \"%{nickname}\" is not exist"
 msgstr "Користувач \"%{nickname}\" не існує"
 
@@ -255,26 +250,26 @@ msgid "Really?"
 msgstr "Впевнені?"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:21
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:23
 msgid "User successfully added to staff"
 msgstr "Користувач успішно доданий до штату"
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:145
+#: lib/ikvn/game/game.ex:130
 msgid "Can't delete the Creator from staff"
 msgstr "Неможливо видалити того хто створив турнір зі штату"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:38
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:43
 msgid "User successfully deleted from staff"
 msgstr "Користувач успішно доданий до штату"
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:116
-msgid "Can't add User \"{nickname}\" to Staff. Contact Admin"
-msgstr "Неможливо додати користувача \"%{nickname}\" до штату. Зконтактуйте з Адміном"
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:26
+msgid "User can't be added to staff. Reason: %{reason}"
+msgstr "Користувача неможливо додати до штату. Бо: %{reason}"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:42
-msgid "User can't be deleted from staff. Contact Admin"
-msgstr "Користувача неможливо видалити з штату. Зконтактуйте з Адміном"
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:46
+msgid "User can't be removed from staff. Reason: %{reason}"
+msgstr "Користувача неможливо видалити з штату. Бо: %{reason}"
