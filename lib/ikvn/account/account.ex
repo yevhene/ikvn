@@ -58,13 +58,14 @@ defmodule Ikvn.Account do
       _ ->
         try do
           email = extra |> MapUtils.dig([:raw_info, :user, "email"])
-          Repo.transaction(fn ->
+          {:ok, result} = Repo.transaction(fn ->
             {:ok, user} = create_user(%{email: email})
             {:ok, link} = create_link(%{
                uid: uid, provider: to_string(provider), user_id: user.id
              })
             {:ok, user, link}
           end)
+          result
         rescue
           e ->
             Logger.error inspect(e)
