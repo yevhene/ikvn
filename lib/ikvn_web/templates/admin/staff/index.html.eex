@@ -1,0 +1,35 @@
+<h4><%= gettext "Admins" %></h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"><%= gettext "Nickname" %></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render_many(Enum.filter(@staff, fn p -> p.role == :admin end), IkvnWeb.Admin.StaffView, "_staff.html", assigns) %>
+  </tbody>
+  <tfoot>
+    <%= render "_form.html", Map.put(assigns, :role, :admin) %>
+  </tfoot>
+</table>
+
+<hr />
+
+<h4><%= gettext "Judges" %></h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"><%= gettext "Nickname" %></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render_many(Enum.filter(@staff, fn p -> p.role == :judge end), IkvnWeb.Admin.StaffView, "_staff.html", assigns) %>
+  </tbody>
+  <tfoot>
+    <%= render "_form.html", Map.put(assigns, :role, :judge) %>
+  </tfoot>
+</table>

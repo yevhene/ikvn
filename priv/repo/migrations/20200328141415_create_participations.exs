@@ -10,8 +10,8 @@ defmodule Ikvn.Repo.Migrations.CreateParticipations do
       add :tournament_id, references(:tournaments, on_delete: :delete_all),
         null: false
       add :user_id, references(:users, on_delete: :delete_all), null: false
-      add :creator_id, references(:users, on_delete: :delete_all), null: false
 
+      add :creator_id, references(:users, on_delete: :nilify_all)
       timestamps(type: :utc_datetime)
     end
 

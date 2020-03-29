@@ -1,0 +1,15 @@
+<tr>
+  <td colspan="2" class="container">
+    <%= form_for @conn, Routes.admin_tournament_staff_path(@conn, :create, @tournament), [as: :staff], fn f -> %>
+      <%= hidden_input f, :role, value: @role %>
+
+      <div class="form-group row">
+        <div class="col-10">
+          <%= text_input f, :nickname, class: "form-control" %>
+        </div>
+        <%= error_tag f, :nickname %>
+        <%= submit gettext("Add"), class: "btn btn-primary col-2" %>
+      </div>
+    <% end %>
+  </td>
+</tr>

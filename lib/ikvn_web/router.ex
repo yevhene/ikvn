@@ -54,8 +54,12 @@ defmodule IkvnWeb.Router do
     scope "/admin", Admin, as: :admin do
       pipe_through [:tournament, :admin]
 
-      resources "/tournaments", TournamentController,
-        except: [:index, :new, :create]
+      resources "/tournaments", TournamentController, only: [
+        :show, :edit, :update
+      ] do
+        resources "/staff", StaffController,
+          only: [:index, :create, :delete]
+      end
     end
   end
 

@@ -1,0 +1,4 @@
+<tr>
+  <td><%= @staff.user.nickname %></td>
+  <td class="text-right"><%= render "_actions.html", assigns %></td>
+</li>

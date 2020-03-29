@@ -30,10 +30,11 @@ msgid "Failed to authenticate"
 msgstr "Не вдалося аутентифікувати"
 
 #, elixir-format
-#: lib/ikvn_web/templates/profile/_form.html.eex:9
+#: lib/ikvn_web/templates/admin/staff/index.html.eex:6
+#: lib/ikvn_web/templates/admin/staff/index.html.eex:25 lib/ikvn_web/templates/profile/_form.html.eex:9
 #: lib/ikvn_web/templates/profile/show.html.eex:5
 msgid "Nickname"
-msgstr "Позивний"
+msgstr "Прізвисько"
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tournament/_form.html.eex:4
@@ -84,7 +85,7 @@ msgid "Successfully authenticated"
 msgstr "Успішно аутентифіковано"
 
 #, elixir-format
-#: lib/ikvn/account/account.ex:31 lib/ikvn_web/guardian/error_handler.ex:17
+#: lib/ikvn/account/account.ex:33 lib/ikvn_web/guardian/error_handler.ex:17
 msgid "Authentication failed"
 msgstr "Не вдалося аутентифікувати"
 
@@ -142,19 +143,9 @@ msgid "New Tournament"
 msgstr "Новий Турнір"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tournament_controller.ex:66
-msgid "Tournament can't be deleted"
-msgstr "Турнір не може бути видаленим"
-
-#, elixir-format
 #: lib/ikvn_web/controllers/admin/tournament_controller.ex:26
 msgid "Tournament created successfully"
 msgstr "Турнір успішно створено"
-
-#, elixir-format
-#: lib/ikvn_web/controllers/admin/tournament_controller.ex:62
-msgid "Tournament deleted successfully"
-msgstr "Турнір успішно видалено"
 
 #, elixir-format
 #: lib/ikvn_web/controllers/admin/tournament_controller.ex:49
@@ -172,14 +163,10 @@ msgid "You should be an Admin"
 msgstr "Ви маєте бути Адміністратором"
 
 #, elixir-format
+#: lib/ikvn_web/templates/admin/staff/_actions.html.eex:3
 #: lib/ikvn_web/templates/admin/tournament/_actions.html.eex:3
 msgid "Actions"
 msgstr "Дії"
-
-#, elixir-format
-#: lib/ikvn_web/templates/admin/tournament/_actions.html.eex:8
-msgid "Delete"
-msgstr "Видалити"
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tournament/_form.html.eex:15
@@ -195,11 +182,6 @@ msgstr "Завершення"
 #: lib/ikvn_web/templates/admin/tournament/_form.html.eex:9
 msgid "Name"
 msgstr "Ім'я"
-
-#, elixir-format
-#: lib/ikvn_web/templates/admin/tournament/_actions.html.eex:8
-msgid "Really?"
-msgstr "Впевнені?"
 
 #, elixir-format
 #: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:3
@@ -220,7 +202,7 @@ msgstr "Новий"
 #, elixir-format
 #: lib/ikvn_web/templates/layout/admin.html.eex:2
 msgid "Tournament \"%{tournament}\" Admin"
-msgstr "Адміністратор Турніру \"%{tournament}\""
+msgstr "Адмінка Турніру \"%{tournament}\""
 
 #, elixir-format
 #: lib/ikvn_web/templates/tournament/index.html.eex:6
@@ -231,3 +213,68 @@ msgstr "Майбутні Турніри"
 #: lib/ikvn_web/templates/tournament/index.html.eex:2
 msgid "Open Electric KVN Championship!"
 msgstr "Відкритий Чемпіонат з ЕлектроКВНу!"
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/staff/_form.html.eex:11
+msgid "Add"
+msgstr "Додати"
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/staff/index.html.eex:1
+msgid "Admins"
+msgstr "Адміни"
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/staff/index.html.eex:20
+msgid "Judges"
+msgstr "Судді"
+
+#, elixir-format
+#: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:7
+msgid "Staff"
+msgstr "Персонал"
+
+#, elixir-format
+#: lib/ikvn/game/game.ex:103
+msgid "User \"%{nickname}\" is already participate"
+msgstr "Користувач \"%{nickname}\" вже бере участь"
+
+#, elixir-format
+#: lib/ikvn/game/game.ex:123
+msgid "User \"%{nickname}\" is not exist"
+msgstr "Користувач \"%{nickname}\" не існує"
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/staff/_actions.html.eex:6
+msgid "Delete"
+msgstr "Видалити"
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/staff/_actions.html.eex:6
+msgid "Really?"
+msgstr "Впевнені?"
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:21
+msgid "User successfully added to staff"
+msgstr "Користувач успішно доданий до штату"
+
+#, elixir-format
+#: lib/ikvn/game/game.ex:145
+msgid "Can't delete the Creator from staff"
+msgstr "Неможливо видалити того хто створив турнір зі штату"
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:38
+msgid "User successfully deleted from staff"
+msgstr "Користувач успішно доданий до штату"
+
+#, elixir-format
+#: lib/ikvn/game/game.ex:116
+msgid "Can't add User \"{nickname}\" to Staff. Contact Admin"
+msgstr "Неможливо додати користувача \"%{nickname}\" до штату. Зконтактуйте з Адміном"
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:42
+msgid "User can't be deleted from staff. Contact Admin"
+msgstr "Користувача неможливо видалити з штату. Зконтактуйте з Адміном"

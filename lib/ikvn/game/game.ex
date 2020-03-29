@@ -1,6 +1,8 @@
 defmodule Ikvn.Game do
   import Ecto.Query, warn: false
+  import IkvnWeb.Gettext
 
+  alias Ikvn.Account
   alias Ikvn.Account.User
   alias Ikvn.Game.Participation
   alias Ikvn.Game.Tournament
@@ -51,11 +53,6 @@ defmodule Ikvn.Game do
     |> Repo.update()
   end
 
-  def delete_tournament(%Tournament{} = tournament) do
-    tournament
-    |> Repo.delete()
-  end
-
   def is_future?(%Tournament{started_at: started_at}) do
     now = DateTime.utc_now
     started_at == nil or DateTime.compare(now, started_at) == :lt
@@ -88,10 +85,68 @@ defmodule Ikvn.Game do
     })
   end
 
+  def list_staff(%Tournament{id: id}) do
+    Participation
+    |> where([p],
+      p.tournament_id == ^id and (p.role == "admin" or p.role == "judge")
+    )
+    |> order_by(:inserted_at)
+    |> Repo.all
+    |> Repo.preload(:user)
+  end
+
+  def create_staff(nickname, role, tournament, creator) do
+    case Account.find_user(nickname) do
+      %User{} = user ->
+        case get_user_participation(user, tournament) do
+          %Participation{} ->
+            {:error, gettext(
+              "User \"%{nickname}\" is already participate",
+              nickname: nickname
+            )}
+          _ ->
+            case create_participation(%{
+              tournament_id: tournament.id,
+              user_id: user.id,
+              role: role,
+              creator_id: creator.id
+            }) do
+              {:ok, participation} -> {:ok, participation}
+              _ ->
+                {:error, gettext(
+                  "Can't add User \"{nickname}\" to Staff. Contact Admin",
+                  nickname: nickname
+                )}
+            end
+        end
+      _ ->
+        {:error, gettext(
+          "User \"%{nickname}\" is not exist", nickname: nickname
+        )}
+    end
+  end
+
+  def get_participation!(id), do: Repo.get(Participation, id)
+
   def create_participation(attrs \\ %{}) do
     %Participation{}
     |> Participation.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def change_participation(attrs \\ %{}) do
+    %Participation{}
+    |> Participation.changeset(attrs)
+  end
+
+  def delete_participation(%Participation{} = participation) do
+    participation = participation |> Repo.preload(:tournament)
+    if participation.tournament.creator_id == participation.user_id do
+      {:error, gettext("Can't delete the Creator from staff")}
+    else
+      participation
+      |> Repo.delete()
+    end
   end
 
   def get_user_participation(
