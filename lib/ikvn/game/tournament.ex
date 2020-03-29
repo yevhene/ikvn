@@ -8,6 +8,7 @@ defmodule Ikvn.Game.Tournament do
 
   schema "tournaments" do
     field :name, :string
+    field :headline, :string
     field :description, :string
     field :started_at, :utc_datetime
     field :finished_at, :utc_datetime
@@ -22,7 +23,7 @@ defmodule Ikvn.Game.Tournament do
   def changeset(%Tournament{} = user, attrs) do
     user
     |> cast(attrs, [
-      :name, :description, :creator_id, :started_at, :finished_at
+      :name, :headline, :description, :creator_id, :started_at, :finished_at
     ])
     |> validate_required([:name, :creator_id])
     |> unique_constraint(:name)

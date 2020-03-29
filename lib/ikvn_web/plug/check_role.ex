@@ -1,13 +1,13 @@
-defmodule IkvnWeb.Plug.AuthorizeAdmin do
+defmodule IkvnWeb.Plug.CheckRole do
   import IkvnWeb.Gettext
   import Phoenix.Controller
   import Plug.Conn
 
   def init(opts), do: opts
 
-  def call(conn, _opts) do
+  def call(conn, opts) do
     participation = conn.assigns.participation
-    if participation.role == :admin do
+    if participation.role == opts[:role] do
       conn
     else
       conn |> error_response
@@ -20,7 +20,7 @@ defmodule IkvnWeb.Plug.AuthorizeAdmin do
     case format do
       "html" ->
         conn
-        |> put_flash(:error, gettext "You should be an Admin")
+        |> put_flash(:error, gettext "You are not authrorized to do that")
         |> redirect(to: "/")
         |> halt()
       _ ->

@@ -5,14 +5,14 @@
 
 
   <div class="card-body">
-    <%= if present?(@tournament.description) do %>
-      <div class="card-text"><%= markdown truncate(@tournament.description) %></div>
+    <%= if present?(@tournament.headline) do %>
+      <div class="card-text"><%= markdown truncate(@tournament.headline) %></div>
     <% end %>
   </div>
 
 
   <div class="card-footer d-flex align-items-center justify-content-between">
     <div><%= @tournament.creator.nickname %></div>
-    <small><%= @tournament.started_at %></small>
+    <small><%= DateTime.to_date(@tournament.started_at) %></small>
   </div>
 </div>

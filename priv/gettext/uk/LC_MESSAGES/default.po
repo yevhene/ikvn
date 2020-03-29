@@ -14,8 +14,8 @@ msgstr ""
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tournament/edit.html.eex:4
 #: lib/ikvn_web/templates/admin/tournament/new.html.eex:6 lib/ikvn_web/templates/admin/tournament/show.html.eex:9
-#: lib/ikvn_web/templates/profile/edit.html.eex:6 lib/ikvn_web/templates/profile/show.html.eex:17
-#: lib/ikvn_web/templates/tournament/show.html.eex:10
+#: lib/ikvn_web/templates/player/tournament/show.html.eex:8 lib/ikvn_web/templates/profile/edit.html.eex:6
+#: lib/ikvn_web/templates/profile/show.html.eex:17 lib/ikvn_web/templates/tournament/show.html.eex:10
 msgid "Back"
 msgstr "Назад"
 
@@ -74,7 +74,7 @@ msgid "Signed out"
 msgstr "Ви вийшли"
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:37
+#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:43
 #: lib/ikvn_web/templates/profile/_form.html.eex:30
 msgid "Submit"
 msgstr "Відправити"
@@ -158,23 +158,18 @@ msgid "You have no permission to do this"
 msgstr "У вас не має дозволу робити це"
 
 #, elixir-format
-#: lib/ikvn_web/plug/authorize_admin.ex:23
-msgid "You should be an Admin"
-msgstr "Ви маєте бути Адміністратором"
-
-#, elixir-format
 #: lib/ikvn_web/templates/admin/staff/_actions.html.eex:3
 #: lib/ikvn_web/templates/admin/tournament/_actions.html.eex:3
 msgid "Actions"
 msgstr "Дії"
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:15
+#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:21
 msgid "Description"
 msgstr "Опис"
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:29
+#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:35
 msgid "Finish"
 msgstr "Завершення"
 
@@ -185,12 +180,12 @@ msgstr "Ім'я"
 
 #, elixir-format
 #: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:3
-#: lib/ikvn_web/templates/tournament/_actions.html.eex:5
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:12
 msgid "Settings"
 msgstr "Налаштування"
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:21
+#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:27
 msgid "Start"
 msgstr "Початок"
 
@@ -273,3 +268,48 @@ msgstr "Користувача неможливо додати до штату. 
 #: lib/ikvn_web/controllers/admin/staff_controller.ex:46
 msgid "User can't be removed from staff. Reason: %{reason}"
 msgstr "Користувача неможливо видалити з штату. Бо: %{reason}"
+
+#, elixir-format
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:17
+msgid "Enter"
+msgstr "Ввійти"
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:15
+msgid "Headline"
+msgstr "Коротко"
+
+#, elixir-format
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:5
+msgid "Take part"
+msgstr "Взяти участь"
+
+#, elixir-format
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:24
+msgid "To take part in tournament sign in first"
+msgstr "Щоб взяти участь спочатку зареєструйтесь"
+
+#, elixir-format
+#: lib/ikvn_web/templates/layout/_player_navigation.html.eex:3
+msgid "Tournament"
+msgstr "Турнір"
+
+#, elixir-format
+#: lib/ikvn_web/templates/layout/player.html.eex:2
+msgid "Tournament \"%{tournament}\""
+msgstr "Адмінка Турніру \"%{tournament}\""
+
+#, elixir-format
+#: lib/ikvn_web/plug/check_role.ex:23
+msgid "You are not authrorized to do that"
+msgstr "Вам не дозволено робити це"
+
+#, elixir-format
+#: lib/ikvn_web/controllers/player/participation_controller.ex:10
+msgid "You can now participate"
+msgstr "Тепер ви можете взяти участь"
+
+#, elixir-format
+#: lib/ikvn_web/controllers/player/participation_controller.ex:13
+msgid "Participation failed. Contact Admin"
+msgstr "Участь відхилено. Зконтактуйте з Адміністратором"

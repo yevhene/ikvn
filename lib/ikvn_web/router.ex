@@ -36,21 +36,28 @@ defmodule IkvnWeb.Router do
   end
 
   pipeline :admin do
-    plug IkvnWeb.Plug.AuthorizeAdmin
+    plug IkvnWeb.Plug.CheckRole, role: :admin
   end
 
+  pipeline :player do
+    plug IkvnWeb.Plug.CheckRole, role: :player
+  end
+
+  # Private pages
   scope "/", IkvnWeb do
     pipe_through [:browser, :guardian, :require_login, :identify]
 
     resources "/profile", ProfileController,
       only: [:show], singleton: true
 
+    # Not yet an admin
     scope "/admin", Admin, as: :admin do
       pipe_through [:can_create_tournament]
 
       resources "/tournaments", TournamentController, only: [:new, :create]
     end
 
+    # Tournament admin
     scope "/admin", Admin, as: :admin do
       pipe_through [:tournament, :admin]
 
@@ -61,8 +68,26 @@ defmodule IkvnWeb.Router do
           only: [:index, :create, :delete]
       end
     end
+
+    # Not yet a player
+    scope "/player", Player, as: :player do
+      pipe_through [:tournament]
+
+      resources "/tournaments", TournamentController, only: [] do
+        resources "/participation", ParticipationController,
+          only: [:create], singleton: true
+      end
+    end
+
+    # Tournament player
+    scope "/player", Player, as: :player do
+      pipe_through [:tournament, :player]
+
+      resources "/tournaments", TournamentController, only: [:show]
+    end
   end
 
+  # Pages for authenticated but not identified user
   scope "/", IkvnWeb do
     pipe_through [:browser, :guardian, :require_login]
 
@@ -72,6 +97,7 @@ defmodule IkvnWeb.Router do
       only: [:edit, :update], singleton: true
   end
 
+  # Public pages
   scope "/", IkvnWeb do
     pipe_through [:browser, :guardian, :identify]
 
@@ -84,6 +110,7 @@ defmodule IkvnWeb.Router do
     end
   end
 
+  # Oauth authentication
   scope "/auth", IkvnWeb do
     pipe_through [:browser, :guardian]
 

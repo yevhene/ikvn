@@ -1,0 +1,5 @@
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <%= nav_item @conn, gettext("Tournament"), Routes.player_tournament_path(@conn, :show, @tournament) %>
+  </li>
+</ul>
