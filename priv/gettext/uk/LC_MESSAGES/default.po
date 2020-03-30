@@ -30,9 +30,9 @@ msgid "Failed to authenticate"
 msgstr "Не вдалося аутентифікувати"
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/staff/index.html.eex:6
-#: lib/ikvn_web/templates/admin/staff/index.html.eex:25 lib/ikvn_web/templates/profile/_form.html.eex:9
-#: lib/ikvn_web/templates/profile/show.html.eex:5
+#: lib/ikvn_web/templates/admin/player/index.html.eex:6
+#: lib/ikvn_web/templates/admin/staff/index.html.eex:6 lib/ikvn_web/templates/admin/staff/index.html.eex:25
+#: lib/ikvn_web/templates/profile/_form.html.eex:9 lib/ikvn_web/templates/profile/show.html.eex:5
 msgid "Nickname"
 msgstr "Прізвисько"
 
@@ -313,3 +313,9 @@ msgstr "Тепер ви можете взяти участь"
 #: lib/ikvn_web/controllers/player/participation_controller.ex:13
 msgid "Participation failed. Contact Admin"
 msgstr "Участь відхилено. Зконтактуйте з Адміністратором"
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/player/index.html.eex:1
+#: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:11
+msgid "Players"
+msgstr "Гравці"

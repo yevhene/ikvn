@@ -10,6 +10,7 @@ defmodule Ikvn.Account.User do
   schema "users" do
     field :nickname, :string
     field :email, :string
+    field :name, :string
     field :permissions, {:array, :string}
 
     has_many :links, Link
@@ -25,7 +26,7 @@ defmodule Ikvn.Account.User do
 
   def profile_changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:nickname, :email])
+    |> cast(attrs, [:nickname, :email, :name])
     |> validate_required([:nickname, :email])
     |> forbid_change(:nickname)
     |> unique_constraint(:nickname)

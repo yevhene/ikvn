@@ -15,7 +15,7 @@ msgid "can't be blank"
 msgstr "не може бути пустим"
 
 msgid "has already been taken"
-msgstr "вже існує"
+msgstr "вже використовується"
 
 msgid "is invalid"
 msgstr "помилкове"

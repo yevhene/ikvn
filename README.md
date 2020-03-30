@@ -22,10 +22,16 @@ export FACEBOOK_CLIENT_ID=_YOUR_VALUE_
 export FACEBOOK_CLIENT_SECRET=_YOUR_VALUE_
 ```
 
-You can generate these using:
+##### To generate secrets you can user:
 ```
 mix phx.gen.secret
 ```
+
+##### Facebook
+To get Facebook credentials for development you should visit: [Facebook for Developer](https://developers.facebook.com/)
+
+##### Hint
+*You can put environment variables in `.env` file and run `source .env` in terminal session.*
 
 ## Run
 ```

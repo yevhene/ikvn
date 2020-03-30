@@ -1,0 +1,12 @@
+<h4><%= gettext "Players" %></h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"><%= gettext "Nickname" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render_many(@players, IkvnWeb.Admin.PlayerView, "_player.html", assigns) %>
+  </tbody>
+</table>

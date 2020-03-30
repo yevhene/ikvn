@@ -52,16 +52,22 @@ defmodule Ikvn.Account do
     |> Repo.update()
   end
 
-  defp user_from_auth(%{uid: uid, provider: provider, extra: extra}) do
+  defp user_from_auth(%{
+    uid: uid, provider: provider, extra: %{raw_info: %{user: user}}
+  }) do
     case  Link |> Repo.get_by(uid: uid) |> Repo.preload(:user) do
       %Link{} = link -> {:ok, link.user, link}
       _ ->
         try do
-          email = extra |> MapUtils.dig([:raw_info, :user, "email"])
           {:ok, result} = Repo.transaction(fn ->
-            {:ok, user} = create_user(%{email: email})
+            {:ok, user} = create_user(%{
+              email: user["email"],
+              name: user["name"]
+            })
             {:ok, link} = create_link(%{
-               uid: uid, provider: to_string(provider), user_id: user.id
+              uid: uid,
+              provider: to_string(provider),
+              user_id: user.id
              })
             {:ok, user, link}
           end)

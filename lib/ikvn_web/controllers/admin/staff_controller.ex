@@ -9,7 +9,7 @@ defmodule IkvnWeb.Admin.StaffController do
   plug :put_layout, "admin.html"
 
   def index(conn, _params) do
-    staff = Game.list_staff(conn.assigns.tournament)
+    staff = Game.list_participations(conn.assigns.tournament, [:admin, :judge])
     render(conn, "index.html", staff: staff)
   end
 

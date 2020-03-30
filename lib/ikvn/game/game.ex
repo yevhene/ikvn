@@ -85,10 +85,10 @@ defmodule Ikvn.Game do
     })
   end
 
-  def list_staff(%Tournament{id: id}) do
+  def list_participations(%Tournament{id: id}, roles) do
     Participation
     |> where([p],
-      p.tournament_id == ^id and (p.role == "admin" or p.role == "judge")
+      p.tournament_id == ^id and p.role in ^roles
     )
     |> order_by(:inserted_at)
     |> Repo.all

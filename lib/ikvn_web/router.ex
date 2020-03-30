@@ -66,6 +66,8 @@ defmodule IkvnWeb.Router do
       ] do
         resources "/staff", StaffController,
           only: [:index, :create, :delete]
+        resources "/players", PlayerController,
+          only: [:index]
       end
     end
 
