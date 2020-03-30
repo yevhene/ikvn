@@ -4,7 +4,8 @@ defmodule Ikvn.Repo.Migrations.CreateTasks do
   def change do
     create table(:tasks) do
       add :title, :text
-      add :content, :text, null: false
+      add :description, :text, null: false
+      add :order, :integer
       add :tour_id, references(:tours, on_delete: :delete_all), null: false
 
       add :creator_id, references(:users, on_delete: :nilify_all)

@@ -18,27 +18,9 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :started_at, gettext("Start"), class: "control-label" %>
-    <br />
-    <%= server_datetime_select f, :started_at, class: "form-control" %>
-    <br />
-    <%= error_tag f, :started_at %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :finished_at, gettext("Finish"), class: "control-label" %>
-    <br />
-    <%= server_datetime_select f, :finished_at, class: "form-control" %>
-    <br />
-    <%= error_tag f, :finished_at %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :results_at, gettext("Results"), class: "control-label" %>
-    <br />
-    <%= server_datetime_select f, :results_at, class: "form-control" %>
-    <br />
-    <%= error_tag f, :results_at %>
+    <%= label f, :order, gettext("Order"), class: "control-label" %>
+    <%= number_input f, :order, class: "form-control" %>
+    <%= error_tag f, :order %>
   </div>
 
   <div class="form-group">

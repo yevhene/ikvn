@@ -5,6 +5,7 @@ defmodule Ikvn.Game do
   alias Ikvn.Account
   alias Ikvn.Account.User
   alias Ikvn.Game.Participation
+  alias Ikvn.Game.Task
   alias Ikvn.Game.Tour
   alias Ikvn.Game.Tournament
   alias Ikvn.Repo
@@ -141,7 +142,6 @@ defmodule Ikvn.Game do
     |> where([t], t.tournament_id == ^tournament_id)
     |> order_by(:started_at)
     |> Repo.all
-    |> Repo.preload([:creator, :tasks])
   end
 
   def change_tour(%Tour{} = tour) do
@@ -162,5 +162,34 @@ defmodule Ikvn.Game do
 
   def delete_tour(%Tour{} = tour) do
     Repo.delete(tour)
+  end
+
+  def get_task!(id), do: Repo.get!(Task, id)
+
+  def list_tasks(%Tour{id: tour_id}) do
+    Task
+    |> where([t], t.tour_id == ^tour_id)
+    |> order_by([asc: :order, desc: :inserted_at])
+    |> Repo.all
+  end
+
+  def change_task(%Task{} = task) do
+    Task.changeset(task, %{})
+  end
+
+  def create_task(attrs \\ %{}, %User{} = creator) do
+    %Task{}
+    |> Task.changeset(Map.put(attrs, "creator_id", creator.id))
+    |> Repo.insert()
+  end
+
+  def update_task(%Task{} = task, attrs) do
+    task
+    |> Task.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_task(%Task{} = task) do
+    Repo.delete(task)
   end
 end

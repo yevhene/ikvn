@@ -68,7 +68,9 @@ defmodule IkvnWeb.Router do
           only: [:index, :create, :delete]
         resources "/players", PlayerController,
           only: [:index]
-        resources "/tour", TourController
+        resources "/tours", TourController do
+          resources "/tasks", TaskController, except: [:index, :show]
+        end
       end
     end
 

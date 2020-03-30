@@ -1,7 +1,7 @@
 <tr>
   <td>
     <%= link to: Routes.admin_tournament_tour_path(@conn, :show, @tournament, @tour) do %>
-      <%= @tour.title %>
+      <%= title(@tour) %>
     <% end %>
   </td>
   <td><%= datetime @tour.started_at %></td>

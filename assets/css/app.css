@@ -23,10 +23,10 @@ main {
   margin-right: 0.5rem;
 }
 
-.actions {
-  margin-left: 1rem;
-}
-
 .form-group.row {
   margin-bottom: 0;
+}
+
+h1 .btn-group, h2 .btn-group, h3 .btn-group, h4 .btn-group, h5 .btn-group {
+  margin-left: 1rem;
 }

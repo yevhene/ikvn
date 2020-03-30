@@ -18,15 +18,21 @@ defmodule IkvnWeb.ServerTime do
   end
 
   def cast_datetime_param(params, field) do
-    naive = cast_datetime_map(Map.get(params, field))
-    Map.put(params, field, to_utc(naive))
+    case cast_datetime_map(Map.get(params, field)) do
+      {:ok, naive} -> Map.put(params, field, to_utc(naive))
+      {:error, _error} -> params
+    end
   end
 
   defp cast_datetime_map(map) do
-    {:ok, %Date{} = date} = cast_date(map)
-    {:ok, %Time{} = time} = cast_time(map)
-    {:ok, %NaiveDateTime{} = naive} = NaiveDateTime.new(date, time)
-    naive
+    with {:ok, %Date{} = date} <- cast_date(map),
+         {:ok, %Time{} = time} <- cast_time(map),
+         {:ok, %NaiveDateTime{} = naive} <- NaiveDateTime.new(date, time)
+    do
+      {:ok, naive}
+    else
+      err -> {:error, err}
+    end
   end
 
   defp cast_date(%{"year" => year, "month" => month, "day" => day}) do

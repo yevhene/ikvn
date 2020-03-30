@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">
+      <%= title(@task) %>
+      <%= render "_actions.html", assigns %>
+    </h5>
+  </div>
+  <div class="card-body">
+    <%= markdown @task.description %>
+  </div>
+</div>
+<br />

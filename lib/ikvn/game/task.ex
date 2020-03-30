@@ -9,7 +9,8 @@ defmodule Ikvn.Game.Task do
 
   schema "tasks" do
     field :title, :string
-    field :content, :string
+    field :order, :integer
+    field :description, :string
 
     belongs_to :tour, Tour
     belongs_to :creator, User
@@ -19,8 +20,8 @@ defmodule Ikvn.Game.Task do
 
   def changeset(%Task{} = user, attrs) do
     user
-    |> cast(attrs, [:title, :content, :tour_id, :creator_id])
-    |> validate_required([:content, :tour_id, :creator_id])
+    |> cast(attrs, [:title, :description, :order, :tour_id, :creator_id])
+    |> validate_required([:description, :tour_id, :creator_id])
     |> foreign_key_constraint(:tour_id)
     |> foreign_key_constraint(:creator_id)
     |> forbid_change(:creator_id)

@@ -1,6 +1,6 @@
-<li class="list-group-item">
+<div class="list-group-item">
   <%= link to: Routes.admin_tournament_tour_path(@conn, :new, @tournament) do %>
     <i class="fa fa-plus-circle" aria-hidden="true"></i>
     <span><%= gettext "New Tour" %></span>
   <% end %>
-</li>
+</div>

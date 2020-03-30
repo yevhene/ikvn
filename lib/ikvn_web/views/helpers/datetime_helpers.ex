@@ -8,18 +8,19 @@ defmodule IkvnWeb.DateTimeHelpers do
     |> format_datetime()
   end
 
-  def server_date_time_select(form, field, opts \\ []) do
+  def server_datetime_select(form, field, opts \\ []) do
     value = Map.get(form.source.changes, field) || Map.get(form.data, field)
-    Form.datetime_select(
-      form, field,
-      Keyword.merge([value: from_utc(value)], opts)
-    )
+    value = case value do
+      nil -> Map.get(form.params, to_string(field))
+      value -> from_utc(value)
+    end
+    Form.datetime_select(form, field, Keyword.merge([value: value], opts))
   end
 
   defp format_datetime(%DateTime{
     year: year, month: month, day: day, hour: hour, minute: minute
   }) do
-    "#{format(year)}/#{format(month)}/#{format(day)} " <>
+    "#{format(year)}-#{format(month)}-#{format(day)} " <>
     "#{format(hour)}:#{format(minute)}"
   end
 

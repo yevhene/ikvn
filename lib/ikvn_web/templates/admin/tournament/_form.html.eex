@@ -26,7 +26,7 @@
   <div class="form-group">
     <%= label f, :started_at, gettext("Start"), class: "control-label" %>
     <br />
-    <%= server_date_time_select f, :started_at, class: "form-control" %>
+    <%= server_datetime_select f, :started_at, class: "form-control" %>
     <br />
     <%= error_tag f, :started_at %>
   </div>
@@ -34,7 +34,7 @@
   <div class="form-group">
     <%= label f, :finished_at, gettext("Finish"), class: "control-label" %>
     <br />
-    <%= server_date_time_select f, :finished_at, class: "form-control" %>
+    <%= server_datetime_select f, :finished_at, class: "form-control" %>
     <br />
     <%= error_tag f, :finished_at %>
   </div>

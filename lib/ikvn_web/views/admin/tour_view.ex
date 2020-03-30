@@ -3,4 +3,10 @@ defmodule IkvnWeb.Admin.TourView do
 
   import IkvnWeb.MarkdownHelpers
   import IkvnWeb.DateTimeHelpers
+
+  alias Ikvn.Game.Tour
+
+  def title(%Tour{title: title}) do
+    title || gettext("Tour")
+  end
 end

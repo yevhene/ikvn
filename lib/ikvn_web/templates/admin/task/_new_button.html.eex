@@ -1,0 +1,6 @@
+<div class="list-group-item">
+  <%= link to: Routes.admin_tournament_tour_task_path(@conn, :new, @tournament, @tour) do %>
+    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+    <span><%= gettext "New Task" %></span>
+  <% end %>
+</div>

@@ -1,5 +1,5 @@
 <h2>
-  <%= @tour.title %>
+  <%= title(@tour) %>
   <%= render "_actions.html", assigns %>
 </h2>
 
@@ -7,11 +7,22 @@
   <%= markdown @tour.description %>
 </div>
 
-<dl>
-  <dt><%= gettext("Start") %></dt><dd><%= datetime @tour.started_at %></dd>
-  <dt><%= gettext("Finish") %></dt><dd><%= datetime @tour.finished_at %></dd>
-  <dt><%= gettext("Results") %></dt><dd><%= datetime @tour.results_at %></dd>
+<dl class="row">
+  <dt class="col-sm-3"><%= gettext("Start") %></dt>
+  <dd class="col-sm-9"><%= datetime @tour.started_at %></dd>
+  <dt class="col-sm-3"><%= gettext("Finish") %></dt>
+  <dd class="col-sm-9"><%= datetime @tour.finished_at %></dd>
+  <dt class="col-sm-3"><%= gettext("Results") %></dt>
+  <dd class="col-sm-9"><%= datetime @tour.results_at %></dd>
 </dl>
+
+<hr />
+
+<h4><%= gettext "Tasks" %></h4>
+<div>
+  <%= render_many(@tasks, IkvnWeb.Admin.TaskView, "_task.html", assigns) %>
+  <%= render IkvnWeb.Admin.TaskView, "_new_button.html", assigns %>
+</div>
 
 <hr />
 <span><%= link gettext("Back"), to: Routes.admin_tournament_tour_path(@conn, :index, @tournament) %></span>
