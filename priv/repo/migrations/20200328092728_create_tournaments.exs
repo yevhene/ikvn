@@ -6,8 +6,8 @@ defmodule Ikvn.Repo.Migrations.CreateTournaments do
       add :name, :text, null: false
       add :headline, :text
       add :description, :text
-      add :started_at, :utc_datetime
-      add :finished_at, :utc_datetime
+      add :started_at, :utc_datetime, null: false
+      add :finished_at, :utc_datetime, null: false
 
       add :creator_id, references(:users, on_delete: :nilify_all)
       timestamps(type: :utc_datetime)

@@ -6,7 +6,7 @@
 
   <div class="card-body">
     <%= if present?(@tournament.headline) do %>
-      <div class="card-text"><%= markdown truncate(@tournament.headline) %></div>
+      <div class="card-text"><%= markdown @tournament.headline %></div>
     <% end %>
   </div>
 

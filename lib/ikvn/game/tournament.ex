@@ -4,6 +4,7 @@ defmodule Ikvn.Game.Tournament do
 
   alias Ikvn.Account.User
   alias Ikvn.Game.Participation
+  alias Ikvn.Game.Tour
   alias Ikvn.Game.Tournament
 
   schema "tournaments" do
@@ -16,6 +17,7 @@ defmodule Ikvn.Game.Tournament do
     belongs_to :creator, User
 
     has_many :participations, Participation
+    has_many :tours, Tour
 
     timestamps(type: :utc_datetime)
   end
@@ -23,9 +25,9 @@ defmodule Ikvn.Game.Tournament do
   def changeset(%Tournament{} = user, attrs) do
     user
     |> cast(attrs, [
-      :name, :headline, :description, :creator_id, :started_at, :finished_at
+      :name, :headline, :description, :started_at, :finished_at, :creator_id
     ])
-    |> validate_required([:name, :creator_id])
+    |> validate_required([:name, :started_at, :finished_at, :creator_id])
     |> unique_constraint(:name)
     |> foreign_key_constraint(:creator_id)
   end

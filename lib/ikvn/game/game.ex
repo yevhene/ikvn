@@ -55,22 +55,19 @@ defmodule Ikvn.Game do
 
   def is_future?(%Tournament{started_at: started_at}) do
     now = DateTime.utc_now
-    started_at == nil or DateTime.compare(now, started_at) == :lt
+    DateTime.compare(now, started_at) == :lt
   end
 
   def is_active?(%Tournament{
     started_at: started_at, finished_at: finished_at
   }) do
     now = DateTime.utc_now
-    DateTime.compare(now, started_at) == :gt and (
-      finished_at == nil or
+    DateTime.compare(now, started_at) == :gt and
       DateTime.compare(now, finished_at) == :lt
-    )
   end
 
   def is_finished?(%Tournament{finished_at: finished_at}) do
     now = DateTime.utc_now
-
     DateTime.compare(now, finished_at) == :gt
   end
 
