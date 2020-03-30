@@ -6,15 +6,9 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :name, gettext("Name"), class: "control-label" %>
-    <%= text_input f, :name, class: "form-control" %>
-    <%= error_tag f, :name %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :headline, gettext("Headline"), class: "control-label" %>
-    <%= textarea f, :headline, class: "form-control markdown-editor" %>
-    <%= error_tag f, :headline %>
+    <%= label f, :title, gettext("Title"), class: "control-label" %>
+    <%= text_input f, :title, class: "form-control" %>
+    <%= error_tag f, :title %>
   </div>
 
   <div class="form-group">
@@ -37,6 +31,14 @@
     <%= server_date_time_select f, :finished_at, class: "form-control" %>
     <br />
     <%= error_tag f, :finished_at %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :results_at, gettext("Results"), class: "control-label" %>
+    <br />
+    <%= server_date_time_select f, :results_at, class: "form-control" %>
+    <br />
+    <%= error_tag f, :results_at %>
   </div>
 
   <div class="form-group">

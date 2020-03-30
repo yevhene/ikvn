@@ -1,6 +1,7 @@
 defmodule Ikvn.Game.Task do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ikvn.Utils.Validation
 
   alias Ikvn.Account.User
   alias Ikvn.Game.Task
@@ -22,5 +23,6 @@ defmodule Ikvn.Game.Task do
     |> validate_required([:content, :tour_id, :creator_id])
     |> foreign_key_constraint(:tour_id)
     |> foreign_key_constraint(:creator_id)
+    |> forbid_change(:creator_id)
   end
 end

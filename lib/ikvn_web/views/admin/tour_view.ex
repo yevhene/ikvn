@@ -1,4 +1,4 @@
-defmodule IkvnWeb.Admin.TournamentView do
+defmodule IkvnWeb.Admin.TourView do
   use IkvnWeb, :view
 
   import IkvnWeb.MarkdownHelpers

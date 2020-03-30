@@ -23,6 +23,7 @@ defmodule IkvnWeb do
 
       import Plug.Conn
       import IkvnWeb.Gettext
+      import IkvnWeb.ServerTime
       alias IkvnWeb.Router.Helpers, as: Routes
     end
   end
@@ -43,6 +44,7 @@ defmodule IkvnWeb do
 
       import IkvnWeb.ErrorHelpers
       import IkvnWeb.Gettext
+      import IkvnWeb.ServerTime
       alias IkvnWeb.Router.Helpers, as: Routes
     end
   end

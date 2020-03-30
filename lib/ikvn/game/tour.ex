@@ -1,6 +1,7 @@
 defmodule Ikvn.Game.Tour do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ikvn.Utils.Validation
 
   alias Ikvn.Account.User
   alias Ikvn.Game.Task
@@ -8,7 +9,8 @@ defmodule Ikvn.Game.Tour do
   alias Ikvn.Game.Tournament
 
   schema "tours" do
-    field :name, :string
+    field :title, :string
+    field :description, :string
     field :started_at, :utc_datetime
     field :finished_at, :utc_datetime
     field :results_at, :utc_datetime
@@ -24,12 +26,14 @@ defmodule Ikvn.Game.Tour do
   def changeset(%Tour{} = user, attrs) do
     user
     |> cast(attrs, [
-      :name, :started_at, :finished_at, :results_at, :tournament_id, :creator_id
+      :title, :description, :started_at, :finished_at,
+      :results_at, :tournament_id, :creator_id
     ])
     |> validate_required([
       :started_at, :finished_at, :results_at, :creator_id
     ])
     |> foreign_key_constraint(:tournament_id)
     |> foreign_key_constraint(:creator_id)
+    |> forbid_change(:creator_id)
   end
 end

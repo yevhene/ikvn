@@ -11,10 +11,12 @@ msgid ""
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/tournament/edit.html.eex:4
-#: lib/ikvn_web/templates/admin/tournament/new.html.eex:6 lib/ikvn_web/templates/admin/tournament/show.html.eex:9
-#: lib/ikvn_web/templates/player/tournament/show.html.eex:8 lib/ikvn_web/templates/profile/edit.html.eex:6
-#: lib/ikvn_web/templates/profile/show.html.eex:17 lib/ikvn_web/templates/tournament/show.html.eex:10
+#: lib/ikvn_web/templates/admin/tour/edit.html.eex:6
+#: lib/ikvn_web/templates/admin/tour/new.html.eex:6 lib/ikvn_web/templates/admin/tour/show.html.eex:17
+#: lib/ikvn_web/templates/admin/tournament/edit.html.eex:6 lib/ikvn_web/templates/admin/tournament/new.html.eex:6
+#: lib/ikvn_web/templates/admin/tournament/show.html.eex:9 lib/ikvn_web/templates/player/tournament/show.html.eex:8
+#: lib/ikvn_web/templates/profile/edit.html.eex:6 lib/ikvn_web/templates/profile/show.html.eex:17
+#: lib/ikvn_web/templates/tournament/show.html.eex:10
 msgid "Back"
 msgstr ""
 
@@ -36,8 +38,8 @@ msgid "Nickname"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:4
-#: lib/ikvn_web/templates/profile/_form.html.eex:4
+#: lib/ikvn_web/templates/admin/tour/_form.html.eex:4
+#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:4 lib/ikvn_web/templates/profile/_form.html.eex:4
 msgid "Oops, something went wrong! Please check the errors below."
 msgstr ""
 
@@ -73,8 +75,8 @@ msgid "Signed out"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:43
-#: lib/ikvn_web/templates/profile/_form.html.eex:30
+#: lib/ikvn_web/templates/admin/tour/_form.html.eex:45
+#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:43 lib/ikvn_web/templates/profile/_form.html.eex:30
 msgid "Submit"
 msgstr ""
 
@@ -94,8 +96,8 @@ msgid "You cannot change this field"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/tournament/_actions.html.eex:6
-#: lib/ikvn_web/templates/profile/show.html.eex:14
+#: lib/ikvn_web/templates/admin/tour/_actions.html.eex:6
+#: lib/ikvn_web/templates/admin/tournament/_actions.html.eex:6 lib/ikvn_web/templates/profile/show.html.eex:14
 msgid "Edit"
 msgstr ""
 
@@ -136,18 +138,18 @@ msgid "Finished Tournaments"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/tournament/new.html.eex:1
-#: lib/ikvn_web/templates/tournament/_new_button.html.eex:5
+#: lib/ikvn_web/templates/admin/tour/new.html.eex:1
+#: lib/ikvn_web/templates/admin/tournament/new.html.eex:1 lib/ikvn_web/templates/tournament/_new_button.html.eex:5
 msgid "New Tournament"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tournament_controller.ex:26
+#: lib/ikvn_web/controllers/admin/tournament_controller.ex:23
 msgid "Tournament created successfully"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tournament_controller.ex:49
+#: lib/ikvn_web/controllers/admin/tournament_controller.ex:45
 msgid "Tournament updated successfully"
 msgstr ""
 
@@ -158,16 +160,19 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/staff/_actions.html.eex:3
-#: lib/ikvn_web/templates/admin/tournament/_actions.html.eex:3
+#: lib/ikvn_web/templates/admin/tour/_actions.html.eex:3 lib/ikvn_web/templates/admin/tournament/_actions.html.eex:3
 msgid "Actions"
 msgstr ""
 
 #, elixir-format
+#: lib/ikvn_web/templates/admin/tour/_form.html.eex:15
 #: lib/ikvn_web/templates/admin/tournament/_form.html.eex:21
 msgid "Description"
 msgstr ""
 
 #, elixir-format
+#: lib/ikvn_web/templates/admin/tour/_form.html.eex:29
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:6 lib/ikvn_web/templates/admin/tour/show.html.eex:12
 #: lib/ikvn_web/templates/admin/tournament/_form.html.eex:35
 msgid "Finish"
 msgstr ""
@@ -184,6 +189,8 @@ msgid "Settings"
 msgstr ""
 
 #, elixir-format
+#: lib/ikvn_web/templates/admin/tour/_form.html.eex:21
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:5 lib/ikvn_web/templates/admin/tour/show.html.eex:11
 #: lib/ikvn_web/templates/admin/tournament/_form.html.eex:27
 msgid "Start"
 msgstr ""
@@ -229,17 +236,19 @@ msgid "Staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:108
+#: lib/ikvn/game/game.ex:104
 msgid "User \"%{nickname}\" is not exist"
 msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/staff/_actions.html.eex:6
+#: lib/ikvn_web/templates/admin/tour/_actions.html.eex:8
 msgid "Delete"
 msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/staff/_actions.html.eex:6
+#: lib/ikvn_web/templates/admin/tour/_actions.html.eex:8
 msgid "Really?"
 msgstr ""
 
@@ -249,7 +258,7 @@ msgid "User successfully added to staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:130
+#: lib/ikvn/game/game.ex:126
 msgid "Can't delete the Creator from staff"
 msgstr ""
 
@@ -317,4 +326,56 @@ msgstr ""
 #: lib/ikvn_web/templates/admin/player/index.html.eex:1
 #: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:11
 msgid "Players"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/tour/edit.html.eex:1
+msgid "Edit Tour \"%{tour}\""
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/tournament/edit.html.eex:1
+msgid "Edit Tournament \"%{tournament}\""
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/tour/_new_button.html.eex:4
+msgid "New Tour"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/tour/_form.html.eex:37
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:7 lib/ikvn_web/templates/admin/tour/show.html.eex:13
+msgid "Results"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/tour/_form.html.eex:9
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:4
+msgid "Title"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/tour_controller.ex:80
+msgid "Tour can't be deleted"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/tour_controller.ex:32
+msgid "Tour created successfully"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/tour_controller.ex:74
+msgid "Tour deleted successfully"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/tour_controller.ex:58
+msgid "Tour updated successfully"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:15
+msgid "Tours"
 msgstr ""

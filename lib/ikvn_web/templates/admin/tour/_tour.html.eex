@@ -1,0 +1,13 @@
+<tr>
+  <td>
+    <%= link to: Routes.admin_tournament_tour_path(@conn, :show, @tournament, @tour) do %>
+      <%= @tour.title %>
+    <% end %>
+  </td>
+  <td><%= datetime @tour.started_at %></td>
+  <td><%= datetime @tour.finished_at %></td>
+  <td><%= datetime @tour.results_at %></td>
+  <td>
+    <%= render "_actions.html", assigns %>
+  </td>
+</tr>

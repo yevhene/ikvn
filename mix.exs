@@ -48,7 +48,8 @@ defmodule Ikvn.MixProject do
       {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
       {:exgravatar, "~> 2.0"},
       {:earmark, "~> 1.4.3"},
-      {:ecto_enum, "~> 1.4"}
+      {:ecto_enum, "~> 1.4"},
+      {:tzdata, "~> 1.0.3"}
     ]
   end
 

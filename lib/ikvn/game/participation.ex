@@ -1,6 +1,7 @@
 defmodule Ikvn.Game.Participation do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ikvn.Utils.Validation
 
   alias Ikvn.Account.User
   alias Ikvn.Game.Participation
@@ -28,5 +29,6 @@ defmodule Ikvn.Game.Participation do
     |> foreign_key_constraint(:user_id)
     |> foreign_key_constraint(:creator_id)
     |> validate_inclusion(:role, Role.__valid_values__())
+    |> forbid_change(:creator_id)
   end
 end

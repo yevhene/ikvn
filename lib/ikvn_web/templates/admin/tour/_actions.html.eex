@@ -1,0 +1,10 @@
+<div class="btn-tour">
+  <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= gettext "Actions" %>
+  </button>
+  <div class="dropdown-menu">
+    <%= link gettext("Edit"), to: Routes.admin_tournament_tour_path(@conn, :edit, @tournament, @tour), class: "dropdown-item" %>
+
+    <%= link gettext("Delete"), to: Routes.admin_tournament_tour_path(@conn, :delete, @tournament, @tour), method: "delete", class: "dropdown-item text-danger", data: [confirm: gettext("Really?")] %>
+  </div>
+</div>

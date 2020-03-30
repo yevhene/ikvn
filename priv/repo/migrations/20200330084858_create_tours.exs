@@ -3,7 +3,8 @@ defmodule Ikvn.Repo.Migrations.CreateTours do
 
   def change do
     create table(:tours) do
-      add :name, :text
+      add :title, :text
+      add :description, :text
       add :started_at, :utc_datetime, null: false
       add :finished_at, :utc_datetime, null: false
       add :results_at, :utc_datetime, null: false

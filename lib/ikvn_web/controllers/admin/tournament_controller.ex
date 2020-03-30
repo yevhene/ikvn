@@ -8,17 +8,16 @@ defmodule IkvnWeb.Admin.TournamentController do
 
   def new(conn, _params) do
     changeset = Game.change_tournament(%Tournament{
-      creator_id: conn.assigns.current_user.id,
       started_at: DateTime.utc_now,
       finished_at: DateTime.utc_now
     })
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"tournament" => tournament_params}) do
-    tournament_params = tournament_params(conn, tournament_params)
-
-    case Game.create_tournament(tournament_params) do
+  def create(conn, %{"tournament" => params}) do
+    case Game.create_tournament(
+      tournament_params(conn, params), conn.assigns.current_user
+    ) do
       {:ok, tournament} ->
         {:ok, _participation} = Game.create_creator_participation(tournament)
 
@@ -39,11 +38,10 @@ defmodule IkvnWeb.Admin.TournamentController do
     render(conn, "edit.html", changeset: changeset)
   end
 
-  def update(conn, %{"tournament" => tournament_params}) do
+  def update(conn, %{"tournament" => params}) do
     tournament = conn.assigns.tournament
-    tournament_params = tournament_params(conn, tournament_params)
 
-    case Game.update_tournament(tournament, tournament_params) do
+    case Game.update_tournament(tournament, tournament_params(conn, params)) do
       {:ok, tournament} ->
         conn
         |> put_flash(:info, gettext "Tournament updated successfully")
@@ -53,8 +51,8 @@ defmodule IkvnWeb.Admin.TournamentController do
     end
   end
 
-  defp tournament_params(conn, params) do
+  def tournament_params(_conn, params) do
     params
-    |> Map.merge(%{"creator_id" => conn.assigns.current_user.id})
+    |> cast_datetime_params(["started_at", "finished_at"])
   end
 end

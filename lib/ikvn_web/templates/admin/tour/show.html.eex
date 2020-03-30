@@ -1,0 +1,17 @@
+<h2>
+  <%= @tour.title %>
+  <%= render "_actions.html", assigns %>
+</h2>
+
+<div>
+  <%= markdown @tour.description %>
+</div>
+
+<dl>
+  <dt><%= gettext("Start") %></dt><dd><%= datetime @tour.started_at %></dd>
+  <dt><%= gettext("Finish") %></dt><dd><%= datetime @tour.finished_at %></dd>
+  <dt><%= gettext("Results") %></dt><dd><%= datetime @tour.results_at %></dd>
+</dl>
+
+<hr />
+<span><%= link gettext("Back"), to: Routes.admin_tournament_tour_path(@conn, :index, @tournament) %></span>

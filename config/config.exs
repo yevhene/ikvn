@@ -53,6 +53,10 @@ config :oauth2,
 
 config :ikvn, IkvnWeb.Gettext, default_locale: "uk"
 
+config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
+
+config :ikvn, IkvnWeb.ServerTime, default_timezone: "Europe/Kiev"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

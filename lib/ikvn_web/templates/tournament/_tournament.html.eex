@@ -13,6 +13,6 @@
 
   <div class="card-footer d-flex align-items-center justify-content-between">
     <div><%= @tournament.creator.nickname %></div>
-    <small><%= DateTime.to_date(@tournament.started_at) %></small>
+    <small><%= datetime @tournament.started_at %></small>
   </div>
 </div>

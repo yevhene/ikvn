@@ -5,6 +5,7 @@ defmodule Ikvn.Game do
   alias Ikvn.Account
   alias Ikvn.Account.User
   alias Ikvn.Game.Participation
+  alias Ikvn.Game.Tour
   alias Ikvn.Game.Tournament
   alias Ikvn.Repo
 
@@ -26,9 +27,7 @@ defmodule Ikvn.Game do
     now = DateTime.utc_now
 
     Tournament
-    |> where([t],
-      is_nil(t.started_at) or t.started_at > ^now
-    )
+    |> where([t], t.started_at > ^now)
     |> join(:inner, [t], p in Participation, on:
       t.id == p.tournament_id and p.user_id == ^user.id and p.role == "admin"
     )
@@ -41,9 +40,9 @@ defmodule Ikvn.Game do
     Tournament.changeset(tournament, %{})
   end
 
-  def create_tournament(attrs \\ %{}) do
+  def create_tournament(attrs \\ %{}, %User{} = creator) do
     %Tournament{}
-    |> Tournament.changeset(attrs)
+    |> Tournament.changeset(Map.put(attrs, "creator_id", creator.id))
     |> Repo.insert()
   end
 
@@ -116,11 +115,6 @@ defmodule Ikvn.Game do
     |> Repo.insert()
   end
 
-  def change_participation(attrs \\ %{}) do
-    %Participation{}
-    |> Participation.changeset(attrs)
-  end
-
   def delete_participation(%Participation{} = participation) do
     participation = participation |> Repo.preload(:tournament)
     if participation.tournament.creator_id == participation.user_id do
@@ -139,4 +133,34 @@ defmodule Ikvn.Game do
   end
 
   def get_user_participation(_, _), do: nil
+
+  def get_tour!(id), do: Repo.get!(Tour, id)
+
+  def list_tours(%Tournament{id: tournament_id}) do
+    Tour
+    |> where([t], t.tournament_id == ^tournament_id)
+    |> order_by(:started_at)
+    |> Repo.all
+    |> Repo.preload([:creator, :tasks])
+  end
+
+  def change_tour(%Tour{} = tour) do
+    Tour.changeset(tour, %{})
+  end
+
+  def create_tour(attrs \\ %{}, %User{} = creator) do
+    %Tour{}
+    |> Tour.changeset(Map.put(attrs, "creator_id", creator.id))
+    |> Repo.insert()
+  end
+
+  def update_tour(%Tour{} = tour, attrs) do
+    tour
+    |> Tour.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_tour(%Tour{} = tour) do
+    Repo.delete(tour)
+  end
 end
