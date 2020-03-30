@@ -13,13 +13,13 @@
 
   <div class="form-group">
     <%= label f, :headline, gettext("Headline"), class: "control-label" %>
-    <%= textarea f, :headline, class: "form-control" %>
+    <%= textarea f, :headline, class: "form-control markdown-editor" %>
     <%= error_tag f, :headline %>
   </div>
 
   <div class="form-group">
     <%= label f, :description, gettext("Description"), class: "control-label" %>
-    <%= textarea f, :description, class: "form-control" %>
+    <%= textarea f, :description, class: "form-control markdown-editor" %>
     <%= error_tag f, :description %>
   </div>
 
