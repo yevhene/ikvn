@@ -49,7 +49,9 @@ defmodule Ikvn.MixProject do
       {:exgravatar, "~> 2.0"},
       {:earmark, "~> 1.4.3"},
       {:ecto_enum, "~> 1.4"},
-      {:tzdata, "~> 1.0.3"}
+      {:tzdata, "~> 1.0.3"},
+      {:edeliver, ">= 1.6.0"},
+      {:distillery, "~> 2.0", warn_missing: false}
     ]
   end
 

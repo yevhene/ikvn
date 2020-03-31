@@ -10,8 +10,13 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :ikvn, IkvnWeb.Endpoint,
-  url: [host: "ikvn.rocks", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  load_from_system_env: true,
+  http: [port: {:system, "PORT"}],
+  url: [host: "ikvn.rocks", port: {:system, "PORT"}],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  server: true,
+  root: ".",
+  code_reloader: false
 
 # Do not print debug messages in production
 config :logger, level: :info

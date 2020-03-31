@@ -1,0 +1,13 @@
+APP="ikvn"
+
+BUILD_HOST="ikvn.rocks"
+BUILD_USER="ikvn"
+BUILD_AT="/tmp/${APP}/builds"
+
+PRODUCTION_HOSTS="ikvn.rocks"
+PRODUCTION_USER="ikvn"
+DELIVER_TO="/home/ikvn/app"
+
+BUILD_CMD=mix
+RELEASE_CMD=mix
+USING_DISTILLERY=true

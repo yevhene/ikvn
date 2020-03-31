@@ -38,3 +38,6 @@ npm-debug.log
 
 # Yarn
 yarn-error.log
+
+# edeliver
+.deliver/releases/
