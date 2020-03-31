@@ -1,5 +1,9 @@
 use Mix.Config
 
+get_env = fn (name) ->
+  System.get_env(name) || raise "environment variable #{name} is missing"
+end
+
 # For production, don't forget to configure the url host
 # to something meaningful, Phoenix uses this information
 # when generating URLs.
@@ -11,12 +15,24 @@ use Mix.Config
 # before starting your production server.
 config :ikvn, IkvnWeb.Endpoint,
   load_from_system_env: true,
-  http: [port: {:system, "PORT"}],
-  url: [host: "ikvn.rocks", port: {:system, "PORT"}],
+  http: [port: 4000],
+  url: [scheme: "https", host: "ikvn.rocks", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
-  root: ".",
-  code_reloader: false
+  code_reloader: false,
+  secret_key_base: get_env.("SECRET_KEY_BASE")
+
+config :ikvn, Ikvn.Repo,
+  user: "ikvn",
+  database: "ikvn",
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+
+config :ueberauth, Ueberauth,
+  providers: [
+    facebook: {Ueberauth.Strategy.Facebook, [
+      callback_url: "https://ikvn.rocks/auth/facebook/callback"
+    ]}
+  ]
 
 # Do not print debug messages in production
 config :logger, level: :info
