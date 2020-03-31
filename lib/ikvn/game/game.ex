@@ -121,6 +121,8 @@ defmodule Ikvn.Game do
 
   def get_tour!(id), do: Repo.get!(Tour, id)
 
+  def get_tour(id), do: Repo.get(Tour, id)
+
   def list_tours(%Tournament{id: tournament_id}) do
     Tour
     |> where([t], t.tournament_id == ^tournament_id)
@@ -158,8 +160,8 @@ defmodule Ikvn.Game do
     DateTime.compare(now, started_at) == :lt
   end
 
-  def is_active?(%Tournament{
-    started_at: started_at, finished_at: finished_at
+  def is_active?(
+    %Tournament{started_at: started_at, finished_at: finished_at
   }) do
     now = DateTime.utc_now
     DateTime.compare(now, started_at) == :gt and

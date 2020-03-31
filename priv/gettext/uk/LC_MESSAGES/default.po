@@ -311,7 +311,7 @@ msgstr "Турнір"
 #, elixir-format
 #: lib/ikvn_web/templates/layout/player.html.eex:2
 msgid "Tournament \"%{tournament}\""
-msgstr "Адмінка Турніру \"%{tournament}\""
+msgstr "Турнір \"%{tournament}\""
 
 #, elixir-format
 #: lib/ikvn_web/plug/check_role.ex:23
@@ -436,7 +436,7 @@ msgstr "Завдання"
 #, elixir-format
 #: lib/ikvn_web/views/admin/tour_view.ex:11
 msgid "Tour"
-msgstr "Тури"
+msgstr "Тур"
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/index.html.eex:5

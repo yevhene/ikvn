@@ -1,0 +1,18 @@
+<h2>
+  <%= title @tour %>
+</h2>
+
+<div>
+  <%= markdown @tour.description %>
+</div>
+
+<hr />
+
+<h4><%= gettext "Tasks" %></h4>
+<div>
+  <%= render_many(@tasks, IkvnWeb.Player.TaskView, "_task.html", assigns) %>
+</div>
+
+<hr />
+
+<span><%= link gettext("Back"), to: Routes.player_tournament_tour_path(@conn, :index, @tournament) %></span>

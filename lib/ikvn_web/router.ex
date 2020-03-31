@@ -35,6 +35,10 @@ defmodule IkvnWeb.Router do
     plug IkvnWeb.Plug.LoadTournament
   end
 
+  pipeline :tour do
+    plug IkvnWeb.Plug.LoadTour
+  end
+
   pipeline :admin do
     plug IkvnWeb.Plug.CheckRole, role: :admin
   end
@@ -54,8 +58,7 @@ defmodule IkvnWeb.Router do
     scope "/admin", Admin, as: :admin do
       pipe_through [:can_create_tournament]
 
-      resources "/tournaments", TournamentController, only: [:new, :create]
-    end
+      resources "/tournaments", TournamentController, only: [:new, :create]    end
 
     # Tournament admin
     scope "/admin", Admin, as: :admin do
@@ -88,7 +91,15 @@ defmodule IkvnWeb.Router do
     scope "/player", Player, as: :player do
       pipe_through [:tournament, :player]
 
-      resources "/tournaments", TournamentController, only: [:show]
+      resources "/tournaments", TournamentController, only: [:show] do
+        resources "/tours", TourController, only: [:index]
+
+        scope "/" do
+          pipe_through [:tour]
+
+          resources "/tours", TourController, only: [:show]
+        end
+      end
     end
   end
 

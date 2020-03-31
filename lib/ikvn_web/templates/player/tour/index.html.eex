@@ -1,0 +1,15 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= gettext "Title" %></th>
+      <th><%= gettext "Status" %></th>
+      <th><%= gettext "Start" %></th>
+      <th><%= gettext "Finish" %></th>
+      <th><%= gettext "Results" %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render_many(@tours, IkvnWeb.Player.TourView, "_tour.html", assigns) %>
+  </tbody>
+</table>

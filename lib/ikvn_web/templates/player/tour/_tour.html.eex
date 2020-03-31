@@ -1,0 +1,15 @@
+<tr>
+  <td>
+    <%= if Game.is_future?(@tour) do %>
+      <%= title @tour %>
+    <% else %>
+      <%= link to: Routes.player_tournament_tour_path(@conn, :show, @tournament, @tour) do %>
+        <%= title @tour %>
+      <% end %>
+    <% end %>
+  </td>
+  <td><%= status @tour %></td>
+  <td><%= datetime @tour.started_at %></td>
+  <td><%= datetime @tour.finished_at %></td>
+  <td><%= datetime @tour.results_at %></td>
+</tr>

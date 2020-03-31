@@ -20,7 +20,6 @@ defmodule IkvnWeb.Admin.TournamentController do
     ) do
       {:ok, tournament} ->
         {:ok, _participation} = Game.create_creator_participation(tournament)
-
         conn
         |> put_flash(:info, gettext "Tournament created successfully")
         |> redirect(to: Routes.tournament_path(conn, :show, tournament))

@@ -39,15 +39,13 @@ defmodule IkvnWeb.Admin.TourController do
   end
 
   def show(conn, _params) do
-    tour = conn.assigns.tour
-    tasks = Game.list_tasks(tour)
-    render(conn, "show.html", tour: tour, tasks: tasks)
+    tasks = Game.list_tasks(conn.assigns.tour)
+    render(conn, "show.html", tasks: tasks)
   end
 
   def edit(conn, _params) do
-    tour = conn.assigns.tour
-    changeset = Game.change_tour(tour)
-    render(conn, "edit.html", tour: tour, changeset: changeset)
+    changeset = Game.change_tour(conn.assigns.tour)
+    render(conn, "edit.html", changeset: changeset)
   end
 
   def update(conn, %{"tour" => params}) do

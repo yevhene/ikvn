@@ -1,4 +1,4 @@
-defmodule IkvnWeb.Plug.LoadTournament do
+defmodule IkvnWeb.Plug.LoadTour do
   import Phoenix.Controller
   import Plug.Conn
 
@@ -7,13 +7,13 @@ defmodule IkvnWeb.Plug.LoadTournament do
   def init(opts), do: opts
 
   def call(conn, _opts) do
-    user = conn.assigns.current_user
-    tournament = Game.get_tournament(tournament_id(conn))
-    participation = Game.get_user_participation(user, tournament)
+    participation = conn.assigns.participation
+    tour = Game.get_tour(tour_id(conn))
 
+    IO.inspect participation
     if (
-      tournament == nil or (
-        Game.is_future?(tournament) and (
+      tour == nil or (
+        Game.is_future?(tour) and (
           participation == nil or
           not Enum.member?([:admin, :judge], participation.role)
         )
@@ -23,13 +23,12 @@ defmodule IkvnWeb.Plug.LoadTournament do
       |> error_response()
     else
       conn
-      |> assign(:tournament, tournament)
-      |> assign(:participation, participation)
+      |> assign(:tour, tour)
     end
   end
 
-  defp tournament_id(conn) do
-    conn.params["tournament_id"] || conn.params["id"]
+  defp tour_id(conn) do
+    conn.params["tour_id"] || conn.params["id"]
   end
 
   defp error_response(conn) do

@@ -6,8 +6,13 @@ defmodule IkvnWeb.ServerTime do
   def from_utc(nil), do: nil
 
   def to_utc(%NaiveDateTime{} = naive) do
-    {:ok, datetime} = DateTime.from_naive(naive, default_timezone())
-    DateTime.shift_zone!(datetime, "Etc/UTC")
+    with {:ok, datetime} <- DateTime.from_naive(naive, default_timezone()),
+         result = DateTime.shift_zone!(datetime, "Etc/UTC")
+    do
+      result
+    else
+      _ -> nil
+    end
   end
   def to_utc(nil), do: nil
 
