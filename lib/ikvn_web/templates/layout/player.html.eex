@@ -1,7 +1,5 @@
 <%= base_layout assigns do %>
   <h2><%= gettext "Tournament \"%{tournament}\"", tournament: @tournament.name %></h2>
 
-  <%= render "_player_navigation.html", assigns %>
-
   <%= render @view_module, @view_template, assigns %>
 <% end %>

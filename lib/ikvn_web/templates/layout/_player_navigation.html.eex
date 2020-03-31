@@ -1,9 +1,0 @@
-<ul class="nav nav-tabs mb-3">
-  <li class="nav-item">
-    <%= nav_item @conn, gettext("Tournament"), Routes.player_tournament_path(@conn, :show, @tournament) %>
-  </li>
-
-  <li class="nav-item">
-    <%= nav_item @conn, gettext("Tours"), Routes.player_tournament_tour_path(@conn, :index, @tournament) %>
-  </li>
-</ul>

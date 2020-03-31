@@ -96,8 +96,6 @@ defmodule IkvnWeb.Router do
       pipe_through [:tournament, :player]
 
       resources "/tournaments", TournamentController, only: [:show] do
-        resources "/tours", TourController, only: [:index]
-
         scope "/" do
           pipe_through [:tour]
 

@@ -32,6 +32,6 @@ h1 .btn-group, h2 .btn-group, h3 .btn-group, h4 .btn-group, h5 .btn-group {
 }
 
 .card img {
-  max-height: 250px;
-  max-width: 50%;
+  max-height: 400px;
+  max-width: 60%;
 }

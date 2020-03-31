@@ -1,7 +1,7 @@
 <%= if @current_user do %>
   <div class="btn-group navbar-nav">
     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <%= img_tag gravatar(@current_user.email, 24), class: "navbar-gravatar" %>
+      <%= img_tag gravatar(@current_user.email, size: 24), class: "navbar-gravatar" %>
       <%= nickname(@current_user) %>
     </button>
 

@@ -1,8 +1,17 @@
-<h2>
-  <%= @tournament.name %>
-</h2>
-
-<div><%= markdown @tournament.description %></div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= gettext "Title" %></th>
+      <th><%= gettext "Status" %></th>
+      <th><%= gettext "Start" %></th>
+      <th><%= gettext "Finish" %></th>
+      <th><%= gettext "Results" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render_many(@tours, IkvnWeb.Player.TourView, "_tour.html", assigns) %>
+  </tbody>
+</table>
 
 <hr />
 <span><%= link gettext("Back"), to: Routes.tournament_path(@conn, :show, @tournament) %></span>

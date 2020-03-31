@@ -13,7 +13,7 @@ defmodule IkvnWeb.Player.ParticipationController do
         |> put_flash(:error, gettext "Participation failed. Contact Admin")
     end
     |> redirect(to:
-      Routes.tournament_path(conn, :show, conn.assigns.tournament)
+      Routes.player_tournament_path(conn, :show, conn.assigns.tournament)
     )
   end
 

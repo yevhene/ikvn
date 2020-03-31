@@ -1,5 +1,3 @@
 defmodule IkvnWeb.Player.TournamentView do
   use IkvnWeb, :view
-
-  import IkvnWeb.MarkdownHelpers
 end

@@ -30,6 +30,7 @@ config :ikvn, Ikvn.Repo,
 config :ueberauth, Ueberauth,
   providers: [
     facebook: {Ueberauth.Strategy.Facebook, [
+      default_scope: "email",
       callback_url: "https://ikvn.rocks/auth/facebook/callback"
     ]}
   ]
