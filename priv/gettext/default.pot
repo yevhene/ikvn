@@ -177,7 +177,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:29
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:6 lib/ikvn_web/templates/admin/tour/show.html.eex:13
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:7 lib/ikvn_web/templates/admin/tour/show.html.eex:13
 #: lib/ikvn_web/templates/admin/tournament/_form.html.eex:35
 msgid "Finish"
 msgstr ""
@@ -195,7 +195,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:21
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:5 lib/ikvn_web/templates/admin/tour/show.html.eex:11
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:6 lib/ikvn_web/templates/admin/tour/show.html.eex:11
 #: lib/ikvn_web/templates/admin/tournament/_form.html.eex:27
 msgid "Start"
 msgstr ""
@@ -241,7 +241,7 @@ msgid "Staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:105
+#: lib/ikvn/game/game.ex:89
 msgid "User \"%{nickname}\" is not exist"
 msgstr ""
 
@@ -263,7 +263,7 @@ msgid "User successfully added to staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:122
+#: lib/ikvn/game/game.ex:106
 msgid "Can't delete the Creator from staff"
 msgstr ""
 
@@ -346,7 +346,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:37
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:7 lib/ikvn_web/templates/admin/tour/show.html.eex:15
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:8 lib/ikvn_web/templates/admin/tour/show.html.eex:15
 msgid "Results"
 msgstr ""
 
@@ -433,6 +433,34 @@ msgid "Tasks"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/views/admin/tour_view.ex:10
+#: lib/ikvn_web/views/admin/tour_view.ex:11
 msgid "Tour"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:5
+msgid "Status"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/views/helpers/status_helpers.ex:12
+#: lib/ikvn_web/views/helpers/status_helpers.ex:23
+msgid "future"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/views/helpers/status_helpers.ex:27
+msgid "judging"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/views/helpers/status_helpers.ex:16
+#: lib/ikvn_web/views/helpers/status_helpers.ex:29
+msgid "finished"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/views/helpers/status_helpers.ex:14
+#: lib/ikvn_web/views/helpers/status_helpers.ex:25
+msgid "started"
 msgstr ""

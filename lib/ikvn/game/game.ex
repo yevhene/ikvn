@@ -30,7 +30,9 @@ defmodule Ikvn.Game do
     Tournament
     |> where([t], t.started_at > ^now)
     |> join(:inner, [t], p in Participation, on:
-      t.id == p.tournament_id and p.user_id == ^user.id and p.role == "admin"
+      t.id == p.tournament_id and
+      p.user_id == ^user.id and
+      p.role in ["admin", "judge"]
     )
     |> order_by(:started_at)
     |> Repo.all
@@ -51,24 +53,6 @@ defmodule Ikvn.Game do
     tournament
     |> Tournament.changeset(attrs)
     |> Repo.update()
-  end
-
-  def is_future?(%Tournament{started_at: started_at}) do
-    now = DateTime.utc_now
-    DateTime.compare(now, started_at) == :lt
-  end
-
-  def is_active?(%Tournament{
-    started_at: started_at, finished_at: finished_at
-  }) do
-    now = DateTime.utc_now
-    DateTime.compare(now, started_at) == :gt and
-      DateTime.compare(now, finished_at) == :lt
-  end
-
-  def is_finished?(%Tournament{finished_at: finished_at}) do
-    now = DateTime.utc_now
-    DateTime.compare(now, finished_at) == :gt
   end
 
   def create_creator_participation(%Tournament{
@@ -162,6 +146,46 @@ defmodule Ikvn.Game do
 
   def delete_tour(%Tour{} = tour) do
     Repo.delete(tour)
+  end
+
+  def is_future?(%Tournament{started_at: started_at}) do
+    now = DateTime.utc_now
+    DateTime.compare(now, started_at) == :lt
+  end
+
+  def is_future?(%Tour{started_at: started_at}) do
+    now = DateTime.utc_now
+    DateTime.compare(now, started_at) == :lt
+  end
+
+  def is_active?(%Tournament{
+    started_at: started_at, finished_at: finished_at
+  }) do
+    now = DateTime.utc_now
+    DateTime.compare(now, started_at) == :gt and
+      DateTime.compare(now, finished_at) == :lt
+  end
+
+  def is_active?(%Tour{started_at: started_at, finished_at: finished_at}) do
+    now = DateTime.utc_now
+    DateTime.compare(now, started_at) == :gt and
+      DateTime.compare(now, finished_at) == :lt
+  end
+
+  def is_finished?(%Tournament{finished_at: finished_at}) do
+    now = DateTime.utc_now
+    DateTime.compare(now, finished_at) == :gt
+  end
+
+  def is_judging?(%Tour{finished_at: finished_at, results_at: results_at}) do
+    now = DateTime.utc_now
+    DateTime.compare(now, finished_at) == :gt and
+      DateTime.compare(now, results_at) == :lt
+  end
+
+  def is_closed?(%Tour{results_at: results_at}) do
+    now = DateTime.utc_now
+    DateTime.compare(now, results_at) == :gt
   end
 
   def get_task!(id), do: Repo.get!(Task, id)

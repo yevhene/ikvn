@@ -3,6 +3,7 @@ defmodule IkvnWeb.Admin.TourView do
 
   import IkvnWeb.MarkdownHelpers
   import IkvnWeb.DateTimeHelpers
+  import IkvnWeb.StatusHelpers
 
   alias Ikvn.Game.Tour
 

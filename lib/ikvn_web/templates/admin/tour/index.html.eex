@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th><%= gettext "Title" %></th>
+      <th><%= gettext "Status" %></th>
       <th><%= gettext "Start" %></th>
       <th><%= gettext "Finish" %></th>
       <th><%= gettext "Results" %></th>

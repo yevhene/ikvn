@@ -1,9 +1,10 @@
 <tr>
   <td>
     <%= link to: Routes.admin_tournament_tour_path(@conn, :show, @tournament, @tour) do %>
-      <%= title(@tour) %>
+      <%= title @tour %>
     <% end %>
   </td>
+  <td><%= status @tour %></td>
   <td><%= datetime @tour.started_at %></td>
   <td><%= datetime @tour.finished_at %></td>
   <td><%= datetime @tour.results_at %></td>

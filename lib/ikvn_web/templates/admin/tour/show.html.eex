@@ -7,15 +7,6 @@
   <%= markdown @tour.description %>
 </div>
 
-<dl class="row">
-  <dt class="col-sm-3"><%= gettext("Start") %></dt>
-  <dd class="col-sm-9"><%= datetime @tour.started_at %></dd>
-  <dt class="col-sm-3"><%= gettext("Finish") %></dt>
-  <dd class="col-sm-9"><%= datetime @tour.finished_at %></dd>
-  <dt class="col-sm-3"><%= gettext("Results") %></dt>
-  <dd class="col-sm-9"><%= datetime @tour.results_at %></dd>
-</dl>
-
 <hr />
 
 <h4><%= gettext "Tasks" %></h4>

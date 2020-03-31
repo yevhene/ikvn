@@ -178,7 +178,7 @@ msgstr "Опис"
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:29
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:6 lib/ikvn_web/templates/admin/tour/show.html.eex:13
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:7 lib/ikvn_web/templates/admin/tour/show.html.eex:13
 #: lib/ikvn_web/templates/admin/tournament/_form.html.eex:35
 msgid "Finish"
 msgstr "Завершення"
@@ -196,7 +196,7 @@ msgstr "Налаштування"
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:21
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:5 lib/ikvn_web/templates/admin/tour/show.html.eex:11
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:6 lib/ikvn_web/templates/admin/tour/show.html.eex:11
 #: lib/ikvn_web/templates/admin/tournament/_form.html.eex:27
 msgid "Start"
 msgstr "Початок"
@@ -242,7 +242,7 @@ msgid "Staff"
 msgstr "Персонал"
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:105
+#: lib/ikvn/game/game.ex:89
 msgid "User \"%{nickname}\" is not exist"
 msgstr "Користувач \"%{nickname}\" не існує"
 
@@ -264,7 +264,7 @@ msgid "User successfully added to staff"
 msgstr "Користувач успішно доданий до штату"
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:122
+#: lib/ikvn/game/game.ex:106
 msgid "Can't delete the Creator from staff"
 msgstr "Неможливо видалити того хто створив турнір зі штату"
 
@@ -347,7 +347,7 @@ msgstr "Новий Турнір"
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:37
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:7 lib/ikvn_web/templates/admin/tour/show.html.eex:15
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:8 lib/ikvn_web/templates/admin/tour/show.html.eex:15
 msgid "Results"
 msgstr "Результати"
 
@@ -387,7 +387,7 @@ msgstr "Тури"
 msgid "Edit \"%{task}\""
 msgstr ""
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/ikvn_web/templates/admin/tour/edit.html.eex:1
 msgid "Edit \"%{tour}\""
 msgstr "Редагувати Тур \"%{tour}\""
@@ -408,22 +408,22 @@ msgstr "Порядок"
 msgid "Task"
 msgstr "Завдання"
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/ikvn_web/controllers/admin/task_controller.ex:71
 msgid "Task can't be deleted"
 msgstr "Завдання не можна видалити"
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/ikvn_web/controllers/admin/task_controller.ex:25
 msgid "Task created successfully"
 msgstr "Завдання успішно створено"
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/ikvn_web/controllers/admin/task_controller.ex:65
 msgid "Task deleted successfully"
 msgstr "Завдання успішно видалено"
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/ikvn_web/controllers/admin/task_controller.ex:48
 msgid "Task updated successfully"
 msgstr "Завдання успішно оновлено"
@@ -433,7 +433,35 @@ msgstr "Завдання успішно оновлено"
 msgid "Tasks"
 msgstr "Завдання"
 
-#, elixir-format, fuzzy
-#: lib/ikvn_web/views/admin/tour_view.ex:10
+#, elixir-format
+#: lib/ikvn_web/views/admin/tour_view.ex:11
 msgid "Tour"
 msgstr "Тури"
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:5
+msgid "Status"
+msgstr "Початок"
+
+#, elixir-format
+#: lib/ikvn_web/views/helpers/status_helpers.ex:12
+#: lib/ikvn_web/views/helpers/status_helpers.ex:23
+msgid "future"
+msgstr "планується"
+
+#, elixir-format
+#: lib/ikvn_web/views/helpers/status_helpers.ex:27
+msgid "judging"
+msgstr "оцінюється"
+
+#, elixir-format
+#: lib/ikvn_web/views/helpers/status_helpers.ex:16
+#: lib/ikvn_web/views/helpers/status_helpers.ex:29
+msgid "finished"
+msgstr "завершено"
+
+#, elixir-format
+#: lib/ikvn_web/views/helpers/status_helpers.ex:14
+#: lib/ikvn_web/views/helpers/status_helpers.ex:25
+msgid "started"
+msgstr "розпочато"
