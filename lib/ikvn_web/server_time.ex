@@ -7,7 +7,7 @@ defmodule IkvnWeb.ServerTime do
 
   def to_utc(%NaiveDateTime{} = naive) do
     with {:ok, datetime} <- DateTime.from_naive(naive, default_timezone()),
-         result = DateTime.shift_zone!(datetime, "Etc/UTC")
+         result <- DateTime.shift_zone!(datetime, "Etc/UTC")
     do
       result
     else

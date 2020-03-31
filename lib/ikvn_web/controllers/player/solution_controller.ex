@@ -53,7 +53,9 @@ defmodule IkvnWeb.Player.SolutionController do
   end
 
   defp check_tour_is_active!(conn, _opts) do
-    if not Game.tour_is_active?(conn.assigns.tour) do
+    if Game.tour_is_active?(conn.assigns.tour) do
+      conn
+    else
       conn
       |> put_flash(:error, gettext "Tour is finished")
       |> redirect(to:
@@ -62,8 +64,7 @@ defmodule IkvnWeb.Player.SolutionController do
         )
       )
       |> halt()
-    else
-      conn
+
     end
   end
 
