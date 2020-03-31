@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">
+      <%= title @task %>
+    </h5>
+  </div>
+  <div class="card-body">
+    <%= markdown @task.description %>
+  </div>
+
+  <% solution = Enum.at(@task.solutions, 0) %>
+  <%= if solution != nil do %>
+    <hr />
+    <div class="card-body">
+      <%= render IkvnWeb.Player.SolutionView, "_solution.html", Map.put(assigns, :solution, solution) %>
+    </div>
+  <% end %>
+
+  <%= if Game.tour_is_active?(@tour) do %>
+    <div class="card-footer">
+      <%= if Enum.count(@task.solutions) > 0 do %>
+        <%= render IkvnWeb.Player.SolutionView, "_edit_button.html", assigns %>
+      <% else %>
+        <%= render IkvnWeb.Player.SolutionView, "_new_button.html", assigns %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<br />

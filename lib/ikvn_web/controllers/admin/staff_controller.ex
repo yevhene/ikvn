@@ -15,9 +15,8 @@ defmodule IkvnWeb.Admin.StaffController do
 
   def create(conn, %{"staff" => %{"nickname" => nickname, "role" => role}}) do
     tournament = conn.assigns.tournament
-    current_user = conn.assigns.current_user
 
-    case Game.create_staff(nickname, role, tournament, current_user) do
+    case Game.create_staff(nickname, role, tournament) do
       {:ok, _participation} ->
         conn
         |> put_flash(:info, gettext "User successfully added to staff")

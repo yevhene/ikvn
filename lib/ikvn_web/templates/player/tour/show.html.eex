@@ -10,7 +10,7 @@
 
 <h4><%= gettext "Tasks" %></h4>
 <div>
-  <%= render_many(@tasks, IkvnWeb.Player.TaskView, "_task.html", assigns) %>
+  <%= render_many(@tasks, IkvnWeb.Player.TaskView, "_task_with_solution.html", assigns) %>
 </div>
 
 <hr />

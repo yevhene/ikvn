@@ -11,7 +11,7 @@ defmodule IkvnWeb.TournamentView do
   alias Ikvn.Game.Tournament
 
   def tournament_style(%Tournament{} = tournament) do
-    if Game.is_active?(tournament) do
+    if Game.tournament_is_active?(tournament) do
       "border-primary"
     else
       ""

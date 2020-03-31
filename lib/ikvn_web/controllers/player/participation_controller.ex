@@ -20,7 +20,6 @@ defmodule IkvnWeb.Player.ParticipationController do
   defp participation_params(conn) do
     %{
       "user_id" => conn.assigns.current_user.id,
-      "creator_id" => conn.assigns.current_user.id,
       "tournament_id" => conn.assigns.tournament.id
     }
   end

@@ -1,0 +1,6 @@
+<div class="list-group-item">
+  <%= link to: Routes.player_tournament_tour_task_solution_path(@conn, :edit, @tournament, @tour, @task) do %>
+    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+    <span><%= gettext "Change Solution" %></span>
+  <% end %>
+</div>

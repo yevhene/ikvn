@@ -30,3 +30,8 @@ main {
 h1 .btn-group, h2 .btn-group, h3 .btn-group, h4 .btn-group, h5 .btn-group {
   margin-left: 1rem;
 }
+
+.card img {
+  max-height: 250px;
+  max-width: 50%;
+}

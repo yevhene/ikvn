@@ -1,10 +1,12 @@
 defmodule Ikvn.Game do
   import Ecto.Query, warn: false
+  import Ecto.Changeset
   import IkvnWeb.Gettext
 
   alias Ikvn.Account
   alias Ikvn.Account.User
   alias Ikvn.Game.Participation
+  alias Ikvn.Game.Solution
   alias Ikvn.Game.Task
   alias Ikvn.Game.Tour
   alias Ikvn.Game.Tournament
@@ -43,9 +45,9 @@ defmodule Ikvn.Game do
     Tournament.changeset(tournament, %{})
   end
 
-  def create_tournament(attrs \\ %{}, %User{} = creator) do
+  def create_tournament(attrs \\ %{}) do
     %Tournament{}
-    |> Tournament.changeset(Map.put(attrs, "creator_id", creator.id))
+    |> Tournament.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -61,7 +63,6 @@ defmodule Ikvn.Game do
     create_participation(%{
       tournament_id: id,
       user_id: creator_id,
-      creator_id: creator_id,
       role: :admin
     })
   end
@@ -76,14 +77,13 @@ defmodule Ikvn.Game do
     |> Repo.preload(:user)
   end
 
-  def create_staff(nickname, role, tournament, creator) do
+  def create_staff(nickname, role, tournament) do
     case Account.find_user(nickname) do
       %User{} = user ->
         create_participation(%{
           tournament_id: tournament.id,
           user_id: user.id,
-          role: role,
-          creator_id: creator.id
+          role: role
         })
       _ ->
         {:error, gettext(
@@ -106,6 +106,8 @@ defmodule Ikvn.Game do
       {:error, gettext("Can't delete the Creator from staff")}
     else
       participation
+      |> change
+      |> no_assoc_constraint(:soultions)
       |> Repo.delete()
     end
   end
@@ -134,9 +136,9 @@ defmodule Ikvn.Game do
     Tour.changeset(tour, %{})
   end
 
-  def create_tour(attrs \\ %{}, %User{} = creator) do
+  def create_tour(attrs \\ %{}) do
     %Tour{}
-    |> Tour.changeset(Map.put(attrs, "creator_id", creator.id))
+    |> Tour.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -147,20 +149,18 @@ defmodule Ikvn.Game do
   end
 
   def delete_tour(%Tour{} = tour) do
-    Repo.delete(tour)
+    tour
+    |> change
+    |> no_assoc_constraint(:tasks)
+    |> Repo.delete()
   end
 
-  def is_future?(%Tournament{started_at: started_at}) do
+  def tournament_is_future?(%Tournament{started_at: started_at}) do
     now = DateTime.utc_now
     DateTime.compare(now, started_at) == :lt
   end
 
-  def is_future?(%Tour{started_at: started_at}) do
-    now = DateTime.utc_now
-    DateTime.compare(now, started_at) == :lt
-  end
-
-  def is_active?(
+  def tournament_is_active?(
     %Tournament{started_at: started_at, finished_at: finished_at
   }) do
     now = DateTime.utc_now
@@ -168,24 +168,33 @@ defmodule Ikvn.Game do
       DateTime.compare(now, finished_at) == :lt
   end
 
-  def is_active?(%Tour{started_at: started_at, finished_at: finished_at}) do
+  def tournament_is_finished?(%Tournament{finished_at: finished_at}) do
+    now = DateTime.utc_now
+    DateTime.compare(now, finished_at) == :gt
+  end
+
+  def tour_is_future?(%Tour{started_at: started_at}) do
+    now = DateTime.utc_now
+    DateTime.compare(now, started_at) == :lt
+  end
+
+  def tour_is_active?(%Tour{
+    started_at: started_at, finished_at: finished_at
+  }) do
     now = DateTime.utc_now
     DateTime.compare(now, started_at) == :gt and
       DateTime.compare(now, finished_at) == :lt
   end
 
-  def is_finished?(%Tournament{finished_at: finished_at}) do
-    now = DateTime.utc_now
-    DateTime.compare(now, finished_at) == :gt
-  end
-
-  def is_judging?(%Tour{finished_at: finished_at, results_at: results_at}) do
+  def tour_is_judging?(%Tour{
+    finished_at: finished_at, results_at: results_at
+  }) do
     now = DateTime.utc_now
     DateTime.compare(now, finished_at) == :gt and
       DateTime.compare(now, results_at) == :lt
   end
 
-  def is_closed?(%Tour{results_at: results_at}) do
+  def tour_is_closed?(%Tour{results_at: results_at}) do
     now = DateTime.utc_now
     DateTime.compare(now, results_at) == :gt
   end
@@ -195,17 +204,26 @@ defmodule Ikvn.Game do
   def list_tasks(%Tour{id: tour_id}) do
     Task
     |> where([t], t.tour_id == ^tour_id)
-    |> order_by([asc: :order, desc: :inserted_at])
+    |> order_by([asc: :order, asc: :inserted_at])
     |> Repo.all
+  end
+
+  def list_tasks(%Tour{} = tour, %Participation{id: participation_id}) do
+    list_tasks(tour)
+    |> Repo.preload([
+      solutions: from(s in Solution,
+        where: s.participation_id == ^participation_id
+      )
+    ])
   end
 
   def change_task(%Task{} = task) do
     Task.changeset(task, %{})
   end
 
-  def create_task(attrs \\ %{}, %User{} = creator) do
+  def create_task(attrs \\ %{}) do
     %Task{}
-    |> Task.changeset(Map.put(attrs, "creator_id", creator.id))
+    |> Task.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -216,6 +234,34 @@ defmodule Ikvn.Game do
   end
 
   def delete_task(%Task{} = task) do
-    Repo.delete(task)
+    task
+    |> change
+    |> no_assoc_constraint(:solutions)
+    |> Repo.delete()
+  end
+
+  def get_solution(%Task{id: task_id}, %Participation{id: participation_id}) do
+    Solution
+    |> where([s],
+      s.task_id == ^task_id and
+      s.participation_id == ^participation_id
+    )
+    |> Repo.one
+  end
+
+  def change_solution(%Solution{} = solution) do
+    Solution.changeset(solution, %{})
+  end
+
+  def create_solution(attrs \\ %{}) do
+    %Solution{}
+    |> Solution.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def update_solution(%Solution{} = solution, attrs) do
+    solution
+    |> Solution.changeset(attrs)
+    |> Repo.update()
   end
 end

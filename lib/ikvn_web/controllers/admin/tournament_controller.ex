@@ -15,9 +15,7 @@ defmodule IkvnWeb.Admin.TournamentController do
   end
 
   def create(conn, %{"tournament" => params}) do
-    case Game.create_tournament(
-      tournament_params(conn, params), conn.assigns.current_user
-    ) do
+    case Game.create_tournament(tournament_params(conn, params)) do
       {:ok, tournament} ->
         {:ok, _participation} = Game.create_creator_participation(tournament)
         conn
@@ -50,8 +48,11 @@ defmodule IkvnWeb.Admin.TournamentController do
     end
   end
 
-  def tournament_params(_conn, params) do
+  def tournament_params(conn, params) do
     params
     |> cast_datetime_params(["started_at", "finished_at"])
+    |> Map.merge(%{
+      "creator_id" => conn.assigns.current_user.id,
+    })
   end
 end

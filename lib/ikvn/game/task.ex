@@ -1,9 +1,8 @@
 defmodule Ikvn.Game.Task do
   use Ecto.Schema
   import Ecto.Changeset
-  import Ikvn.Utils.Validation
 
-  alias Ikvn.Account.User
+  alias Ikvn.Game.Solution
   alias Ikvn.Game.Task
   alias Ikvn.Game.Tour
 
@@ -13,17 +12,16 @@ defmodule Ikvn.Game.Task do
     field :description, :string
 
     belongs_to :tour, Tour
-    belongs_to :creator, User
+
+    has_many :solutions, Solution
 
     timestamps(type: :utc_datetime)
   end
 
   def changeset(%Task{} = user, attrs) do
     user
-    |> cast(attrs, [:title, :description, :order, :tour_id, :creator_id])
-    |> validate_required([:description, :tour_id, :creator_id])
+    |> cast(attrs, [:title, :description, :order, :tour_id])
+    |> validate_required([:description, :tour_id])
     |> foreign_key_constraint(:tour_id)
-    |> foreign_key_constraint(:creator_id)
-    |> forbid_change(:creator_id)
   end
 end

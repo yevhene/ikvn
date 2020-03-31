@@ -13,7 +13,7 @@ defmodule IkvnWeb.Plug.LoadTournament do
 
     if (
       tournament == nil or (
-        Game.is_future?(tournament) and (
+        Game.tournament_is_future?(tournament) and (
           participation == nil or
           not Enum.member?([:admin, :judge], participation.role)
         )

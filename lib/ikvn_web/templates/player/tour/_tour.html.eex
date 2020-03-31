@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <%= if Game.is_future?(@tour) do %>
+    <%= if Game.tour_is_future?(@tour) do %>
       <%= title @tour %>
     <% else %>
       <%= link to: Routes.player_tournament_tour_path(@conn, :show, @tournament, @tour) do %>

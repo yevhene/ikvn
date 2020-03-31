@@ -5,7 +5,6 @@ defmodule IkvnWeb.Admin.TaskController do
   alias Ikvn.Game.Task
 
   plug :put_layout, "admin.html"
-  plug :load_parent_resource
   plug :load_resource when action in [:edit, :update, :delete]
 
   def new(conn, _params) do
@@ -17,9 +16,7 @@ defmodule IkvnWeb.Admin.TaskController do
     tournament = conn.assigns.tournament
     tour = conn.assigns.tour
 
-    case Game.create_task(
-      task_params(conn, params), conn.assigns.current_user
-    ) do
+    case Game.create_task(task_params(conn, params)) do
       {:ok, _task} ->
         conn
         |> put_flash(:info, gettext "Task created successfully")
@@ -73,11 +70,6 @@ defmodule IkvnWeb.Admin.TaskController do
           Routes.admin_tournament_tour_task_path(conn, :index, tournament, tour)
         )
     end
-  end
-
-  defp load_parent_resource(conn, _opts) do
-    tour = Game.get_tour!(conn.params["tour_id"])
-    assign(conn, :tour, tour)
   end
 
   defp load_resource(conn, _opts) do

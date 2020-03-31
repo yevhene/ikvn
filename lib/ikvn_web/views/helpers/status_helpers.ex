@@ -8,24 +8,24 @@ defmodule IkvnWeb.StatusHelpers do
 
   def status(%Tournament{} = tournament) do
     cond do
-      Game.is_future?(tournament) ->
+      Game.tournament_is_future?(tournament) ->
         content_tag(:div, gettext("future"), class: "text-danger")
-      Game.is_active?(tournament) ->
+      Game.tournament_is_active?(tournament) ->
         content_tag(:div, gettext("started"), class: "text-success")
-      Game.is_finished?(tournament) ->
+      Game.tournament_is_finished?(tournament) ->
         content_tag(:div, gettext("finished"), class: "text-secondary")
     end
   end
 
   def status(%Tour{} = tour) do
     cond do
-      Game.is_future?(tour) ->
+      Game.tour_is_future?(tour) ->
         content_tag(:div, gettext("future"), class: "text-danger")
-      Game.is_active?(tour) ->
+      Game.tour_is_active?(tour) ->
         content_tag(:div, gettext("started"), class: "text-success")
-      Game.is_judging?(tour) ->
+      Game.tour_is_judging?(tour) ->
         content_tag(:div, gettext("judging"), class: "text-warning")
-      Game.is_closed?(tour) ->
+      Game.tour_is_closed?(tour) ->
         content_tag(:div, gettext("finished"), class: "text-seconary")
     end
   end

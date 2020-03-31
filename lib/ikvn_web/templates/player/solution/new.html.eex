@@ -1,0 +1,6 @@
+<%= render IkvnWeb.Player.TaskView, "_task.html", assigns %>
+
+<%= render "_form.html", Map.put(assigns, :action, Routes.player_tournament_tour_task_solution_path(@conn, :create, @tournament, @tour, @task)) %>
+
+<hr />
+<span><%= link gettext("Back"), to: Routes.player_tournament_tour_path(@conn, :show, @tournament, @tour) %></span>

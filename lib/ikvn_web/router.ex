@@ -72,7 +72,11 @@ defmodule IkvnWeb.Router do
         resources "/players", PlayerController,
           only: [:index]
         resources "/tours", TourController do
-          resources "/tasks", TaskController, except: [:index, :show]
+          scope "/" do
+            pipe_through [:tour]
+
+            resources "/tasks", TaskController, except: [:index, :show]
+          end
         end
       end
     end
@@ -97,7 +101,12 @@ defmodule IkvnWeb.Router do
         scope "/" do
           pipe_through [:tour]
 
-          resources "/tours", TourController, only: [:show]
+          resources "/tours", TourController, only: [:show] do
+            scope "/tasks/:task_id", as: :task do
+              resources "/solution", SolutionController,
+                only: [:new, :create, :edit, :update], singleton: true
+            end
+          end
         end
       end
     end

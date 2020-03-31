@@ -24,9 +24,7 @@ defmodule IkvnWeb.Admin.TourController do
   def create(conn, %{"tour" => params}) do
     tournament = conn.assigns.tournament
 
-    case Game.create_tour(
-      tour_params(conn, params), conn.assigns.current_user
-    ) do
+    case Game.create_tour(tour_params(conn, params)) do
       {:ok, _tour} ->
         conn
         |> put_flash(:info, gettext "Tour created successfully")

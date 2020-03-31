@@ -10,10 +10,9 @@ defmodule IkvnWeb.Plug.LoadTour do
     participation = conn.assigns.participation
     tour = Game.get_tour(tour_id(conn))
 
-    IO.inspect participation
     if (
       tour == nil or (
-        Game.is_future?(tour) and (
+        Game.tour_is_future?(tour) and (
           participation == nil or
           not Enum.member?([:admin, :judge], participation.role)
         )

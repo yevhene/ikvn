@@ -14,11 +14,12 @@ msgstr ""
 #, elixir-format
 #: lib/ikvn_web/templates/admin/task/edit.html.eex:6
 #: lib/ikvn_web/templates/admin/task/new.html.eex:6 lib/ikvn_web/templates/admin/tour/edit.html.eex:6
-#: lib/ikvn_web/templates/admin/tour/new.html.eex:6 lib/ikvn_web/templates/admin/tour/show.html.eex:28
+#: lib/ikvn_web/templates/admin/tour/new.html.eex:6 lib/ikvn_web/templates/admin/tour/show.html.eex:19
 #: lib/ikvn_web/templates/admin/tournament/edit.html.eex:6 lib/ikvn_web/templates/admin/tournament/new.html.eex:6
-#: lib/ikvn_web/templates/admin/tournament/show.html.eex:9 lib/ikvn_web/templates/player/tournament/show.html.eex:8
-#: lib/ikvn_web/templates/profile/edit.html.eex:6 lib/ikvn_web/templates/profile/show.html.eex:17
-#: lib/ikvn_web/templates/tournament/show.html.eex:10
+#: lib/ikvn_web/templates/admin/tournament/show.html.eex:9 lib/ikvn_web/templates/player/solution/edit.html.eex:6
+#: lib/ikvn_web/templates/player/solution/new.html.eex:6 lib/ikvn_web/templates/player/tour/show.html.eex:18
+#: lib/ikvn_web/templates/player/tournament/show.html.eex:8 lib/ikvn_web/templates/profile/edit.html.eex:6
+#: lib/ikvn_web/templates/profile/show.html.eex:17 lib/ikvn_web/templates/tournament/show.html.eex:10
 msgid "Back"
 msgstr ""
 
@@ -42,7 +43,7 @@ msgstr ""
 #, elixir-format
 #: lib/ikvn_web/templates/admin/task/_form.html.eex:4
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:4 lib/ikvn_web/templates/admin/tournament/_form.html.eex:4
-#: lib/ikvn_web/templates/profile/_form.html.eex:4
+#: lib/ikvn_web/templates/player/solution/_form.html.eex:4 lib/ikvn_web/templates/profile/_form.html.eex:4
 msgid "Oops, something went wrong! Please check the errors below."
 msgstr ""
 
@@ -80,7 +81,7 @@ msgstr ""
 #, elixir-format
 #: lib/ikvn_web/templates/admin/task/_form.html.eex:27
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:45 lib/ikvn_web/templates/admin/tournament/_form.html.eex:43
-#: lib/ikvn_web/templates/profile/_form.html.eex:30
+#: lib/ikvn_web/templates/player/solution/_form.html.eex:15 lib/ikvn_web/templates/profile/_form.html.eex:30
 msgid "Submit"
 msgstr ""
 
@@ -149,12 +150,12 @@ msgid "New Tournament"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tournament_controller.ex:25
+#: lib/ikvn_web/controllers/admin/tournament_controller.ex:22
 msgid "Tournament created successfully"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tournament_controller.ex:47
+#: lib/ikvn_web/controllers/admin/tournament_controller.ex:44
 msgid "Tournament updated successfully"
 msgstr ""
 
@@ -178,8 +179,8 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:29
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:7 lib/ikvn_web/templates/admin/tour/show.html.eex:13
-#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:35
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:7 lib/ikvn_web/templates/admin/tournament/_form.html.eex:35
+#: lib/ikvn_web/templates/player/tour/index.html.eex:7
 msgid "Finish"
 msgstr ""
 
@@ -196,8 +197,8 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:21
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:6 lib/ikvn_web/templates/admin/tour/show.html.eex:11
-#: lib/ikvn_web/templates/admin/tournament/_form.html.eex:27
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:6 lib/ikvn_web/templates/admin/tournament/_form.html.eex:27
+#: lib/ikvn_web/templates/player/tour/index.html.eex:6
 msgid "Start"
 msgstr ""
 
@@ -259,7 +260,7 @@ msgid "Really?"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:23
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:22
 msgid "User successfully added to staff"
 msgstr ""
 
@@ -269,17 +270,17 @@ msgid "Can't delete the Creator from staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:43
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:42
 msgid "User successfully deleted from staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:26
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:25
 msgid "User can't be added to staff. Reason: %{reason}"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:46
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:45
 msgid "User can't be removed from staff. Reason: %{reason}"
 msgstr ""
 
@@ -347,38 +348,40 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:37
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:8 lib/ikvn_web/templates/admin/tour/show.html.eex:15
+#: lib/ikvn_web/templates/admin/tour/index.html.eex:8 lib/ikvn_web/templates/player/tour/index.html.eex:8
 msgid "Results"
 msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/task/_form.html.eex:9
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:9 lib/ikvn_web/templates/admin/tour/index.html.eex:4
+#: lib/ikvn_web/templates/player/tour/index.html.eex:4
 msgid "Title"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tour_controller.ex:82
+#: lib/ikvn_web/controllers/admin/tour_controller.ex:78
 msgid "Tour can't be deleted"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tour_controller.ex:32
+#: lib/ikvn_web/controllers/admin/tour_controller.ex:30
 msgid "Tour created successfully"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tour_controller.ex:76
+#: lib/ikvn_web/controllers/admin/tour_controller.ex:72
 msgid "Tour deleted successfully"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tour_controller.ex:60
+#: lib/ikvn_web/controllers/admin/tour_controller.ex:56
 msgid "Tour updated successfully"
 msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:15
+#: lib/ikvn_web/templates/layout/_player_navigation.html.eex:7
 msgid "Tours"
 msgstr ""
 
@@ -405,41 +408,45 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/views/admin/task_view.ex:9
+#: lib/ikvn_web/views/player/task_view.ex:10
 msgid "Task"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/task_controller.ex:71
+#: lib/ikvn_web/controllers/admin/task_controller.ex:68
 msgid "Task can't be deleted"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/task_controller.ex:25
+#: lib/ikvn_web/controllers/admin/task_controller.ex:22
 msgid "Task created successfully"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/task_controller.ex:65
+#: lib/ikvn_web/controllers/admin/task_controller.ex:62
 msgid "Task deleted successfully"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/task_controller.ex:48
+#: lib/ikvn_web/controllers/admin/task_controller.ex:45
 msgid "Task updated successfully"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/tour/show.html.eex:21
+#: lib/ikvn_web/templates/admin/tour/show.html.eex:12
+#: lib/ikvn_web/templates/player/tour/show.html.eex:11
 msgid "Tasks"
 msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/views/admin/tour_view.ex:11
+#: lib/ikvn_web/views/player/tour_view.ex:12
 msgid "Tour"
 msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/index.html.eex:5
+#: lib/ikvn_web/templates/player/tour/index.html.eex:5
 msgid "Status"
 msgstr ""
 
@@ -464,4 +471,34 @@ msgstr ""
 #: lib/ikvn_web/views/helpers/status_helpers.ex:14
 #: lib/ikvn_web/views/helpers/status_helpers.ex:25
 msgid "started"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/player/solution/_form.html.eex:9
+msgid "Content"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/player/solution_controller.ex:24
+msgid "Solution created successfully"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/player/solution_controller.ex:46
+msgid "Solution updated successfully"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/player/solution/_new_button.html.eex:4
+msgid "Submit Solution"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/player/solution/_edit_button.html.eex:4
+msgid "Change Solution"
+msgstr ""
+
+#, elixir-format, fuzzy
+#: lib/ikvn_web/controllers/player/solution_controller.ex:58
+msgid "Tour is finished"
 msgstr ""
