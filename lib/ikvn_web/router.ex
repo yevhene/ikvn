@@ -115,6 +115,13 @@ defmodule IkvnWeb.Router do
     end
   end
 
+  # Static public pages
+  scope "/", IkvnWeb do
+    pipe_through [:browser]
+
+    get "/terms", PageController, :terms
+  end
+
   # Oauth authentication
   scope "/auth", IkvnWeb do
     pipe_through [:browser, :guardian]
