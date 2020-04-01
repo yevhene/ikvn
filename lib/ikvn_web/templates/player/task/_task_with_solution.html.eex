@@ -18,10 +18,10 @@
 
   <%= if Game.tour_is_active?(@tour) do %>
     <div class="card-footer">
-      <%= if Enum.count(@task.solutions) > 0 do %>
-        <%= render IkvnWeb.Player.SolutionView, "_edit_button.html", assigns %>
-      <% else %>
+      <%= if solution == nil do %>
         <%= render IkvnWeb.Player.SolutionView, "_new_button.html", assigns %>
+      <% else %>
+        <%= render IkvnWeb.Player.SolutionView, "_edit_button.html", assigns %>
       <% end %>
     </div>
   <% end %>

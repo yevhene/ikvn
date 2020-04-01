@@ -1,26 +1,29 @@
-<%= if @current_user do %>
-  <%= if @participation == nil do %>
-    <%= link to: Routes.player_tournament_participation_path(@conn, :create, @tournament), method: :post, class: "btn btn-primary actions" do %>
-      <i class="fas fa-plus" aria-hidden="true"></i>
-      <%= gettext "Take part" %>
+<% participation = is_list(@tournament.participations) && Enum.at(@tournament.participations, 0) %>
+<div class="card-footer d-flex flex-fill">
+  <%= if @current_user do %>
+    <%= if participation do %>
+      <%= case participation.role do %>
+        <% :admin -> %>
+          <%= link to: Routes.admin_tournament_path(@conn, :show, @tournament), class: "btn btn-danger flex-grow-1" do %>
+            <i class="fas fa-cogs" aria-hidden="true"></i>
+            <%= gettext "Settings" %>
+          <% end %>
+        <% :player -> %>
+          <%= link to: Routes.player_tournament_path(@conn, :show, @tournament), class: "btn btn-success flex-grow-1" do %>
+            <i class="fas fa-hand-paper" aria-hidden="true"></i>
+            <%= gettext "Enter" %>
+          <% end %>
+      <% end %>
+    <% else %>
+      <%= link to: Routes.player_tournament_participation_path(@conn, :create, @tournament), method: :post, class: "btn btn-primary flex-grow-1" do %>
+        <i class="fas fa-plus" aria-hidden="true"></i>
+        <%= gettext "Take part" %>
+      <% end %>
     <% end %>
   <% else %>
-    <%= case @participation.role do %>
-      <% :admin -> %>
-        <%= link to: Routes.admin_tournament_path(@conn, :show, @tournament), class: "btn btn-primary actions" do %>
-          <i class="fas fa-cogs" aria-hidden="true"></i>
-          <%= gettext "Settings" %>
-        <% end %>
-      <% :player -> %>
-        <%= link to: Routes.player_tournament_path(@conn, :show, @tournament), class: "btn btn-primary actions" do %>
-          <i class="fas fa-hand-paper" aria-hidden="true"></i>
-          <%= gettext "Enter" %>
-        <% end %>
-    <% end %>
+    <a class="btn btn-primary flex-grow-1" href="/auth/facebook">
+      <i class="fab fa-facebook"></i>
+      <%= gettext "Sign in" %>
+    </a>
   <% end %>
-<% else %>
-  <a class="btn btn-primary" href="/auth/facebook">
-    <i class="fab fa-facebook"></i>
-    <%= gettext "To take part in tournament sign in first" %>
-  </a>
-<% end %>
+</div>

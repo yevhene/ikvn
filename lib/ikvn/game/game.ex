@@ -14,14 +14,22 @@ defmodule Ikvn.Game do
 
   def get_tournament(id), do: Repo.get(Tournament, id)
 
-  def list_public_tournaments do
+  def list_public_tournaments(user \\ nil)
+
+  def list_public_tournaments(nil) do
     now = DateTime.utc_now
 
     Tournament
     |> where([t], t.started_at <= ^now)
     |> order_by(:started_at)
     |> Repo.all
-    |> Repo.preload(:creator)
+  end
+
+  def list_public_tournaments(%User{id: user_id}) do
+    list_public_tournaments(nil)
+    |> Repo.preload([participations:
+      from(p in Participation, where: p.user_id == ^user_id)
+    ])
   end
 
   def list_future_tournaments(nil), do: []
@@ -210,10 +218,8 @@ defmodule Ikvn.Game do
 
   def list_tasks(%Tour{} = tour, %Participation{id: participation_id}) do
     list_tasks(tour)
-    |> Repo.preload([
-      solutions: from(s in Solution,
-        where: s.participation_id == ^participation_id
-      )
+    |> Repo.preload([solutions:
+      from(s in Solution, where: s.participation_id == ^participation_id)
     ])
   end
 

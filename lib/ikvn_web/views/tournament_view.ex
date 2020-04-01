@@ -4,8 +4,6 @@ defmodule IkvnWeb.TournamentView do
   import IkvnWeb.MarkdownHelpers
   import IkvnWeb.StringHelpers
   import IkvnWeb.Permissions
-  import IkvnWeb.DateTimeHelpers
-  import IkvnWeb.StatusHelpers
 
   alias Ikvn.Game
   alias Ikvn.Game.Tournament

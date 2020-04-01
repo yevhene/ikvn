@@ -1,3 +1,5 @@
+<div><%= markdown @tournament.description %></div>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -14,4 +16,4 @@
 </table>
 
 <hr />
-<span><%= link gettext("Back"), to: Routes.tournament_path(@conn, :show, @tournament) %></span>
+<span><%= link gettext("Back"), to: Routes.tournament_path(@conn, :index) %></span>

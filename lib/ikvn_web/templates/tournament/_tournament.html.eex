@@ -1,8 +1,7 @@
 <div class="card mb-3 <%= tournament_style(@tournament) %>">
   <div class="card-header">
-    <h4 class="card-title m-0"><%= link(@tournament.name, to: Routes.tournament_path(@conn, :show, @tournament)) %></h4>
+    <h4 class="card-title m-0"><%= @tournament.name %></h4>
   </div>
-
 
   <div class="card-body">
     <%= if present?(@tournament.headline) do %>
@@ -10,10 +9,5 @@
     <% end %>
   </div>
 
-
-  <div class="card-footer d-flex align-items-center justify-content-between">
-    <div><%= @tournament.creator.nickname %></div>
-    <small><%= status @tournament %></small>
-    <small><%= datetime @tournament.started_at %></small>
-  </div>
+  <%= render "_actions.html", assigns %>
 </div>
