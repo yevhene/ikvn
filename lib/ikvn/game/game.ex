@@ -5,6 +5,7 @@ defmodule Ikvn.Game do
 
   alias Ikvn.Account
   alias Ikvn.Account.User
+  alias Ikvn.Game.Mark
   alias Ikvn.Game.Participation
   alias Ikvn.Game.Solution
   alias Ikvn.Game.Task
@@ -207,6 +208,21 @@ defmodule Ikvn.Game do
     DateTime.compare(now, results_at) == :gt
   end
 
+  def tournament_is_available?(%Tournament{}, %Participation{}), do: true
+
+  def tournament_is_available?(%Tournament{} = tournament, nil) do
+    not tournament_is_future?(tournament)
+  end
+
+  def tour_is_available?(%Tour{} = tour, role) do
+    case role do
+      :admin -> true
+      :judge -> not tour_is_future?(tour) and not tour_is_active?(tour)
+      :player -> not tour_is_future?(tour)
+      _ -> false
+    end
+  end
+
   def get_task!(id), do: Repo.get!(Task, id)
 
   def list_tasks(%Tour{id: tour_id}) do
@@ -216,7 +232,22 @@ defmodule Ikvn.Game do
     |> Repo.all
   end
 
-  def list_tasks(%Tour{} = tour, %Participation{id: participation_id}) do
+  def list_tasks(
+    %Tour{} = tour, %Participation{role: role} = participation
+  ) when role == :admin or role == :judge do
+    list_tasks(tour)
+    |> Repo.preload([solutions:
+      from(s in Solution,
+        left_join: m in Mark,
+        on: m.solution_id == s.id and m.participation_id == ^participation.id,
+        preload: [marks: m]
+      )
+    ])
+  end
+
+  def list_tasks(%Tour{} = tour, %Participation{
+    id: participation_id, role: :player
+  }) do
     list_tasks(tour)
     |> Repo.preload([solutions:
       from(s in Solution, where: s.participation_id == ^participation_id)
@@ -246,6 +277,20 @@ defmodule Ikvn.Game do
     |> Repo.delete()
   end
 
+  def list_solutions(
+    %Task{} = task, %Participation{role: role} = participation
+  ) when role == :admin or role == :judge do
+    Solution
+    |> where([s], s.task_id == ^task.id)
+    |> order_by(fragment("md5(inserted_at::text) ASC"))
+    |> Repo.all
+    |> Repo.preload([marks:
+      from(m in Mark, where: m.participation_id == ^participation.id)
+    ])
+  end
+
+  def get_solution!(id), do: Repo.get!(Solution, id)
+
   def get_solution(%Task{id: task_id}, %Participation{id: participation_id}) do
     Solution
     |> where([s],
@@ -268,6 +313,29 @@ defmodule Ikvn.Game do
   def update_solution(%Solution{} = solution, attrs) do
     solution
     |> Solution.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def get_mark(
+    %Solution{id: solution_id}, %Participation{id: participation_id}
+  ) do
+    Mark
+    |> Repo.get_by(solution_id: solution_id, participation_id: participation_id)
+  end
+
+  def change_mark(%Mark{} = mark) do
+    Mark.changeset(mark, %{})
+  end
+
+  def create_mark(attrs \\ %{}) do
+    %Mark{}
+    |> Mark.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def update_mark(%Mark{} = mark, attrs) do
+    mark
+    |> Mark.changeset(attrs)
     |> Repo.update()
   end
 end

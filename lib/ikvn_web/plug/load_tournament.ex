@@ -11,20 +11,13 @@ defmodule IkvnWeb.Plug.LoadTournament do
     tournament = Game.get_tournament(tournament_id(conn))
     participation = Game.get_user_participation(user, tournament)
 
-    if (
-      tournament == nil or (
-        Game.tournament_is_future?(tournament) and (
-          participation == nil or
-          not Enum.member?([:admin, :judge], participation.role)
-        )
-      )
-    ) do
-      conn
-      |> error_response()
-    else
+    if Game.tournament_is_available?(tournament, participation) do
       conn
       |> assign(:tournament, tournament)
       |> assign(:participation, participation)
+    else
+      conn
+      |> error_response()
     end
   end
 

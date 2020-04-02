@@ -15,7 +15,7 @@ end
 # before starting your production server.
 config :ikvn, IkvnWeb.Endpoint,
   load_from_system_env: true,
-  http: [port: 4000],
+  http: [port: String.to_integer(System.get_env("PORT") || "4000")],
   url: [scheme: "https", host: "ikvn.rocks", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,

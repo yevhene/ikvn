@@ -4,7 +4,6 @@ defmodule IkvnWeb.Admin.TaskController do
   alias Ikvn.Game
   alias Ikvn.Game.Task
 
-  plug :put_layout, "admin.html"
   plug :load_resource when action in [:edit, :update, :delete]
 
   def new(conn, _params) do

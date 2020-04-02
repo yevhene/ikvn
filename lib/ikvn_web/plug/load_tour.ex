@@ -7,22 +7,13 @@ defmodule IkvnWeb.Plug.LoadTour do
   def init(opts), do: opts
 
   def call(conn, _opts) do
-    participation = conn.assigns.participation
     tour = Game.get_tour(tour_id(conn))
-
-    if (
-      tour == nil or (
-        Game.tour_is_future?(tour) and (
-          participation == nil or
-          not Enum.member?([:admin, :judge], participation.role)
-        )
-      )
-    ) do
-      conn
-      |> error_response()
-    else
+    if Game.tour_is_available?(tour, conn.assigns.current_role) do
       conn
       |> assign(:tour, tour)
+    else
+      conn
+      |> error_response()
     end
   end
 

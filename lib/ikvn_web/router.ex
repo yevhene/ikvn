@@ -31,6 +31,14 @@ defmodule IkvnWeb.Router do
     plug IkvnWeb.Plug.CheckPermission, permission: :create_tournament
   end
 
+  pipeline :can_submit_solution do
+    plug IkvnWeb.Plug.CheckCanSubmitSolution
+  end
+
+  pipeline :can_submit_mark do
+    plug IkvnWeb.Plug.CheckCanSubmitMark
+  end
+
   pipeline :tournament do
     plug IkvnWeb.Plug.LoadTournament
   end
@@ -40,11 +48,19 @@ defmodule IkvnWeb.Router do
   end
 
   pipeline :admin do
-    plug IkvnWeb.Plug.CheckRole, role: :admin
+    plug IkvnWeb.Plug.AuthorizeRole, role: :admin
+    plug :put_layout, {IkvnWeb.LayoutView, "admin.html"}
+  end
+
+  pipeline :judge do
+    plug IkvnWeb.Plug.AuthorizeRole,
+      role: :judge, accessible_by: [:admin, :judge]
+    plug :put_layout, {IkvnWeb.LayoutView, "judge.html"}
   end
 
   pipeline :player do
-    plug IkvnWeb.Plug.CheckRole, role: :player
+    plug IkvnWeb.Plug.AuthorizeRole, role: :player
+    plug :put_layout, {IkvnWeb.LayoutView, "player.html"}
   end
 
   # Private pages
@@ -58,7 +74,8 @@ defmodule IkvnWeb.Router do
     scope "/admin", Admin, as: :admin do
       pipe_through [:can_create_tournament]
 
-      resources "/tournaments", TournamentController, only: [:new, :create]    end
+      resources "/tournaments", TournamentController, only: [:new, :create]
+    end
 
     # Tournament admin
     scope "/admin", Admin, as: :admin do
@@ -81,11 +98,33 @@ defmodule IkvnWeb.Router do
       end
     end
 
+    # Tournament judge
+    scope "/judge", Judge, as: :judge do
+      pipe_through [:tournament, :judge]
+
+      resources "/tournaments", TournamentController, only: [:show] do
+        scope "/" do
+          pipe_through [:tour]
+
+          resources "/tours", TourController, only: [:show] do
+            resources "/tasks", TaskController, only: [:show] do
+              scope "/solutions/:solution_id", as: :solution do
+                pipe_through [:can_submit_mark]
+
+                resources "/marks", MarkController,
+                  only: [:create], singleton: true
+              end
+            end
+          end
+        end
+      end
+    end
+
     # Not yet a player
     scope "/player", Player, as: :player do
       pipe_through [:tournament]
 
-      resources "/tournaments", TournamentController, only: [] do
+      scope "/tournaments/:tournament_id", as: :tournament do
         resources "/participation", ParticipationController,
           only: [:create], singleton: true
       end
@@ -101,6 +140,8 @@ defmodule IkvnWeb.Router do
 
           resources "/tours", TourController, only: [:show] do
             scope "/tasks/:task_id", as: :task do
+              pipe_through [:can_submit_solution]
+
               resources "/solution", SolutionController,
                 only: [:new, :create, :edit, :update], singleton: true
             end

@@ -1,0 +1,18 @@
+<h3>
+  <%= title @tour %>
+</h3>
+
+<div>
+  <%= markdown @tour.description %>
+</div>
+
+<hr />
+
+<h4><%= gettext "Tasks" %></h4>
+<div>
+  <%= render_many(@tasks, IkvnWeb.Judge.TaskView, "_task.html", assigns) %>
+</div>
+
+<hr />
+
+<span><%= link gettext("Back"), to: Routes.judge_tournament_path(@conn, :show, @tournament) %></span>

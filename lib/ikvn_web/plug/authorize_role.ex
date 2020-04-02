@@ -1,4 +1,4 @@
-defmodule IkvnWeb.Plug.CheckRole do
+defmodule IkvnWeb.Plug.AuthorizeRole do
   import IkvnWeb.Gettext
   import Phoenix.Controller
   import Plug.Conn
@@ -6,12 +6,18 @@ defmodule IkvnWeb.Plug.CheckRole do
   def init(opts), do: opts
 
   def call(conn, opts) do
-    participation = conn.assigns.participation
-    if participation.role == opts[:role] do
-      conn
+
+    if is_accessible?(conn, opts) do
+      conn |> assign(:current_role, opts[:role])
     else
       conn |> error_response
     end
+  end
+
+  defp is_accessible?(conn, opts) do
+    accessible_by = opts[:accessible_by] || [opts[:role]]
+    participation = conn.assigns.participation
+    Enum.member?(accessible_by, participation.role)
   end
 
   defp error_response(conn) do

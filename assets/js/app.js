@@ -10,9 +10,9 @@ import "bootstrap";
 import { library } from "@fortawesome/fontawesome";
 import { faFacebook } from "@fortawesome/fontawesome-free-brands";
 import {
-  faPlusCircle, faCogs, faTimes, faHandPaper, faPlus
+  faPlusCircle, faCogs, faTimes, faHandPaper, faPlus, faGavel
 } from "@fortawesome/fontawesome-free-solid";
-library.add(faFacebook, faPlusCircle, faCogs, faHandPaper, faPlus);
+library.add(faFacebook, faPlusCircle, faCogs, faHandPaper, faPlus, faGavel);
 
 import "./markdown-editor";
 

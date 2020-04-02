@@ -35,3 +35,17 @@ h1 .btn-group, h2 .btn-group, h3 .btn-group, h4 .btn-group, h5 .btn-group {
   max-height: 400px;
   max-width: 60%;
 }
+
+p {
+  margin-bottom: 0;
+}
+
+.btn-group.flex-fill > * {
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.card > hr {
+  margin: 0;
+}

@@ -1,7 +1,7 @@
 <tr>
   <td>
-    <%= if Game.tour_is_available?(@tour, :player) do %>
-      <%= link to: Routes.player_tournament_tour_path(@conn, :show, @tournament, @tour) do %>
+    <%= if Game.tour_is_available?(@tour, :judge) do %>
+      <%= link to: Routes.judge_tournament_tour_path(@conn, :show, @tournament, @tour) do %>
         <%= title @tour %>
       <% end %>
     <% else %>

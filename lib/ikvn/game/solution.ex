@@ -2,6 +2,7 @@ defmodule Ikvn.Game.Solution do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Ikvn.Game.Mark
   alias Ikvn.Game.Participation
   alias Ikvn.Game.Solution
   alias Ikvn.Game.Task
@@ -11,6 +12,8 @@ defmodule Ikvn.Game.Solution do
 
     belongs_to :participation, Participation
     belongs_to :task, Task
+
+    has_many :marks, Mark
 
     timestamps(type: :utc_datetime)
   end

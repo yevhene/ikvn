@@ -27,6 +27,7 @@ defmodule Ikvn.Account.User do
   def profile_changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [:nickname, :email, :name])
+    |> trim([:nickname, :email])
     |> validate_required([:nickname, :email])
     |> forbid_change(:nickname)
     |> unique_constraint(:nickname)

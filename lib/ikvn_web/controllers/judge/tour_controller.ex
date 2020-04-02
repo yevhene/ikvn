@@ -1,4 +1,4 @@
-defmodule IkvnWeb.Player.TourController do
+defmodule IkvnWeb.Judge.TourController do
   use IkvnWeb, :controller
 
   alias Ikvn.Game

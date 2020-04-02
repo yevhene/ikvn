@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-body">
+    <%= markdown @solution.content %>
+  </div>
+  <div class="card-footer">
+    <div class="btn-group" role="group">
+      <% mark = Enum.at(@solution.marks, 0) %>
+      <%= if Game.tour_is_judging?(@tour) do %>
+        <%= for i <- 1..10 do %>
+          <%= link i, to: Routes.judge_tournament_tour_task_solution_mark_path(@conn, :create, @tournament, @tour, @task, @solution, value: i), method: :post, class: mark_button_class(mark, i) %>
+        <% end %>
+      <% else %>
+        <%= for i <- 1..10 do %>
+          <%= content_tag :div, i, class: mark_button_class(mark, i) %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

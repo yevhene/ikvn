@@ -15,6 +15,22 @@ defmodule Ikvn.Utils.Validation do
     end)
   end
 
+  def trim(changeset, fields) when is_list(fields) do
+    Enum.reduce(fields, changeset, fn (field, changeset) ->
+      trim(changeset, field)
+    end)
+  end
+
+  def trim(changeset, field) when is_atom(field) do
+    update_change(changeset, field, fn (value) ->
+      if value == nil do
+        value
+      else
+        String.trim(value)
+      end
+    end)
+  end
+
   def fetch_errors(%Ecto.Changeset{errors: errors}) do
     Enum.join(Enum.map(Keyword.values(errors), fn {error, _} ->
       Gettext.dpgettext(IkvnWeb.Gettext, "errors", nil, error, [])

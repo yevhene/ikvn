@@ -1,21 +1,32 @@
 <% participation = is_list(@tournament.participations) && Enum.at(@tournament.participations, 0) %>
-<div class="card-footer d-flex flex-fill">
+<div class="card-footer d-flex">
   <%= if @current_user do %>
     <%= if participation do %>
       <%= case participation.role do %>
         <% :admin -> %>
-          <%= link to: Routes.admin_tournament_path(@conn, :show, @tournament), class: "btn btn-danger flex-grow-1" do %>
-            <i class="fas fa-cogs" aria-hidden="true"></i>
-            <%= gettext "Settings" %>
+          <div class="btn-group flex-fill" role="group">
+            <%= link to: Routes.admin_tournament_path(@conn, :show, @tournament), class: "btn btn-danger" do %>
+              <i class="fas fa-cogs" aria-hidden="true"></i>
+              <%= gettext "Admin" %>
+            <% end %>
+            <%= link to: Routes.judge_tournament_path(@conn, :show, @tournament), class: "btn btn-warning" do %>
+              <i class="fas fa-gavel" aria-hidden="true"></i>
+              <%= gettext "Judge" %>
+            <% end %>
+          </div>
+        <% :judge -> %>
+          <%= link to: Routes.judge_tournament_path(@conn, :show, @tournament), class: "btn btn-warning flex-fill" do %>
+            <i class="fas fa-gavel" aria-hidden="true"></i>
+            <%= gettext "Judge" %>
           <% end %>
         <% :player -> %>
-          <%= link to: Routes.player_tournament_path(@conn, :show, @tournament), class: "btn btn-success flex-grow-1" do %>
+          <%= link to: Routes.player_tournament_path(@conn, :show, @tournament), class: "btn btn-success flex-fill" do %>
             <i class="fas fa-hand-paper" aria-hidden="true"></i>
             <%= gettext "Enter" %>
           <% end %>
       <% end %>
     <% else %>
-      <%= link to: Routes.player_tournament_participation_path(@conn, :create, @tournament), method: :post, class: "btn btn-primary flex-grow-1" do %>
+      <%= link to: Routes.player_tournament_participation_path(@conn, :create, @tournament), method: :post, class: "btn btn-primary flex-fill" do %>
         <i class="fas fa-plus" aria-hidden="true"></i>
         <%= gettext "Take part" %>
       <% end %>

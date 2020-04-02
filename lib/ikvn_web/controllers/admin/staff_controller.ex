@@ -6,7 +6,6 @@ defmodule IkvnWeb.Admin.StaffController do
   alias Ikvn.Game
 
   plug :load_resource when action in [:delete]
-  plug :put_layout, "admin.html"
 
   def index(conn, _params) do
     staff = Game.list_participations(conn.assigns.tournament, [:admin, :judge])

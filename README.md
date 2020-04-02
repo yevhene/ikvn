@@ -16,10 +16,14 @@ mix ecto.setup
 
 #### All environments
 ```
-export SECRET_KEY_BASE=_YOUR_VALUE_
-export GUARDIAN_SECRET_KEY=_YOUR_VALUE_
-export FACEBOOK_CLIENT_ID=_YOUR_VALUE_
-export FACEBOOK_CLIENT_SECRET=_YOUR_VALUE_
+export SECRET_KEY_BASE="_YOUR_VALUE_"
+export GUARDIAN_SECRET_KEY="_YOUR_VALUE_"
+export FACEBOOK_CLIENT_ID="_YOUR_VALUE_"
+export FACEBOOK_CLIENT_SECRET="_YOUR_VALUE_"
+
+# Optional
+export PORT=4000
+export POOL=10
 ```
 
 ##### To generate secrets you can user:

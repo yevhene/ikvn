@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">
+      <%= title @task %>
+    </h5>
+  </div>
+  <div class="card-body">
+    <%= markdown @task.description %>
+  </div>
+</div>
+
+<hr />
+
+<h4><%= gettext "Not judged solutions" %><%= not_judged_badge(@solutions) %></h4>
+<div>
+  <%= render_many(not_judged(@solutions), IkvnWeb.Judge.SolutionView, "_solution.html", assigns) %>
+</div>
+
+<hr />
+
+<h4><%= gettext "Already judged solutions" %></h4>
+<div>
+  <%= render_many(judged(@solutions), IkvnWeb.Judge.SolutionView, "_solution.html", assigns) %>
+</div>
+
+<span><%= link gettext("Back"), to: Routes.judge_tournament_tour_path(@conn, :show, @tournament, @tour) %></span>

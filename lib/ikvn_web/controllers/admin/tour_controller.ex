@@ -4,7 +4,6 @@ defmodule IkvnWeb.Admin.TourController do
   alias Ikvn.Game
   alias Ikvn.Game.Tour
 
-  plug :put_layout, "admin.html"
   plug :load_resource when action in [:show, :edit, :update, :delete]
 
   def index(conn, _params) do

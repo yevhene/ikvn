@@ -17,7 +17,7 @@
   <% end %>
 
   <%= if Game.tour_is_active?(@tour) do %>
-    <div class="card-footer">
+    <div class="card-footer d-flex">
       <%= if solution == nil do %>
         <%= render IkvnWeb.Player.SolutionView, "_new_button.html", assigns %>
       <% else %>

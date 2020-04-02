@@ -4,10 +4,8 @@ defmodule IkvnWeb.Player.SolutionController do
   alias Ikvn.Game
   alias Ikvn.Game.Solution
 
-  plug :put_layout, "player.html"
   plug :load_parent_resource
   plug :load_resource when action in [:edit, :update]
-  plug :check_tour_is_active!
 
   def new(conn, _params) do
     changeset = Game.change_solution(%Solution{})
@@ -49,22 +47,6 @@ defmodule IkvnWeb.Player.SolutionController do
         )
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", solution: solution, changeset: changeset)
-    end
-  end
-
-  defp check_tour_is_active!(conn, _opts) do
-    if Game.tour_is_active?(conn.assigns.tour) do
-      conn
-    else
-      conn
-      |> put_flash(:error, gettext "Tour is finished")
-      |> redirect(to:
-        Routes.player_tournament_tour_path(
-          conn, :show, conn.assigns.tournament, conn.assigns.tour
-        )
-      )
-      |> halt()
-
     end
   end
 

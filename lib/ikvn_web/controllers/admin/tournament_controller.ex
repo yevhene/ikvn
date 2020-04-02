@@ -4,8 +4,6 @@ defmodule IkvnWeb.Admin.TournamentController do
   alias Ikvn.Game
   alias Ikvn.Game.Tournament
 
-  plug :put_layout, "admin.html" when action not in [:new, :create]
-
   def new(conn, _params) do
     changeset = Game.change_tournament(%Tournament{
       started_at: DateTime.utc_now,
@@ -20,7 +18,7 @@ defmodule IkvnWeb.Admin.TournamentController do
         {:ok, _participation} = Game.create_creator_participation(tournament)
         conn
         |> put_flash(:info, gettext "Tournament created successfully")
-        |> redirect(to: Routes.tournament_path(conn, :show, tournament))
+        |> redirect(to: Routes.admin_tournament_path(conn, :show, tournament))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
