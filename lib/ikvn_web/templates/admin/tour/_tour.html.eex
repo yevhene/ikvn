@@ -1,14 +1,23 @@
-<tr>
-  <td>
-    <%= link to: Routes.admin_tournament_tour_path(@conn, :show, @tournament, @tour) do %>
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">
       <%= title @tour %>
+      (<%= status @tour %>)
+    </h5>
+  </div>
+  <div class="card-body">
+    <%= markdown @tour.description %>
+    <dl class="row m-0">
+      <dt class="col-md-5"><%= gettext "Start" %></td><dd class="col-md-7"><%= datetime @tour.started_at %></dd>
+      <dt class="col-md-5"><%= gettext "Finish" %></td><dd class="col-md-7"><%= datetime @tour.finished_at %></dd>
+      <dt class="col-md-5"><%= gettext "Results" %></td><dd class="col-md-7"><%= datetime @tour.results_at %></dd>
+    </dl>
+  </div>
+  <div class="d-flex">
+    <%= link to: Routes.admin_tournament_tour_path(@conn, :show, @tournament, @tour), class: "btn btn-danger flex-fill" do %>
+      <i class="fas fa-cogs" aria-hidden="true"></i>
+      <span class="d-none d-sm-inline-block"><%= gettext "Settings" %><span>
     <% end %>
-  </td>
-  <td><%= status @tour %></td>
-  <td><%= datetime @tour.started_at %></td>
-  <td><%= datetime @tour.finished_at %></td>
-  <td><%= datetime @tour.results_at %></td>
-  <td>
-    <%= render "_actions.html", assigns %>
-  </td>
-</tr>
+  </div>
+</div>
+<br />

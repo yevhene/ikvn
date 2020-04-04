@@ -1,15 +1,26 @@
-<tr>
-  <td>
-    <%= if Game.tour_is_available?(@tour, :judge) do %>
-      <%= link to: Routes.judge_tournament_tour_path(@conn, :show, @tournament, @tour) do %>
-        <%= title @tour %>
-      <% end %>
-    <% else %>
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">
       <%= title @tour %>
-    <% end %>
-  </td>
-  <td><%= status @tour %></td>
-  <td><%= datetime @tour.started_at %></td>
-  <td><%= datetime @tour.finished_at %></td>
-  <td><%= datetime @tour.results_at %></td>
-</tr>
+      (<%= status @tour %>)
+    </h5>
+  </div>
+  <div class="card-body">
+    <%= markdown @tour.description %>
+    <dl class="row m-0">
+      <dt class="col-md-5"><%= gettext "Start" %></td><dd class="col-md-7"><%= datetime @tour.started_at %></dd>
+      <dt class="col-md-5"><%= gettext "Finish" %></td><dd class="col-md-7"><%= datetime @tour.finished_at %></dd>
+      <dt class="col-md-5"><%= gettext "Results" %></td><dd class="col-md-7"><%= datetime @tour.results_at %></dd>
+    </dl>
+  </div>
+
+  <%= if Game.tour_is_available?(@tour, :judge) do %>
+    <div class="d-flex">
+      <%= link to: Routes.judge_tournament_tour_path(@conn, :show, @tournament, @tour), class: "btn btn-success flex-fill" do %>
+        <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+        <span class="d-none d-sm-inline-block"><%= gettext "Enter" %><span>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<br />

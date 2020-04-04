@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs mb-3">
   <li class="nav-item">
-    <%= nav_item @conn, gettext("Settings"), Routes.admin_tournament_path(@conn, :show, @tournament) %>
+    <%= nav_item @conn, gettext("Settings"), Routes.admin_tournament_path(@conn, :show, @tournament), exact: true %>
   </li>
 
   <li class="nav-item">

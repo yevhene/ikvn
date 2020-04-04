@@ -8,7 +8,10 @@
           <%= text_input f, :nickname, class: "form-control" %>
         </div>
         <%= error_tag f, :nickname %>
-        <%= submit gettext("Add"), class: "btn btn-primary col-2" %>
+        <%= content_tag :button, type: :submit, class: "btn btn-primary col-2" do %>
+          <i class="fas fa-plus-circle" aria-hidden="true"></i>
+          <span class="d-none d-md-inline-block"><%= gettext("Add") %></span>
+        <% end %>
       </div>
     <% end %>
   </td>

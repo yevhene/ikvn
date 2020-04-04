@@ -36,7 +36,7 @@ h1 .btn-group, h2 .btn-group, h3 .btn-group, h4 .btn-group, h5 .btn-group {
   max-width: 60%;
 }
 
-p {
+p:last-child {
   margin-bottom: 0;
 }
 
@@ -48,4 +48,18 @@ p {
 
 .card > hr {
   margin: 0;
+}
+
+.card-columns {
+  @include media-breakpoint-only(sm) {
+    column-count: 2;
+  }
+
+  @include media-breakpoint-only(md) {
+    column-count: 2;
+  }
+
+  @include media-breakpoint-only(lg) {
+    column-count: 2;
+  }
 }

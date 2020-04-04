@@ -3,10 +3,11 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th scope="col">#</th>
       <th scope="col"><%= gettext "Nickname" %></th>
     </tr>
   </thead>
   <tbody>
-    <%= render_many(@players, IkvnWeb.Admin.PlayerView, "_player.html", assigns) %>
+    <%= render_many_with_index(@players, IkvnWeb.Admin.PlayerView, "_player.html", assigns) %>
   </tbody>
 </table>

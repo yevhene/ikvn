@@ -16,9 +16,9 @@ msgstr ""
 #: lib/ikvn_web/templates/admin/tour/new.html.eex:6 lib/ikvn_web/templates/admin/tour/show.html.eex:19
 #: lib/ikvn_web/templates/admin/tournament/edit.html.eex:6 lib/ikvn_web/templates/admin/tournament/new.html.eex:6
 #: lib/ikvn_web/templates/admin/tournament/show.html.eex:9 lib/ikvn_web/templates/judge/task/show.html.eex:26
-#: lib/ikvn_web/templates/judge/tour/show.html.eex:18 lib/ikvn_web/templates/judge/tournament/show.html.eex:19
+#: lib/ikvn_web/templates/judge/tour/show.html.eex:18 lib/ikvn_web/templates/judge/tournament/show.html.eex:11
 #: lib/ikvn_web/templates/player/solution/edit.html.eex:6 lib/ikvn_web/templates/player/solution/new.html.eex:6
-#: lib/ikvn_web/templates/player/tour/show.html.eex:18 lib/ikvn_web/templates/player/tournament/show.html.eex:19
+#: lib/ikvn_web/templates/player/tour/show.html.eex:18 lib/ikvn_web/templates/player/tournament/show.html.eex:11
 #: lib/ikvn_web/templates/profile/edit.html.eex:6 lib/ikvn_web/templates/profile/show.html.eex:17
 msgid "Back"
 msgstr ""
@@ -34,7 +34,7 @@ msgid "Failed to authenticate"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/player/index.html.eex:6
+#: lib/ikvn_web/templates/admin/player/index.html.eex:7
 #: lib/ikvn_web/templates/admin/staff/index.html.eex:6 lib/ikvn_web/templates/admin/staff/index.html.eex:25
 #: lib/ikvn_web/templates/profile/_form.html.eex:9 lib/ikvn_web/templates/profile/show.html.eex:5
 msgid "Nickname"
@@ -70,7 +70,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/layout/_user_navigation.html.eex:17
-#: lib/ikvn_web/templates/tournament/_actions.html.eex:37
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:40
 msgid "Sign in"
 msgstr ""
 
@@ -130,7 +130,7 @@ msgid "and for your gravatar"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/views/layout_view.ex:39
+#: lib/ikvn_web/views/layout_view.ex:44
 msgid "Unknown"
 msgstr ""
 
@@ -146,7 +146,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tournament/new.html.eex:1
-#: lib/ikvn_web/templates/tournament/_new_button.html.eex:5
+#: lib/ikvn_web/templates/tournament/_new_button.html.eex:4
 msgid "New Tournament"
 msgstr ""
 
@@ -180,8 +180,8 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:29
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:7 lib/ikvn_web/templates/admin/tournament/_form.html.eex:35
-#: lib/ikvn_web/templates/judge/tournament/show.html.eex:9 lib/ikvn_web/templates/player/tournament/show.html.eex:9
+#: lib/ikvn_web/templates/admin/tour/_tour.html.eex:12 lib/ikvn_web/templates/admin/tournament/_form.html.eex:35
+#: lib/ikvn_web/templates/judge/tour/_tour.html.eex:12 lib/ikvn_web/templates/player/tour/_tour.html.eex:12
 msgid "Finish"
 msgstr ""
 
@@ -191,19 +191,20 @@ msgid "Name"
 msgstr ""
 
 #, elixir-format
+#: lib/ikvn_web/templates/admin/tour/_tour.html.eex:19
 #: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:3
 msgid "Settings"
 msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:21
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:6 lib/ikvn_web/templates/admin/tournament/_form.html.eex:27
-#: lib/ikvn_web/templates/judge/tournament/show.html.eex:8 lib/ikvn_web/templates/player/tournament/show.html.eex:8
+#: lib/ikvn_web/templates/admin/tour/_tour.html.eex:11 lib/ikvn_web/templates/admin/tournament/_form.html.eex:27
+#: lib/ikvn_web/templates/judge/tour/_tour.html.eex:11 lib/ikvn_web/templates/player/tour/_tour.html.eex:11
 msgid "Start"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/views/layout_view.ex:19
+#: lib/ikvn_web/views/layout_view.ex:18
 msgid "New"
 msgstr ""
 
@@ -223,7 +224,7 @@ msgid "Open Electric KVN Championship!"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/staff/_form.html.eex:11
+#: lib/ikvn_web/templates/admin/staff/_form.html.eex:13
 msgid "Add"
 msgstr ""
 
@@ -285,18 +286,8 @@ msgid "User can't be removed from staff. Reason: %{reason}"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/tournament/_actions.html.eex:25
-msgid "Enter"
-msgstr ""
-
-#, elixir-format
 #: lib/ikvn_web/templates/admin/tournament/_form.html.eex:15
 msgid "Headline"
-msgstr ""
-
-#, elixir-format
-#: lib/ikvn_web/templates/tournament/_actions.html.eex:31
-msgid "Take part"
 msgstr ""
 
 #, elixir-format
@@ -307,11 +298,6 @@ msgstr ""
 #, elixir-format
 #: lib/ikvn_web/plug/authorize_role.ex:29
 msgid "You are not authrorized to do that"
-msgstr ""
-
-#, elixir-format
-#: lib/ikvn_web/controllers/player/participation_controller.ex:10
-msgid "You can now participate"
 msgstr ""
 
 #, elixir-format
@@ -338,15 +324,14 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:37
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:8 lib/ikvn_web/templates/judge/tournament/show.html.eex:10
-#: lib/ikvn_web/templates/player/tournament/show.html.eex:10
+#: lib/ikvn_web/templates/admin/tour/_tour.html.eex:13 lib/ikvn_web/templates/judge/tour/_tour.html.eex:13
+#: lib/ikvn_web/templates/player/tour/_tour.html.eex:13
 msgid "Results"
 msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/task/_form.html.eex:9
-#: lib/ikvn_web/templates/admin/tour/_form.html.eex:9 lib/ikvn_web/templates/admin/tour/index.html.eex:4
-#: lib/ikvn_web/templates/judge/tournament/show.html.eex:6 lib/ikvn_web/templates/player/tournament/show.html.eex:6
+#: lib/ikvn_web/templates/admin/tour/_form.html.eex:9
 msgid "Title"
 msgstr ""
 
@@ -372,6 +357,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:15
+#: lib/ikvn_web/templates/layout/_judge_navigation.html.eex:3 lib/ikvn_web/templates/layout/_player_navigation.html.eex:3
 msgid "Tours"
 msgstr ""
 
@@ -435,12 +421,6 @@ msgid "Tour"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/tour/index.html.eex:5
-#: lib/ikvn_web/templates/judge/tournament/show.html.eex:7 lib/ikvn_web/templates/player/tournament/show.html.eex:7
-msgid "Status"
-msgstr ""
-
-#, elixir-format
 #: lib/ikvn_web/views/helpers/status_helpers.ex:12
 #: lib/ikvn_web/views/helpers/status_helpers.ex:23
 msgid "future"
@@ -499,8 +479,9 @@ msgid "Admin"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/judge/task/_task.html.eex:13
-#: lib/ikvn_web/templates/tournament/_actions.html.eex:14 lib/ikvn_web/templates/tournament/_actions.html.eex:20
+#: lib/ikvn_web/templates/judge/task/_task.html.eex:12
+#: lib/ikvn_web/templates/judge/tour/_tour.html.eex:21 lib/ikvn_web/templates/tournament/_actions.html.eex:14
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:20
 msgid "Judge"
 msgstr ""
 
@@ -527,4 +508,15 @@ msgstr ""
 #, elixir-format
 #: lib/ikvn_web/plug/check_can_submit_mark.ex:24
 msgid "Judging is finished"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/player/participation_controller.ex:10
+msgid "You participate now"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/player/tour/_tour.html.eex:20
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:25 lib/ikvn_web/templates/tournament/_actions.html.eex:34
+msgid "Enter"
 msgstr ""

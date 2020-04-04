@@ -217,7 +217,7 @@ defmodule Ikvn.Game do
   def tour_is_available?(%Tour{} = tour, role) do
     case role do
       :admin -> true
-      :judge -> not tour_is_future?(tour) and not tour_is_active?(tour)
+      :judge -> not tour_is_future?(tour)
       :player -> not tour_is_future?(tour)
       _ -> false
     end

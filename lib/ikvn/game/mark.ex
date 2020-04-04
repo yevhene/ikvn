@@ -15,10 +15,16 @@ defmodule Ikvn.Game.Mark do
     timestamps(type: :utc_datetime)
   end
 
+  def min, do: 6
+  def max, do: 10
+
   def changeset(%Mark{} = user, attrs) do
     user
     |> cast(attrs, [:value, :participation_id, :solution_id])
     |> validate_required([:value, :participation_id, :solution_id])
+    |> validate_number(:value,
+      greater_than_or_equal_to: min(), less_than_or_equal_to: max()
+    )
     |> foreign_key_constraint(:participation_id)
     |> foreign_key_constraint(:solution_id)
     |> unique_constraint(:task_id,

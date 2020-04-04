@@ -1,17 +1,5 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= gettext "Title" %></th>
-      <th><%= gettext "Status" %></th>
-      <th><%= gettext "Start" %></th>
-      <th><%= gettext "Finish" %></th>
-      <th><%= gettext "Results" %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render_many(@tours, IkvnWeb.Admin.TourView, "_tour.html", assigns) %>
-  </tbody>
-</table>
+<div class="card-columns">
+  <%= render_many(@tours, IkvnWeb.Admin.TourView, "_tour.html", assigns) %>
+</div>
 
 <%= render "_new_button.html", assigns %>

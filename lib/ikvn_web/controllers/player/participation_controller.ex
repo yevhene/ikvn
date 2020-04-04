@@ -7,7 +7,7 @@ defmodule IkvnWeb.Player.ParticipationController do
     case Game.create_participation(participation_params(conn)) do
       {:ok, _participation} ->
         conn
-        |> put_flash(:info, gettext "You can now participate")
+        |> put_flash(:info, gettext "You participate now")
       {:error, _} ->
         conn
         |> put_flash(:error, gettext "Participation failed. Contact Admin")

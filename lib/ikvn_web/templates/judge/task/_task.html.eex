@@ -7,13 +7,19 @@
   <div class="card-body">
     <%= markdown @task.description %>
   </div>
-  <div class="card-footer d-flex">
-    <%= link to: Routes.judge_tournament_tour_task_path(@conn, :show, @tournament, @tour, @task), class: "btn btn-outline-primary flex-fill" do %>
-      <i class="fas fa-gavel" aria-hidden="true"></i>
-      <%= gettext "Judge" %>
-      <%= not_judged_badge @task.solutions %>
-    <% end %>
-  </div>
+  <%= cond do %>
+    <%= Game.tour_is_judging?(@tour) -> %>
+      <%= link to: Routes.judge_tournament_tour_task_path(@conn, :show, @tournament, @tour, @task), class: "btn btn-warning flex-fill" do %>
+        <i class="fas fa-gavel" aria-hidden="true"></i>
+        <%= gettext "Judge" %>
+        <%= not_judged_badge @task.solutions %>
+      <% end %>
+    <% Game.tour_is_closed?(@tour) ->%>
+      <%= link to: Routes.judge_tournament_tour_task_path(@conn, :show, @tournament, @tour, @task), class: "btn btn-success flex-fill" do %>
+        <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+        <%= gettext "Enter" %>
+      <% end %>
+  <% end %>
 </div>
 
 <br />

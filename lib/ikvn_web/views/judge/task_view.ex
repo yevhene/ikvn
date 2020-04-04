@@ -3,6 +3,7 @@ defmodule IkvnWeb.Judge.TaskView do
 
   import IkvnWeb.MarkdownHelpers
 
+  alias Ikvn.Game
   alias Ikvn.Game.Task
 
   def title(%Task{title: title}) do
