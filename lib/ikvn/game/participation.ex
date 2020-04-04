@@ -3,8 +3,10 @@ defmodule Ikvn.Game.Participation do
   import Ecto.Changeset
 
   alias Ikvn.Account.User
+  alias Ikvn.Game.Mark
   alias Ikvn.Game.Participation
   alias Ikvn.Game.Role
+  alias Ikvn.Game.Solution
   alias Ikvn.Game.Tournament
 
   schema "participations" do
@@ -12,6 +14,9 @@ defmodule Ikvn.Game.Participation do
 
     belongs_to :tournament, Tournament
     belongs_to :user, User
+
+    has_many :solutions, Solution
+    has_many :marks, Mark
 
     timestamps(type: :utc_datetime)
   end

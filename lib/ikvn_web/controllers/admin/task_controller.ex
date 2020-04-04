@@ -60,13 +60,13 @@ defmodule IkvnWeb.Admin.TaskController do
         conn
         |> put_flash(:info, gettext "Task deleted successfully")
         |> redirect(to:
-          Routes.admin_tournament_tour_task_path(conn, :index, tournament, tour)
+          Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
         )
       {:error, %Ecto.Changeset{} = _changeset} ->
         conn
         |> put_flash(:error, gettext "Task can't be deleted")
         |> redirect(to:
-          Routes.admin_tournament_tour_task_path(conn, :index, tournament, tour)
+          Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
         )
     end
   end

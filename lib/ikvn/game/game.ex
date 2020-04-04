@@ -66,6 +66,13 @@ defmodule Ikvn.Game do
     |> Repo.update()
   end
 
+  def delete_tournament(%Tournament{} = tournament) do
+    tournament
+    |> change
+    |> no_assoc_constraint(:tours)
+    |> Repo.delete()
+  end
+
   def create_creator_participation(%Tournament{
     id: id, creator_id: creator_id
   }) do
@@ -110,15 +117,11 @@ defmodule Ikvn.Game do
   end
 
   def delete_participation(%Participation{} = participation) do
-    participation = participation |> Repo.preload(:tournament)
-    if participation.tournament.creator_id == participation.user_id do
-      {:error, gettext("Can't delete the Creator from staff")}
-    else
-      participation
-      |> change
-      |> no_assoc_constraint(:soultions)
-      |> Repo.delete()
-    end
+    participation
+    |> change
+    |> no_assoc_constraint(:solutions)
+    |> no_assoc_constraint(:marks)
+    |> Repo.delete()
   end
 
   def get_user_participation(

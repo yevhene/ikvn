@@ -82,12 +82,12 @@ defmodule IkvnWeb.Router do
       pipe_through [:tournament, :admin]
 
       resources "/tournaments", TournamentController, only: [
-        :show, :edit, :update
+        :show, :edit, :update, :delete
       ] do
         resources "/staff", StaffController,
           only: [:index, :create, :delete]
         resources "/players", PlayerController,
-          only: [:index]
+          only: [:index, :delete]
         resources "/tours", TourController do
           scope "/" do
             pipe_through [:tour]

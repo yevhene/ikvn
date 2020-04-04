@@ -167,9 +167,9 @@ msgid "You have no permission to do this"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/staff/_actions.html.eex:3
-#: lib/ikvn_web/templates/admin/task/_actions.html.eex:3 lib/ikvn_web/templates/admin/tour/_actions.html.eex:3
-#: lib/ikvn_web/templates/admin/tournament/_actions.html.eex:3
+#: lib/ikvn_web/templates/admin/player/_actions.html.eex:3
+#: lib/ikvn_web/templates/admin/staff/_actions.html.eex:3 lib/ikvn_web/templates/admin/task/_actions.html.eex:3
+#: lib/ikvn_web/templates/admin/tour/_actions.html.eex:3 lib/ikvn_web/templates/admin/tournament/_actions.html.eex:3
 msgid "Actions"
 msgstr ""
 
@@ -245,19 +245,21 @@ msgid "Staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:98
+#: lib/ikvn/game/game.ex:105
 msgid "User \"%{nickname}\" is not exist"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/staff/_actions.html.eex:6
-#: lib/ikvn_web/templates/admin/task/_actions.html.eex:8 lib/ikvn_web/templates/admin/tour/_actions.html.eex:8
+#: lib/ikvn_web/templates/admin/player/_actions.html.eex:6
+#: lib/ikvn_web/templates/admin/staff/_actions.html.eex:6 lib/ikvn_web/templates/admin/task/_actions.html.eex:8
+#: lib/ikvn_web/templates/admin/tour/_actions.html.eex:8 lib/ikvn_web/templates/admin/tournament/_actions.html.eex:8
 msgid "Delete"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/staff/_actions.html.eex:6
-#: lib/ikvn_web/templates/admin/task/_actions.html.eex:8 lib/ikvn_web/templates/admin/tour/_actions.html.eex:8
+#: lib/ikvn_web/templates/admin/player/_actions.html.eex:6
+#: lib/ikvn_web/templates/admin/staff/_actions.html.eex:6 lib/ikvn_web/templates/admin/task/_actions.html.eex:8
+#: lib/ikvn_web/templates/admin/tour/_actions.html.eex:8 lib/ikvn_web/templates/admin/tournament/_actions.html.eex:8
 msgid "Really?"
 msgstr ""
 
@@ -267,23 +269,8 @@ msgid "User successfully added to staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:115
-msgid "Can't delete the Creator from staff"
-msgstr ""
-
-#, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:41
-msgid "User successfully deleted from staff"
-msgstr ""
-
-#, elixir-format
 #: lib/ikvn_web/controllers/admin/staff_controller.ex:24
 msgid "User can't be added to staff. Reason: %{reason}"
-msgstr ""
-
-#, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:44
-msgid "User can't be removed from staff. Reason: %{reason}"
 msgstr ""
 
 #, elixir-format
@@ -385,7 +372,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/views/admin/task_view.ex:9
-#: lib/ikvn_web/views/judge/task_view.ex:9 lib/ikvn_web/views/player/task_view.ex:10
+#: lib/ikvn_web/views/judge/task_view.ex:10 lib/ikvn_web/views/player/task_view.ex:10
 msgid "Task"
 msgstr ""
 
@@ -480,9 +467,8 @@ msgid "Admin"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/judge/task/_task.html.eex:12
-#: lib/ikvn_web/templates/judge/tour/_tour.html.eex:21 lib/ikvn_web/templates/tournament/_actions.html.eex:14
-#: lib/ikvn_web/templates/tournament/_actions.html.eex:20
+#: lib/ikvn_web/templates/judge/task/_task.html.eex:14
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:14 lib/ikvn_web/templates/tournament/_actions.html.eex:20
 msgid "Judge"
 msgstr ""
 
@@ -517,7 +503,39 @@ msgid "You participate now"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/player/tour/_tour.html.eex:20
+#: lib/ikvn_web/templates/judge/task/_task.html.eex:20
+#: lib/ikvn_web/templates/judge/tour/_tour.html.eex:21 lib/ikvn_web/templates/player/tour/_tour.html.eex:20
 #: lib/ikvn_web/templates/tournament/_actions.html.eex:25 lib/ikvn_web/templates/tournament/_actions.html.eex:34
 msgid "Enter"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/tournament_controller.ex:59
+msgid "Tournament can't be deleted"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/tournament_controller.ex:55
+msgid "Tournament deleted successfully"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:40
+msgid "Can't remove the creator from staff"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/player_controller.ex:20
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:48
+msgid "User can't be removed from staff"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:45
+msgid "User successfully removed from staff"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/player_controller.ex:17
+msgid "User successfully removed from tournament"
 msgstr ""

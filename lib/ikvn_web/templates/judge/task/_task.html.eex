@@ -14,11 +14,12 @@
         <%= gettext "Judge" %>
         <%= not_judged_badge @task.solutions %>
       <% end %>
-    <% Game.tour_is_closed?(@tour) ->%>
+    <% Game.tour_is_closed?(@tour) -> %>
       <%= link to: Routes.judge_tournament_tour_task_path(@conn, :show, @tournament, @tour, @task), class: "btn btn-success flex-fill" do %>
         <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
         <%= gettext "Enter" %>
       <% end %>
+    <% true -> %>
   <% end %>
 </div>
 

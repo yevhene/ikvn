@@ -46,6 +46,21 @@ defmodule IkvnWeb.Admin.TournamentController do
     end
   end
 
+  def delete(conn, _params) do
+    tournament = conn.assigns.tournament
+
+    case Game.delete_tournament(tournament) do
+      {:ok, _tournament} ->
+        conn
+        |> put_flash(:info, gettext "Tournament deleted successfully")
+        |> redirect(to: Routes.tournament_path(conn, :index))
+      {:error, %Ecto.Changeset{} = _changeset} ->
+        conn
+        |> put_flash(:error, gettext "Tournament can't be deleted")
+        |> redirect(to: Routes.admin_tournament_path(conn, :show, tournament))
+    end
+  end
+
   def tournament_params(conn, params) do
     params
     |> cast_datetime_params(["started_at", "finished_at"])

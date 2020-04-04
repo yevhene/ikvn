@@ -76,7 +76,7 @@ defmodule IkvnWeb.Admin.TourController do
         conn
         |> put_flash(:error, gettext "Tour can't be deleted")
         |> redirect(to:
-          Routes.admin_tournament_tour_path(conn, :index, tournament)
+          Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
         )
     end
   end

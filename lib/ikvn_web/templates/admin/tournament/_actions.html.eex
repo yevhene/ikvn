@@ -4,5 +4,7 @@
   </button>
   <div class="dropdown-menu">
     <%= link gettext("Edit"), to: Routes.admin_tournament_path(@conn, :edit, @tournament), class: "dropdown-item" %>
+
+    <%= link gettext("Delete"), to: Routes.admin_tournament_path(@conn, :delete, @tournament), method: "delete", class: "dropdown-item text-danger", data: [confirm: gettext("Really?")] %>
   </div>
 </div>

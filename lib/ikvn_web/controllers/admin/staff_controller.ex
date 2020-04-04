@@ -35,19 +35,18 @@ defmodule IkvnWeb.Admin.StaffController do
   end
 
   def delete(conn, _params) do
-    case Game.delete_participation(conn.assigns.staff) do
-      {:ok, _staff} ->
-        conn
-        |> put_flash(:info, gettext "User successfully deleted from staff")
-      {:error, %Ecto.Changeset{} = changeset} ->
-        conn
-        |> put_flash(:error, gettext(
-          "User can't be removed from staff. Reason: %{reason}",
-          reason: fetch_errors(changeset)
-        ))
-      {:error, error} ->
-        conn
-        |> put_flash(:error, error)
+    if conn.assigns.tournament.creator_id == conn.assigns.staff.user_id do
+      conn
+      |> put_flash(:error, gettext("Can't remove the creator from staff"))
+    else
+      case Game.delete_participation(conn.assigns.staff) do
+        {:ok, _staff} ->
+          conn
+          |> put_flash(:info, gettext("User successfully removed from staff"))
+        {:error, %Ecto.Changeset{}} ->
+          conn
+          |> put_flash(:error, gettext("User can't be removed from staff"))
+      end
     end
     |> redirect(to:
       Routes.admin_tournament_staff_path(conn, :index, conn.assigns.tournament)
