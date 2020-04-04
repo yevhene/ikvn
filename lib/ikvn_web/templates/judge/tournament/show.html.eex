@@ -2,6 +2,8 @@
 
 <hr />
 
+<h4><%= gettext "Tours" %></h4>
+
 <div class="card-columns">
   <%= render_many(@tours, IkvnWeb.Judge.TourView, "_tour.html", assigns) %>
 </div>

@@ -6,6 +6,7 @@ defmodule Ikvn.Game.Solution do
   alias Ikvn.Game.Participation
   alias Ikvn.Game.Solution
   alias Ikvn.Game.Task
+  alias Ikvn.Results.Score
 
   schema "solutions" do
     field :content, :string
@@ -14,6 +15,7 @@ defmodule Ikvn.Game.Solution do
     belongs_to :task, Task
 
     has_many :marks, Mark
+    has_one :score, Score
 
     timestamps(type: :utc_datetime)
   end

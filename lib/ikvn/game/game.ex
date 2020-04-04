@@ -253,7 +253,9 @@ defmodule Ikvn.Game do
   }) do
     list_tasks(tour)
     |> Repo.preload([solutions:
-      from(s in Solution, where: s.participation_id == ^participation_id)
+      from(s in Solution,
+        where: s.participation_id == ^participation_id,
+        preload: [:score])
     ])
   end
 

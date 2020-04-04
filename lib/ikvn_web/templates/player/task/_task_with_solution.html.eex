@@ -16,12 +16,26 @@
     </div>
   <% end %>
 
-  <%= if Game.tour_is_active?(@tour) do %>
-    <%= if solution == nil do %>
-      <%= render IkvnWeb.Player.SolutionView, "_new_button.html", assigns %>
-    <% else %>
-      <%= render IkvnWeb.Player.SolutionView, "_edit_button.html", assigns %>
-    <% end %>
+  <%= cond do %>
+    <% Game.tour_is_active?(@tour) -> %>
+      <%= if solution == nil do %>
+        <%= render IkvnWeb.Player.SolutionView, "_new_button.html", assigns %>
+      <% else %>
+        <%= render IkvnWeb.Player.SolutionView, "_edit_button.html", assigns %>
+      <% end %>
+    <% Game.tour_is_closed?(@tour) -> %>
+      <div class="card-footer">
+        <h3>
+          <span class="badge badge-primary">
+            <%= if solution == nil do %>
+              0.0
+            <% else %>
+              <%= :erlang.float_to_binary(solution.score.value, [decimals: 1]) %>
+            <% end %>
+          </span>
+        </h3>
+      </div>
+    <% true -> %>
   <% end %>
 </div>
 <br />
