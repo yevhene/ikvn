@@ -289,7 +289,7 @@ msgid "You are not authrorized to do that"
 msgstr "Вам не дозволено робити це"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/player/participation_controller.ex:13
+#: lib/ikvn_web/controllers/player/participation_controller.ex:22
 msgid "Participation failed. Contact Admin"
 msgstr "Участь відхилено. Зконтактуйте з Адміністратором"
 
@@ -498,7 +498,7 @@ msgid "Judging is finished"
 msgstr "Оцінювання завершено"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/player/participation_controller.ex:10
+#: lib/ikvn_web/controllers/player/participation_controller.ex:16
 msgid "You participate now"
 msgstr "Ви берете участь"
 
@@ -539,3 +539,8 @@ msgstr "Користувач успішно видалений зі штату"
 #: lib/ikvn_web/controllers/admin/player_controller.ex:17
 msgid "User successfully removed from tournament"
 msgstr "Користувач успішно видалений з турніру"
+
+#, elixir-format, fuzzy
+#: lib/ikvn_web/controllers/player/participation_controller.ex:10
+msgid "Tournament is finished"
+msgstr "Турнір завершено"

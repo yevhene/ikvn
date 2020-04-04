@@ -7,7 +7,7 @@
 
   <div class="form-group">
     <%= label f, :nickname, gettext("Nickname"), class: "control-label" %>
-    <%= text_input f, :nickname, class: "form-control" %>
+    <%= text_input f, :nickname, class: "form-control", disabled: f.data.nickname %>
     <%= error_tag f, :nickname %>
     <div>
       <small class="text-danger"><%= gettext("You can set it only once") %></small>
