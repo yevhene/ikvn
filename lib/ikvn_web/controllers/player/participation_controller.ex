@@ -15,7 +15,7 @@ defmodule IkvnWeb.Player.ParticipationController do
           conn
           |> put_flash(:info, gettext "You participate now")
           |> redirect(to:
-            Routes.player_tournament_path(conn, :show, tournament)
+            Routes.player_tournament_tour_path(conn, :index, tournament)
           )
         {:error, _} ->
           conn

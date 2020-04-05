@@ -15,4 +15,4 @@
 
 <hr />
 
-<span><%= link gettext("Back"), to: Routes.player_tournament_path(@conn, :show, @tournament) %></span>
+<span><%= link gettext("Back"), to: Routes.player_tournament_tour_path(@conn, :index, @tournament) %></span>

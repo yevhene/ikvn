@@ -17,9 +17,9 @@ msgstr ""
 #: lib/ikvn_web/templates/admin/tour/new.html.eex:6 lib/ikvn_web/templates/admin/tour/show.html.eex:19
 #: lib/ikvn_web/templates/admin/tournament/edit.html.eex:6 lib/ikvn_web/templates/admin/tournament/new.html.eex:6
 #: lib/ikvn_web/templates/admin/tournament/show.html.eex:9 lib/ikvn_web/templates/judge/task/show.html.eex:26
-#: lib/ikvn_web/templates/judge/tour/show.html.eex:18 lib/ikvn_web/templates/judge/tournament/show.html.eex:13
+#: lib/ikvn_web/templates/judge/tour/show.html.eex:18 lib/ikvn_web/templates/judge/tournament/show.html.eex:11
 #: lib/ikvn_web/templates/player/solution/edit.html.eex:6 lib/ikvn_web/templates/player/solution/new.html.eex:6
-#: lib/ikvn_web/templates/player/tour/show.html.eex:18 lib/ikvn_web/templates/player/tournament/show.html.eex:13
+#: lib/ikvn_web/templates/player/tour/show.html.eex:18 lib/ikvn_web/templates/player/tournament/show.html.eex:11
 #: lib/ikvn_web/templates/profile/edit.html.eex:6 lib/ikvn_web/templates/profile/show.html.eex:17
 msgid "Back"
 msgstr "Назад"
@@ -313,7 +313,8 @@ msgstr "Новий Тур"
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:37
 #: lib/ikvn_web/templates/admin/tour/_tour.html.eex:13 lib/ikvn_web/templates/judge/tour/_tour.html.eex:13
-#: lib/ikvn_web/templates/player/tour/_tour.html.eex:13
+#: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:19 lib/ikvn_web/templates/layout/_judge_navigation.html.eex:7
+#: lib/ikvn_web/templates/layout/_player_navigation.html.eex:7 lib/ikvn_web/templates/player/tour/_tour.html.eex:13
 msgid "Results"
 msgstr "Результати"
 
@@ -344,8 +345,8 @@ msgid "Tour updated successfully"
 msgstr "Тур успішно оновлено"
 
 #, elixir-format
-#: lib/ikvn_web/templates/judge/tournament/show.html.eex:5
-#: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:15 lib/ikvn_web/templates/player/tournament/show.html.eex:5
+#: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:15
+#: lib/ikvn_web/templates/layout/_judge_navigation.html.eex:3 lib/ikvn_web/templates/layout/_player_navigation.html.eex:3
 msgid "Tours"
 msgstr "Тури"
 
@@ -545,13 +546,18 @@ msgstr "Користувач успішно видалений з турніру
 msgid "Tournament is finished"
 msgstr "Турнір завершено"
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/ikvn_web/templates/admin/staff/index.html.eex:7
 #: lib/ikvn_web/templates/admin/staff/index.html.eex:27
 msgid "Judged"
-msgstr "Оцінювати"
+msgstr "Оцінені"
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/player/index.html.eex:8
 msgid "Submissions"
 msgstr "Подання"
+
+#, elixir-format
+#: lib/ikvn_web/templates/result/index.html.eex:2
+msgid "No results yet"
+msgstr "Поки немає результатів"

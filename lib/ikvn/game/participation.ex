@@ -9,6 +9,7 @@ defmodule Ikvn.Game.Participation do
   alias Ikvn.Game.Solution
   alias Ikvn.Game.Tournament
   alias Ikvn.Metrics.Duty
+  alias Ikvn.Metrics.Score
   alias Ikvn.Metrics.Submission
 
   schema "participations" do
@@ -21,7 +22,8 @@ defmodule Ikvn.Game.Participation do
     has_many :marks, Mark
 
     has_many :duties, Duty
-    has_many :submissions, Submissions
+    has_many :scores, Score
+    has_many :submissions, Submission
 
     timestamps(type: :utc_datetime)
   end

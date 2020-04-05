@@ -86,8 +86,10 @@ defmodule IkvnWeb.Router do
       ] do
         resources "/staff", StaffController,
           only: [:index, :create, :delete]
+
         resources "/players", PlayerController,
           only: [:index, :delete]
+
         resources "/tours", TourController do
           scope "/" do
             pipe_through [:tour]
@@ -95,6 +97,8 @@ defmodule IkvnWeb.Router do
             resources "/tasks", TaskController, except: [:index, :show]
           end
         end
+
+        resources "/results", ResultController, only: [:show], singleton: true
       end
     end
 
@@ -102,7 +106,9 @@ defmodule IkvnWeb.Router do
     scope "/judge", Judge, as: :judge do
       pipe_through [:tournament, :judge]
 
-      resources "/tournaments", TournamentController, only: [:show] do
+      scope "/tournaments/:tournament_id", as: :tournament do
+        resources "/tours", TourController, only: [:index]
+
         scope "/" do
           pipe_through [:tour]
 
@@ -117,6 +123,8 @@ defmodule IkvnWeb.Router do
             end
           end
         end
+
+        resources "/results", ResultController, only: [:show], singleton: true
       end
     end
 
@@ -134,7 +142,9 @@ defmodule IkvnWeb.Router do
     scope "/player", Player, as: :player do
       pipe_through [:tournament, :player]
 
-      resources "/tournaments", TournamentController, only: [:show] do
+      scope "/tournaments/:tournament_id", as: :tournament do
+        resources "/tours", TourController, only: [:index]
+
         scope "/" do
           pipe_through [:tour]
 
@@ -147,6 +157,8 @@ defmodule IkvnWeb.Router do
             end
           end
         end
+
+        resources "/results", ResultController, only: [:show], singleton: true
       end
     end
   end
@@ -157,6 +169,7 @@ defmodule IkvnWeb.Router do
 
     resources "/session", SessionController,
       only: [:delete], singleton: true
+
     resources "/profile", ProfileController,
       only: [:edit, :update], singleton: true
   end

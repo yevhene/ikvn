@@ -4,9 +4,8 @@ defmodule IkvnWeb.NavigationHelpers do
   import IkvnWeb.Gettext
 
   def nav_item(conn, text, path, opts \\ []) do
-    exact = Keyword.get(opts, :exact, false)
     content_tag :li, class: "nav-item" do
-      link to: path, class: nav_item_link_class(conn, path, exact) do
+      link to: path, class: nav_item_link_class(conn, path) do
         if opts[:counter] do
           [
             content_tag(:span, "#{text} "),
@@ -20,19 +19,15 @@ defmodule IkvnWeb.NavigationHelpers do
     end
   end
 
-  defp nav_item_link_class(conn, path, exact) do
-    if nav_item_active?(path, conn.request_path, exact) do
+  defp nav_item_link_class(conn, path) do
+    if nav_item_active?(path, conn.request_path) do
       "nav-link active"
     else
       "nav-link"
     end
   end
 
-  defp nav_item_active?(path, current_path, exact) do
-    if exact do
-      current_path =~ ~r{^#{path}(/\d+.*)?(/edit|/new)?$}
-    else
-      current_path =~ ~r{^#{path}.*$}
-    end
+  defp nav_item_active?(path, current_path) do
+    current_path =~ ~r{^#{path}(/\d+.*)?(/edit|/new)?$}
   end
 end
