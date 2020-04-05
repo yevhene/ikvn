@@ -1,5 +1,6 @@
 <tr>
   <td><%= @index + 1 %></td>
   <td><%= @player.user.nickname %></td>
+  <td><%= submitted_badge(@player) %></td>
   <td class="text-right"><%= render "_actions.html", assigns %></td>
 </li>

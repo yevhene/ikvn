@@ -12,6 +12,7 @@ defmodule Ikvn.Game do
   alias Ikvn.Game.Tour
   alias Ikvn.Game.Tournament
   alias Ikvn.Metrics.Duty
+  alias Ikvn.Metrics.Submission
   alias Ikvn.Repo
 
   def get_tournament(id), do: Repo.get(Tournament, id)
@@ -86,6 +87,17 @@ defmodule Ikvn.Game do
 
   def list_players(%Tournament{} = tournament) do
     list_participations(tournament, [:player])
+    |> Repo.preload([submissions:
+      from(s in Submission,
+        group_by: s.participation_id,
+        select: %{
+          participation_id: s.participation_id,
+          all: sum(s.all),
+          done: sum(s.done),
+          left: sum(s.left)
+        }
+      )
+    ])
   end
 
   def list_staff(%Tournament{} = tournament) do

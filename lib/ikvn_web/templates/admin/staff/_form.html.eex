@@ -1,5 +1,5 @@
 <tr>
-  <td colspan="2" class="container">
+  <td colspan="3" class="container">
     <%= form_for @conn, Routes.admin_tournament_staff_path(@conn, :create, @tournament), [as: :staff], fn f -> %>
       <%= hidden_input f, :role, value: @role %>
 

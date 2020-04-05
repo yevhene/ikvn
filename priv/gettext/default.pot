@@ -35,7 +35,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/player/index.html.eex:7
-#: lib/ikvn_web/templates/admin/staff/index.html.eex:6 lib/ikvn_web/templates/admin/staff/index.html.eex:25
+#: lib/ikvn_web/templates/admin/staff/index.html.eex:6 lib/ikvn_web/templates/admin/staff/index.html.eex:26
 #: lib/ikvn_web/templates/profile/_form.html.eex:9 lib/ikvn_web/templates/profile/show.html.eex:5
 msgid "Nickname"
 msgstr ""
@@ -234,7 +234,7 @@ msgid "Admins"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn_web/templates/admin/staff/index.html.eex:20
+#: lib/ikvn_web/templates/admin/staff/index.html.eex:21
 msgid "Judges"
 msgstr ""
 
@@ -244,7 +244,7 @@ msgid "Staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:123
+#: lib/ikvn/game/game.ex:137
 msgid "User \"%{nickname}\" is not exist"
 msgstr ""
 
@@ -542,4 +542,15 @@ msgstr ""
 #, elixir-format
 #: lib/ikvn_web/controllers/player/participation_controller.ex:10
 msgid "Tournament is finished"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/staff/index.html.eex:7
+#: lib/ikvn_web/templates/admin/staff/index.html.eex:27
+msgid "Judged"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/admin/player/index.html.eex:8
+msgid "Submissions"
 msgstr ""

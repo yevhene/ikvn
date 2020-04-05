@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th scope="col"><%= gettext "Nickname" %></th>
+      <th scope="col"><%= gettext "Judged" %></th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -23,6 +24,7 @@
   <thead>
     <tr>
       <th scope="col"><%= gettext "Nickname" %></th>
+      <th scope="col"><%= gettext "Judged" %></th>
       <th scope="col"></th>
     </tr>
   </thead>
