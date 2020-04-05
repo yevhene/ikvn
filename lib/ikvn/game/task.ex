@@ -5,6 +5,7 @@ defmodule Ikvn.Game.Task do
   alias Ikvn.Game.Solution
   alias Ikvn.Game.Task
   alias Ikvn.Game.Tour
+  alias Ikvn.Metrics.Duty
 
   schema "tasks" do
     field :title, :string
@@ -14,6 +15,7 @@ defmodule Ikvn.Game.Task do
     belongs_to :tour, Tour
 
     has_many :solutions, Solution
+    has_many :duties, Duty
 
     timestamps(type: :utc_datetime)
   end

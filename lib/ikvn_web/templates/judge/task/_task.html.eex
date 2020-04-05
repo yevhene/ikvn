@@ -12,7 +12,7 @@
       <%= link to: Routes.judge_tournament_tour_task_path(@conn, :show, @tournament, @tour, @task), class: "btn btn-warning flex-fill" do %>
         <i class="fas fa-gavel" aria-hidden="true"></i>
         <%= gettext "Judge" %>
-        <%= not_judged_badge @task.solutions %>
+        <%= not_judged_badge @task %>
       <% end %>
     <% Game.tour_is_closed?(@tour) -> %>
       <%= link to: Routes.judge_tournament_tour_task_path(@conn, :show, @tournament, @tour, @task), class: "btn btn-success flex-fill" do %>

@@ -6,7 +6,7 @@ defmodule IkvnWeb.Admin.PlayerController do
   plug :load_resource when action in [:delete]
 
   def index(conn, _params) do
-    players = Game.list_participations(conn.assigns.tournament, [:player])
+    players = Game.list_players(conn.assigns.tournament)
     render(conn, "index.html", players: players)
   end
 

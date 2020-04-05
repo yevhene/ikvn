@@ -6,7 +6,7 @@ defmodule Ikvn.Game.Solution do
   alias Ikvn.Game.Participation
   alias Ikvn.Game.Solution
   alias Ikvn.Game.Task
-  alias Ikvn.Results.Score
+  alias Ikvn.Metrics.Score
 
   schema "solutions" do
     field :content, :string

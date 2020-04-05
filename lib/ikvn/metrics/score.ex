@@ -1,4 +1,4 @@
-defmodule Ikvn.Results.Score do
+defmodule Ikvn.Metrics.Score do
   use Ecto.Schema
 
   alias Ikvn.Game.Solution

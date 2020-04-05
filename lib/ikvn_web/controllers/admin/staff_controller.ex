@@ -8,7 +8,7 @@ defmodule IkvnWeb.Admin.StaffController do
   plug :load_resource when action in [:delete]
 
   def index(conn, _params) do
-    staff = Game.list_participations(conn.assigns.tournament, [:admin, :judge])
+    staff = Game.list_staff(conn.assigns.tournament)
     render(conn, "index.html", staff: staff)
   end
 
