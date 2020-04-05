@@ -41,3 +41,6 @@ yarn-error.log
 
 # edeliver
 .deliver/releases/
+
+# tmp
+tmp/
