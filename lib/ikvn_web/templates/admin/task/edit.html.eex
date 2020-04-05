@@ -3,4 +3,4 @@
 <%= render "_form.html", Map.put(assigns, :action, Routes.admin_tournament_tour_task_path(@conn, :update, @tournament, @tour, @task)) %>
 
 <hr />
-<span><%= link gettext("Back"), to: Routes.admin_tournament_tour_path(@conn, :show, @tournament, @task) %></span>
+<span><%= link gettext("Back"), to: Routes.admin_tournament_tour_path(@conn, :show, @tournament, @tour) %></span>

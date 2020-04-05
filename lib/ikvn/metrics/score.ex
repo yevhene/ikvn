@@ -10,6 +10,7 @@ defmodule Ikvn.Metrics.Score do
   @primary_key false
   schema "scores" do
     field :value, :float
+    field :place, :integer
 
     belongs_to :solution, Solution
 

@@ -5,8 +5,9 @@ defmodule IkvnWeb.Player.ResultController do
 
   def show(conn, _params) do
     {results, tours} = Metrics.list_results(conn.assigns.tournament)
+    digest = Metrics.get_digest(conn.assigns.tournament)
     conn
     |> put_view(IkvnWeb.ResultView)
-    |> render("index.html", results: results, tours: tours)
+    |> render("index.html", results: results, tours: tours, digest: digest)
   end
 end

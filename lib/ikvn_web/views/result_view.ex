@@ -1,6 +1,19 @@
 defmodule IkvnWeb.ResultView do
   use IkvnWeb, :view
 
+  import IkvnWeb.MarkdownHelpers
+
+  alias Ikvn.Game.Tour
+  alias Ikvn.Game.Task
+
+  def title(%Tour{title: title}) do
+    title || gettext("Tour")
+  end
+
+  def title(%Task{title: title}) do
+    title || gettext("Task")
+  end
+
   def render_results_table_head(tours) do
     [
       content_tag(:tr, [

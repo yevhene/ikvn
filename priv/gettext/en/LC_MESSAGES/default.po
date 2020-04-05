@@ -38,7 +38,7 @@ msgstr ""
 #: lib/ikvn_web/templates/admin/player/index.html.eex:7
 #: lib/ikvn_web/templates/admin/staff/index.html.eex:6 lib/ikvn_web/templates/admin/staff/index.html.eex:26
 #: lib/ikvn_web/templates/profile/_form.html.eex:9 lib/ikvn_web/templates/profile/show.html.eex:5
-#: lib/ikvn_web/views/result_view.ex:18
+#: lib/ikvn_web/views/result_view.ex:31
 msgid "Nickname"
 msgstr ""
 
@@ -375,6 +375,7 @@ msgstr ""
 #, elixir-format
 #: lib/ikvn_web/views/admin/task_view.ex:9
 #: lib/ikvn_web/views/judge/task_view.ex:10 lib/ikvn_web/views/player/task_view.ex:10
+#: lib/ikvn_web/views/result_view.ex:14
 msgid "Task"
 msgstr ""
 
@@ -407,6 +408,7 @@ msgstr ""
 #, elixir-format
 #: lib/ikvn_web/views/admin/tour_view.ex:11
 #: lib/ikvn_web/views/judge/tour_view.ex:12 lib/ikvn_web/views/player/tour_view.ex:12
+#: lib/ikvn_web/views/result_view.ex:10
 msgid "Tour"
 msgstr ""
 
@@ -561,4 +563,9 @@ msgstr ""
 #, elixir-format
 #: lib/ikvn_web/templates/result/index.html.eex:2
 msgid "No results yet"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/templates/result/index.html.eex:13
+msgid "Best solutions"
 msgstr ""

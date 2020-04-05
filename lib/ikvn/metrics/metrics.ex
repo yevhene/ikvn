@@ -2,9 +2,11 @@ defmodule Ikvn.Metrics do
   import Ecto.Query, warn: false
 
   alias Ikvn.Game.Participation
+  alias Ikvn.Game.Solution
   alias Ikvn.Game.Task
   alias Ikvn.Game.Tour
   alias Ikvn.Game.Tournament
+  alias Ikvn.Metrics.Score
   alias Ikvn.Repo
 
   def list_results(%Tournament{id: tournament_id}) do
@@ -79,5 +81,23 @@ defmodule Ikvn.Metrics do
     end)
     |> Enum.zip(results)
     |> Enum.map(fn {place, result} -> Map.put(result, :place, place) end)
+  end
+
+  def get_digest(%Tournament{id: tournament_id}) do
+    now = DateTime.utc_now
+
+    Tour
+    |> where([t], t.tournament_id == ^tournament_id)
+    |> where([t], t.results_at <= ^now)
+    |> order_by([desc: :started_at])
+    |> Repo.all
+    |> Repo.preload(tasks: [solutions:
+      from(s in Solution,
+        join: score in Score, on: s.id == score.solution_id,
+        where: score.place <= 5,
+        order_by: score.place,
+        preload: [:score, [participation: :user]]
+      )
+    ])
   end
 end
