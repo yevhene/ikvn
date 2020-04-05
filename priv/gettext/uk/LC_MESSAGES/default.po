@@ -17,9 +17,9 @@ msgstr ""
 #: lib/ikvn_web/templates/admin/tour/new.html.eex:6 lib/ikvn_web/templates/admin/tour/show.html.eex:19
 #: lib/ikvn_web/templates/admin/tournament/edit.html.eex:6 lib/ikvn_web/templates/admin/tournament/new.html.eex:6
 #: lib/ikvn_web/templates/admin/tournament/show.html.eex:9 lib/ikvn_web/templates/judge/task/show.html.eex:26
-#: lib/ikvn_web/templates/judge/tour/show.html.eex:18 lib/ikvn_web/templates/judge/tournament/show.html.eex:11
+#: lib/ikvn_web/templates/judge/tour/index.html.eex:11 lib/ikvn_web/templates/judge/tour/show.html.eex:18
 #: lib/ikvn_web/templates/player/solution/edit.html.eex:6 lib/ikvn_web/templates/player/solution/new.html.eex:6
-#: lib/ikvn_web/templates/player/tour/show.html.eex:18 lib/ikvn_web/templates/player/tournament/show.html.eex:11
+#: lib/ikvn_web/templates/player/tour/index.html.eex:11 lib/ikvn_web/templates/player/tour/show.html.eex:18
 #: lib/ikvn_web/templates/profile/edit.html.eex:6 lib/ikvn_web/templates/profile/show.html.eex:17
 msgid "Back"
 msgstr "Назад"
@@ -38,6 +38,7 @@ msgstr "Не вдалося аутентифікувати"
 #: lib/ikvn_web/templates/admin/player/index.html.eex:7
 #: lib/ikvn_web/templates/admin/staff/index.html.eex:6 lib/ikvn_web/templates/admin/staff/index.html.eex:26
 #: lib/ikvn_web/templates/profile/_form.html.eex:9 lib/ikvn_web/templates/profile/show.html.eex:5
+#: lib/ikvn_web/views/result_view.ex:18
 msgid "Nickname"
 msgstr "Прізвисько"
 
@@ -205,7 +206,7 @@ msgid "Start"
 msgstr "Початок"
 
 #, elixir-format
-#: lib/ikvn_web/views/helpers/navigation_helpers.ex:14
+#: lib/ikvn_web/views/helpers/navigation_helpers.ex:13
 msgid "New"
 msgstr "Новий"
 

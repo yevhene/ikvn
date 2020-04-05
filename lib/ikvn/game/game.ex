@@ -249,6 +249,8 @@ defmodule Ikvn.Game do
     not tournament_is_future?(tournament)
   end
 
+  def tournament_is_available?(nil, nil), do: false
+
   def tour_is_available?(%Tour{} = tour, role) do
     case role do
       :admin -> true

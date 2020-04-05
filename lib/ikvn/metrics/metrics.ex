@@ -28,6 +28,7 @@ defmodule Ikvn.Metrics do
     |> Enum.map(&(results_row(&1, tours)))
     |> Enum.sort_by(&(&1[:total]), :desc)
     |> Enum.filter(&(&1[:total] > 0))
+    |> add_result_place()
 
     {results, tours}
   end
@@ -48,7 +49,7 @@ defmodule Ikvn.Metrics do
       tasks = result_tasks(participation, tour.tasks)
       %{
         tasks: tasks,
-        total: Enum.sum(tasks)
+        total: Enum.sum(tasks) |> Float.round(1)
       }
     end)
   end
@@ -65,5 +66,18 @@ defmodule Ikvn.Metrics do
         score.value
       end
     end)
+  end
+
+  defp add_result_place(results) do
+    results
+    |> Enum.map(&(&1[:total]))
+    |> Enum.zip(1..(Enum.count(results)))
+    |> Enum.chunk_by(fn {score, _place} -> score end)
+    |> Enum.flat_map(fn chunk ->
+      {_score, place} = Enum.at(chunk, 0)
+      Enum.map(1..Enum.count(chunk), fn _number -> place end)
+    end)
+    |> Enum.zip(results)
+    |> Enum.map(fn {place, result} -> Map.put(result, :place, place) end)
   end
 end
