@@ -2,23 +2,14 @@
   <div class="card-body">
     <%= markdown @solution.content %>
   </div>
-  <div class="card-footer">
+  <div class="card-footer d-flex justify-content-between align-items-center">
     <div class="btn-group" role="group">
-      <% mark = Enum.at(@solution.marks, 0) %>
-      <%= if Game.tour_is_judging?(@tour) do %>
-        <%= for i <- mark_range() do %>
-          <%= submit_data i, data: [value: i],
-                             to: Routes.judge_tournament_tour_task_solution_mark_path(@conn, :create, @tournament, @tour, @task, @solution),
-                             method: :post,
-                             class: mark_button_class(mark, i),
-                             form: [class: mark_form_class(mark, i)] %>
-        <% end %>
-      <% else %>
-        <%= for i <- mark_range() do %>
-          <%= content_tag :div, i, class: mark_static_class(mark, i) %>
-        <% end %>
-      <% end %>
+      <%= render IkvnWeb.Judge.MarkView, "_form.html", assigns %>
     </div>
+
+    <%= unless Game.tour_is_judging?(@tour) do %>
+      <i><%= @solution.participation.user.nickname %></i>
+    <% end %>
   </div>
 </div>
 <br />

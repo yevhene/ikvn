@@ -3,8 +3,8 @@ defmodule IkvnWeb.ResultView do
 
   import IkvnWeb.MarkdownHelpers
 
-  alias Ikvn.Game.Tour
   alias Ikvn.Game.Task
+  alias Ikvn.Game.Tour
 
   def title(%Tour{title: title}) do
     title || gettext("Tour")

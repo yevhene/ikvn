@@ -1,0 +1,14 @@
+<% mark = Enum.at(@solution.marks, 0) %>
+<%= if Game.tour_is_judging?(@tour) do %>
+  <%= for i <- mark_range() do %>
+    <%= submit_data i, data: [value: i],
+                       to: Routes.judge_tournament_tour_task_solution_mark_path(@conn, :create, @tournament, @tour, @task, @solution),
+                       method: :post,
+                       class: mark_button_class(mark, i),
+                       form: [class: mark_form_class(mark, i)] %>
+  <% end %>
+<% else %>
+  <%= for i <- mark_range() do %>
+    <%= content_tag :div, i, class: mark_static_class(mark, i) %>
+  <% end %>
+<% end %>

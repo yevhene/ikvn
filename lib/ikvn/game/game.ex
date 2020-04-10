@@ -319,9 +319,9 @@ defmodule Ikvn.Game do
     |> where([s], s.task_id == ^task.id)
     |> order_by(fragment("md5(inserted_at::text) ASC"))
     |> Repo.all
-    |> Repo.preload([marks:
+    |> Repo.preload([[participation: :user], [marks:
       from(m in Mark, where: m.participation_id == ^participation.id)
-    ])
+    ]])
   end
 
   def get_solution!(id), do: Repo.get!(Solution, id)
