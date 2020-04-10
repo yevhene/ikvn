@@ -84,6 +84,8 @@ defmodule IkvnWeb.Router do
       resources "/tournaments", TournamentController, only: [
         :show, :edit, :update, :delete
       ] do
+        resources "/finish", Tournament.FinishController, only: [:create]
+
         resources "/staff", StaffController,
           only: [:index, :create, :delete]
 

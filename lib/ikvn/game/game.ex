@@ -74,6 +74,14 @@ defmodule Ikvn.Game do
     |> Repo.delete()
   end
 
+  def finish_tournament(%Tournament{} = tournament) do
+    now = DateTime.utc_now
+
+    tournament
+    |> Tournament.changeset(%{finished_at: now})
+    |> Repo.update()
+  end
+
   def create_creator_participation(%Tournament{
     id: id, creator_id: creator_id
   }) do
@@ -198,13 +206,14 @@ defmodule Ikvn.Game do
     %Tournament{started_at: started_at, finished_at: finished_at
   }) do
     now = DateTime.utc_now
-    DateTime.compare(now, started_at) == :gt and
-      DateTime.compare(now, finished_at) == :lt
+    DateTime.compare(now, started_at) == :gt and (
+      finished_at == nil or DateTime.compare(now, finished_at) == :lt
+    )
   end
 
   def tournament_is_finished?(%Tournament{finished_at: finished_at}) do
     now = DateTime.utc_now
-    DateTime.compare(now, finished_at) == :gt
+    finished_at != nil and DateTime.compare(now, finished_at) == :gt
   end
 
   def tour_is_future?(%Tour{started_at: started_at}) do

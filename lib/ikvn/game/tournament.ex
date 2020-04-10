@@ -28,7 +28,7 @@ defmodule Ikvn.Game.Tournament do
     |> cast(attrs, [
       :name, :headline, :description, :started_at, :finished_at, :creator_id
     ])
-    |> validate_required([:name, :started_at, :finished_at, :creator_id])
+    |> validate_required([:name, :started_at, :creator_id])
     |> unique_constraint(:name)
     |> foreign_key_constraint(:creator_id)
     |> forbid_change(:creator_id)

@@ -83,7 +83,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/task/_form.html.eex:27
-#: lib/ikvn_web/templates/admin/tour/_form.html.eex:45 lib/ikvn_web/templates/admin/tournament/_form.html.eex:43
+#: lib/ikvn_web/templates/admin/tour/_form.html.eex:45 lib/ikvn_web/templates/admin/tournament/_form.html.eex:35
 #: lib/ikvn_web/templates/player/solution/_form.html.eex:15 lib/ikvn_web/templates/profile/_form.html.eex:30
 msgid "Submit"
 msgstr ""
@@ -182,7 +182,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:29
-#: lib/ikvn_web/templates/admin/tour/_tour.html.eex:12 lib/ikvn_web/templates/admin/tournament/_form.html.eex:35
+#: lib/ikvn_web/templates/admin/tour/_tour.html.eex:12 lib/ikvn_web/templates/admin/tournament/_actions.html.eex:9
 #: lib/ikvn_web/templates/judge/tour/_tour.html.eex:12 lib/ikvn_web/templates/player/tour/_tour.html.eex:12
 msgid "Finish"
 msgstr ""
@@ -246,7 +246,7 @@ msgid "Staff"
 msgstr ""
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:137
+#: lib/ikvn/game/game.ex:135
 msgid "User \"%{nickname}\" is not exist"
 msgstr ""
 
@@ -261,6 +261,7 @@ msgstr ""
 #: lib/ikvn_web/templates/admin/player/_actions.html.eex:6
 #: lib/ikvn_web/templates/admin/staff/_actions.html.eex:6 lib/ikvn_web/templates/admin/task/_actions.html.eex:8
 #: lib/ikvn_web/templates/admin/tour/_actions.html.eex:8 lib/ikvn_web/templates/admin/tournament/_actions.html.eex:8
+#: lib/ikvn_web/templates/admin/tournament/_actions.html.eex:9
 msgid "Really?"
 msgstr ""
 
@@ -568,4 +569,14 @@ msgstr ""
 #, elixir-format
 #: lib/ikvn_web/templates/result/index.html.eex:13
 msgid "Best solutions"
+msgstr ""
+
+#, elixir-format
+#: lib/ikvn_web/controllers/admin/tournament/finish_controller.ex:15
+msgid "Can't finish tournament"
+msgstr ""
+
+#, elixir-format, fuzzy
+#: lib/ikvn_web/controllers/admin/tournament/finish_controller.ex:12
+msgid "Tournament finished"
 msgstr ""
