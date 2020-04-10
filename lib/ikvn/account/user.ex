@@ -21,7 +21,7 @@ defmodule Ikvn.Account.User do
 
   def create_changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:email])
+    |> cast(attrs, [:email, :name])
   end
 
   def profile_changeset(%User{} = user, attrs) do
