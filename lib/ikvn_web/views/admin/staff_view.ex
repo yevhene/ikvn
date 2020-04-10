@@ -6,7 +6,7 @@ defmodule IkvnWeb.Admin.StaffView do
   alias Ikvn.Game.Participation
 
   def judged_badge(%Participation{duties: duties}) do
-    duty = Enum.at(duties, 0)
-    badge(duty)
+    duties
+    |> Enum.map(&badge/1)
   end
 end

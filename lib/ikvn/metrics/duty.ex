@@ -3,6 +3,7 @@ defmodule Ikvn.Metrics.Duty do
 
   alias Ikvn.Game.Participation
   alias Ikvn.Game.Task
+  alias Ikvn.Game.Tour
 
   @primary_key false
   schema "duties" do
@@ -12,5 +13,6 @@ defmodule Ikvn.Metrics.Duty do
 
     belongs_to :participation, Participation
     belongs_to :task, Task
+    belongs_to :tour, Tour
   end
 end

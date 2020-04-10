@@ -7,7 +7,7 @@ defmodule IkvnWeb.Admin.PlayerView do
   alias Ikvn.Game.Participation
 
   def submitted_badge(%Participation{submissions: submissions}) do
-    submitted = Enum.at(submissions, 0)
-    badge(submitted)
+    submissions
+    |> Enum.map(&badge/1)
   end
 end
