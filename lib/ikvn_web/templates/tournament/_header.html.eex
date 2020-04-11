@@ -1,0 +1,15 @@
+<h1><%= @tournament.name %></h1>
+
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <%= nav_item @conn, gettext("Tournament"), Routes.tournament_path(@conn, :show, @tournament) %>
+  </li>
+
+  <li class="nav-item">
+    <%= nav_item @conn, gettext("Results"), Routes.tournament_result_path(@conn, :show, @tournament) %>
+  </li>
+
+  <li class="nav-item">
+    <%= nav_item @conn, gettext("Digest"), Routes.tournament_digest_path(@conn, :show, @tournament) %>
+  </li>
+</ul>

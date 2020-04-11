@@ -7,28 +7,28 @@ defmodule IkvnWeb.AuthController do
 
   alias Ikvn.Account
 
-  def callback(%{assigns: %{ueberauth_failure: failure}} = conn, _params) do
+  def callback(%{assigns: %{ueberauth_failure: failure}} = conn, params) do
     Logger.error inspect(failure)
 
     conn
     |> put_flash(:error, gettext "Failed to authenticate")
-    |> redirect(to: "/")
+    |> redirect(to: params["state"] || "/")
   end
 
-  def callback(%{assigns: %{ueberauth_auth: oauth}} = conn, _params) do
+  def callback(%{assigns: %{ueberauth_auth: oauth}} = conn, params) do
     case Account.authenticate(oauth) do
       {:ok, user} ->
         conn
         |> put_flash(:info, gettext "Successfully authenticated")
         |> sign_in(user)
-        |> redirect(to: "/")
+        |> redirect(to: params["state"] || "/")
       {:error, reason} ->
         conn
         |> put_flash(
           :error,
           gettext("Error: %{reason}", reason: reason)
         )
-        |> redirect(to: "/")
+        |> redirect(to: params["state"] || "/")
     end
   end
 end

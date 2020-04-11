@@ -99,8 +99,6 @@ defmodule IkvnWeb.Router do
             resources "/tasks", TaskController, except: [:index, :show]
           end
         end
-
-        resources "/results", ResultController, only: [:show], singleton: true
       end
     end
 
@@ -125,8 +123,6 @@ defmodule IkvnWeb.Router do
             end
           end
         end
-
-        resources "/results", ResultController, only: [:show], singleton: true
       end
     end
 
@@ -159,8 +155,6 @@ defmodule IkvnWeb.Router do
             end
           end
         end
-
-        resources "/results", ResultController, only: [:show], singleton: true
       end
     end
   end
@@ -186,6 +180,12 @@ defmodule IkvnWeb.Router do
       pipe_through [:tournament]
 
       resources "/tournaments", TournamentController, only: [:show]
+
+      scope "/tournaments/:tournament_id", Tournament, as: :tournament do
+        resources "/results", ResultController, only: [:show], singleton: true
+
+        resources "/digest", DigestController, only: [:show], singleton: true
+      end
     end
   end
 

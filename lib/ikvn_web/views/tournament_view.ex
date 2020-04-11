@@ -5,6 +5,7 @@ defmodule IkvnWeb.TournamentView do
   import IkvnWeb.StringHelpers
   import IkvnWeb.FormHelpers
   import IkvnWeb.Permissions
+  import IkvnWeb.NavigationHelpers
 
   alias Ikvn.Game
   alias Ikvn.Game.Tournament

@@ -12,9 +12,6 @@
   </div>
 <% else %>
   <div class="btn-group navbar-nav">
-    <a class="btn btn-primary" href="/auth/facebook">
-      <i class="fab fa-facebook"></i>
-      <%= gettext "Sign in" %>
-    </a>
+    <%= render IkvnWeb.AuthView, "_facebook.html", assigns %>
   </div>
 <% end %>

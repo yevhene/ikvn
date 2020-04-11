@@ -1,0 +1,14 @@
+<%= render IkvnWeb.TournamentView, "_header.html", assigns %>
+
+<%= if Enum.empty?(@results) do %>
+  <h4><%= gettext "No results yet" %></h4>
+<% else %>
+  <table class="table table-striped table-bordered table-responsive-md">
+    <thead>
+      <%= render_results_table_head @tours %>
+    </thead>
+    <tbody>
+      <%= Enum.map(@results, &render_results_table_row/1) %>
+    </tbody>
+  </table>
+<% end %>

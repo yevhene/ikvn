@@ -38,7 +38,7 @@ msgstr "Не вдалося аутентифікувати"
 #: lib/ikvn_web/templates/admin/player/index.html.eex:7
 #: lib/ikvn_web/templates/admin/staff/index.html.eex:6 lib/ikvn_web/templates/admin/staff/index.html.eex:26
 #: lib/ikvn_web/templates/profile/_form.html.eex:9 lib/ikvn_web/templates/profile/show.html.eex:5
-#: lib/ikvn_web/views/result_view.ex:31
+#: lib/ikvn_web/views/tournament/result_view.ex:18
 msgid "Nickname"
 msgstr "Прізвисько"
 
@@ -72,7 +72,7 @@ msgstr "Вийти"
 
 #, elixir-format
 #: lib/ikvn_web/templates/layout/_user_navigation.html.eex:17
-#: lib/ikvn_web/templates/tournament/_actions.html.eex:40
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:39
 msgid "Sign in"
 msgstr "Зареєструватись на сайті"
 
@@ -94,7 +94,7 @@ msgid "Successfully authenticated"
 msgstr "Успішно аутентифіковано"
 
 #, elixir-format
-#: lib/ikvn/account/account.ex:33 lib/ikvn_web/guardian/error_handler.ex:17
+#: lib/ikvn/account.ex:33 lib/ikvn_web/guardian/error_handler.ex:17
 msgid "Authentication failed"
 msgstr "Не вдалося аутентифікувати"
 
@@ -246,7 +246,7 @@ msgid "Staff"
 msgstr "Персонал"
 
 #, elixir-format
-#: lib/ikvn/game/game.ex:135
+#: lib/ikvn/game.ex:143
 msgid "User \"%{nickname}\" is not exist"
 msgstr "Користувач \"%{nickname}\" не існує"
 
@@ -315,8 +315,7 @@ msgstr "Новий Тур"
 #, elixir-format
 #: lib/ikvn_web/templates/admin/tour/_form.html.eex:37
 #: lib/ikvn_web/templates/admin/tour/_tour.html.eex:13 lib/ikvn_web/templates/judge/tour/_tour.html.eex:13
-#: lib/ikvn_web/templates/layout/_admin_navigation.html.eex:19 lib/ikvn_web/templates/layout/_judge_navigation.html.eex:7
-#: lib/ikvn_web/templates/layout/_player_navigation.html.eex:7 lib/ikvn_web/templates/player/tour/_tour.html.eex:13
+#: lib/ikvn_web/templates/player/tour/_tour.html.eex:13 lib/ikvn_web/templates/tournament/_header.html.eex:9
 msgid "Results"
 msgstr "Результати"
 
@@ -376,7 +375,7 @@ msgstr "Порядок"
 #, elixir-format
 #: lib/ikvn_web/views/admin/task_view.ex:9
 #: lib/ikvn_web/views/judge/task_view.ex:10 lib/ikvn_web/views/player/task_view.ex:10
-#: lib/ikvn_web/views/result_view.ex:14
+#: lib/ikvn_web/views/tournament/digest_view.ex:14
 msgid "Task"
 msgstr "Завдання"
 
@@ -409,7 +408,7 @@ msgstr "Завдання"
 #, elixir-format
 #: lib/ikvn_web/views/admin/tour_view.ex:11
 #: lib/ikvn_web/views/judge/tour_view.ex:12 lib/ikvn_web/views/player/tour_view.ex:12
-#: lib/ikvn_web/views/result_view.ex:10
+#: lib/ikvn_web/views/tournament/digest_view.ex:10
 msgid "Tour"
 msgstr "Тур"
 
@@ -467,13 +466,13 @@ msgid "Tour is finished"
 msgstr "Тур завершено"
 
 #, elixir-format
-#: lib/ikvn_web/templates/tournament/_actions.html.eex:10
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:9
 msgid "Admin"
 msgstr "Адмінка"
 
 #, elixir-format
 #: lib/ikvn_web/templates/judge/task/_task.html.eex:14
-#: lib/ikvn_web/templates/tournament/_actions.html.eex:14 lib/ikvn_web/templates/tournament/_actions.html.eex:20
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:13 lib/ikvn_web/templates/tournament/_actions.html.eex:19
 msgid "Judge"
 msgstr "Оцінювати"
 
@@ -510,7 +509,7 @@ msgstr "Ви берете участь"
 #, elixir-format
 #: lib/ikvn_web/templates/judge/task/_task.html.eex:20
 #: lib/ikvn_web/templates/judge/tour/_tour.html.eex:21 lib/ikvn_web/templates/player/tour/_tour.html.eex:20
-#: lib/ikvn_web/templates/tournament/_actions.html.eex:25 lib/ikvn_web/templates/tournament/_actions.html.eex:34
+#: lib/ikvn_web/templates/tournament/_tournament.html.eex:15
 msgid "Enter"
 msgstr "Ввійти"
 
@@ -562,21 +561,32 @@ msgid "Submissions"
 msgstr "Подання"
 
 #, elixir-format
-#: lib/ikvn_web/templates/result/index.html.eex:2
+#: lib/ikvn_web/templates/tournament/result/show.html.eex:4
 msgid "No results yet"
 msgstr "Поки немає результатів"
-
-#, elixir-format
-#: lib/ikvn_web/templates/result/index.html.eex:13
-msgid "Best solutions"
-msgstr "Кращі рішення"
 
 #, elixir-format
 #: lib/ikvn_web/controllers/admin/tournament/finish_controller.ex:15
 msgid "Can't finish tournament"
 msgstr "Неможливо завершити Турнір"
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/ikvn_web/controllers/admin/tournament/finish_controller.ex:12
 msgid "Tournament finished"
 msgstr "Турнір завершено"
+
+#, elixir-format
+#: lib/ikvn_web/templates/tournament/_header.html.eex:13
+msgid "Digest"
+msgstr "Кращі відповіді"
+
+#, elixir-format, fuzzy
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:24
+#: lib/ikvn_web/templates/tournament/_actions.html.eex:33
+msgid "Play"
+msgstr "Грати"
+
+#, elixir-format, fuzzy
+#: lib/ikvn_web/templates/tournament/_header.html.eex:5
+msgid "Tournament"
+msgstr "Турнір"

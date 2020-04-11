@@ -1,8 +1,7 @@
-<% participation = is_list(@tournament.participations) && Enum.at(@tournament.participations, 0) %>
-<div class="card-footer d-flex">
+<div class="d-flex">
   <%= if @current_user do %>
-    <%= if participation do %>
-      <%= case participation.role do %>
+    <%= if @participation do %>
+      <%= case @participation.role do %>
         <% :admin -> %>
           <div class="btn-group flex-fill" role="group">
             <%= link to: Routes.admin_tournament_path(@conn, :show, @tournament), class: "btn btn-danger" do %>
@@ -22,7 +21,7 @@
         <% :player -> %>
           <%= link to: Routes.player_tournament_tour_path(@conn, :index, @tournament), class: "btn btn-success flex-fill" do %>
             <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
-            <span class="d-none d-sm-inline-block"><%= gettext "Enter" %><span>
+            <span class="d-none d-sm-inline-block"><%= gettext "Play" %><span>
           <% end %>
       <% end %>
     <% else %>
@@ -31,13 +30,12 @@
                       class: "btn btn-success flex-fill",
                       form: [class: "flex-fill d-flex"] do %>
         <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
-        <span class="d-none d-md-inline-block"><%= gettext "Enter" %><span>
+        <span class="d-none d-md-inline-block"><%= gettext "Play" %><span>
       <% end %>
     <% end %>
   <% else %>
-    <a class="btn btn-primary flex-grow-1" href="/auth/facebook">
-      <i class="fab fa-facebook"></i>
-      <span class="d-none d-md-inline-block"><%= gettext "Sign in" %></span>
-    </a>
+    <div class="btn-group flex-fill" role="group">
+      <%= render IkvnWeb.AuthView, "_facebook.html", assigns %>
+    </div>
   <% end %>
 </div>

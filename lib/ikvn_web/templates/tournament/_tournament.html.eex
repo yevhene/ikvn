@@ -9,5 +9,10 @@
     <% end %>
   </div>
 
-  <%= render "_actions.html", assigns %>
+  <div class="card-footer d-flex">
+    <%= link to: Routes.tournament_path(@conn, :show, @tournament), class: "btn btn-success flex-fill" do %>
+      <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+      <span class="d-none d-sm-inline-block"><%= gettext "Enter" %><span>
+    <% end %>
+  </div>
 </div>

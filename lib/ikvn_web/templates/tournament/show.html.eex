@@ -1,0 +1,7 @@
+<%= render "_header.html", assigns %>
+
+<div><%= markdown @tournament.description %></div>
+
+<hr />
+
+<%= render "_actions.html", assigns %>

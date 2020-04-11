@@ -1,0 +1,32 @@
+<%= render IkvnWeb.TournamentView, "_header.html", assigns %>
+
+<%= Enum.map(@digest, fn tour -> %>
+  <h4><%= title(tour) %></h4>
+
+  <%= Enum.map(tour.tasks, fn task -> %>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">
+          <%= title task %>
+        </h5>
+      </div>
+      <div class="card-body">
+        <%= markdown task.description %>
+      </div>
+      <%= Enum.map(task.solutions, fn solution -> %>
+        <hr />
+        <div class="card-body">
+          <%= markdown solution.content %>
+
+          <div>
+            <b><i><%= solution.participation.user.nickname %></i></b>
+            <span class="badge badge-primary">
+              <%= :erlang.float_to_binary(solution.score.value, [decimals: 1]) %>
+            </span>
+          </div>
+        </div>
+      <% end) %>
+    </div>
+    <br />
+  <% end) %>
+<% end) %>
