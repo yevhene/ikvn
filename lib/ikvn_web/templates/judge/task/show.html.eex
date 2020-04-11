@@ -9,19 +9,23 @@
   </div>
 </div>
 
-<hr />
+<%= unless Enum.empty?(@not_judged_solution) do %>
+  <hr />
 
-<h4><%= gettext "Not judged solutions" %><%= not_judged_badge(@solutions) %></h4>
-<div>
-  <%= render_many(not_judged(@solutions), IkvnWeb.Judge.SolutionView, "_solution.html", assigns) %>
-</div>
+  <h4><%= gettext "Not judged solutions" %><%= not_judged_badge(Enum.count(@not_judged_solution)) %></h4>
+  <div>
+    <%= render_many(@not_judged_solution, IkvnWeb.Judge.SolutionView, "_solution.html", assigns) %>
+  </div>
+<% end %>
 
-<hr />
+<%= unless Enum.empty?(@judged_solutions) do %>
+  <hr />
 
-<h4><%= gettext "Already judged solutions" %></h4>
-<div>
-  <%= render_many(judged(@solutions), IkvnWeb.Judge.SolutionView, "_solution.html", assigns) %>
-</div>
+  <h4><%= gettext "Already judged solutions" %></h4>
+  <div>
+    <%= render_many(@judged_solutions, IkvnWeb.Judge.SolutionView, "_solution.html", assigns) %>
+  </div>
+<% end %>
 
 <hr />
 <span><%= link gettext("Back"), to: Routes.judge_tournament_tour_path(@conn, :show, @tournament, @tour) %></span>

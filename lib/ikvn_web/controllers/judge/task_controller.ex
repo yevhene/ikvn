@@ -6,10 +6,15 @@ defmodule IkvnWeb.Judge.TaskController do
   plug :load_resource
 
   def show(conn, _params) do
-    solutions = Game.list_solutions(
+    {not_judged_solution, judged_solutions} = Game.list_solutions(
       conn.assigns.task, conn.assigns.participation
     )
-    render(conn, "show.html", solutions: solutions)
+    |> Enum.split_with(&(Enum.empty?(&1.marks)))
+
+    render(conn, "show.html",
+      not_judged_solution: not_judged_solution,
+      judged_solutions: judged_solutions
+    )
   end
 
   defp load_resource(conn, _opts) do
