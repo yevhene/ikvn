@@ -91,12 +91,17 @@ defmodule Ikvn.Metrics do
     |> where([t], t.results_at <= ^now)
     |> order_by([desc: :started_at])
     |> Repo.all
-    |> Repo.preload(tasks: [solutions:
-      from(s in Solution,
-        join: score in Score, on: s.id == score.solution_id,
-        where: score.place <= 5,
-        order_by: score.place,
-        preload: [:score, [participation: :user]]
+    |> Repo.preload([tasks:
+      from(t in Task,
+        order_by: [asc: t.order, asc: t.inserted_at],
+        preload: ^[solutions:
+          from(s in Solution,
+            join: score in Score, on: s.id == score.solution_id,
+            where: score.place <= 5,
+            order_by: [score.place, s.inserted_at],
+            preload: [:score, [participation: :user]]
+          )
+        ]
       )
     ])
   end
