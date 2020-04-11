@@ -63,7 +63,7 @@ defmodule IkvnWeb.Admin.TournamentController do
 
   def tournament_params(conn, params) do
     params
-    |> cast_datetime_params(["started_at"])
+    |> cast_datetime_params(["started_at"], conn.assigns.browser_timezone)
     |> Map.merge(%{
       "creator_id" => conn.assigns.current_user.id,
     })

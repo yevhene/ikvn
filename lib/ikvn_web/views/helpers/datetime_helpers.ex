@@ -1,18 +1,18 @@
 defmodule IkvnWeb.DateTimeHelpers do
   alias Phoenix.HTML.Form
-  import IkvnWeb.ServerTime
+  import IkvnWeb.UserTime
 
-  def datetime(%DateTime{} = dt) do
+  def datetime(%DateTime{} = dt, timezone) do
     dt
-    |> from_utc()
+    |> from_utc(timezone)
     |> format_datetime()
   end
 
-  def server_datetime_select(form, field, opts \\ []) do
+  def user_datetime_select(form, field, timezone, opts \\ []) do
     value = Map.get(form.source.changes, field) || Map.get(form.data, field)
     value = case value do
       nil -> Map.get(form.params, to_string(field))
-      value -> from_utc(value)
+      value -> from_utc(value, timezone)
     end
     Form.datetime_select(form, field, Keyword.merge([value: value], opts))
   end

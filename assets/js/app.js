@@ -14,7 +14,8 @@ import {
 } from "@fortawesome/fontawesome-free-solid";
 library.add(faFacebook, faPlusCircle, faCogs, faSignInAlt, faGavel);
 
-import "./markdown-editor";
+import "./browser_timezone";
+import "./markdown_editor";
 
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured

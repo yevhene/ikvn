@@ -8,9 +8,9 @@
   <div class="card-body">
     <%= markdown @tour.description %>
     <dl class="row m-0">
-      <dt class="col-md-5"><%= gettext "Start" %></td><dd class="col-md-7"><%= datetime @tour.started_at %></dd>
-      <dt class="col-md-5"><%= gettext "Finish" %></td><dd class="col-md-7"><%= datetime @tour.finished_at %></dd>
-      <dt class="col-md-5"><%= gettext "Results" %></td><dd class="col-md-7"><%= datetime @tour.results_at %></dd>
+      <dt class="col-md-5"><%= gettext "Start" %></td><dd class="col-md-7"><%= datetime @tour.started_at, @browser_timezone %></dd>
+      <dt class="col-md-5"><%= gettext "Finish" %></td><dd class="col-md-7"><%= datetime @tour.finished_at, @browser_timezone %></dd>
+      <dt class="col-md-5"><%= gettext "Results" %></td><dd class="col-md-7"><%= datetime @tour.results_at, @browser_timezone %></dd>
     </dl>
   </div>
 

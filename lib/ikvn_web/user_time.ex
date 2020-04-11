@@ -1,12 +1,12 @@
-defmodule IkvnWeb.ServerTime do
-  def from_utc(datetime, timezone \\ default_timezone())
+defmodule IkvnWeb.UserTime do
+  def from_utc(datetime, timezone)
   def from_utc(%DateTime{} = datetime, timezone) do
     datetime
     |> DateTime.shift_zone!(timezone)
   end
   def from_utc(nil, _), do: nil
 
-  def to_utc(naive, timezone \\ default_timezone())
+  def to_utc(naive, timezone)
   def to_utc(%NaiveDateTime{} = naive, timezone) do
     with {:ok, datetime} <- DateTime.from_naive(naive, timezone),
          result <- DateTime.shift_zone!(datetime, "Etc/UTC")
@@ -18,15 +18,15 @@ defmodule IkvnWeb.ServerTime do
   end
   def to_utc(nil, _), do: nil
 
-  def cast_datetime_params(params, fields) do
+  def cast_datetime_params(params, fields, timezone) do
     Enum.reduce(fields, params, fn field, params ->
-      cast_datetime_param(params, field)
+      cast_datetime_param(params, field, timezone)
     end)
   end
 
-  def cast_datetime_param(params, field) do
+  def cast_datetime_param(params, field, timezone) do
     case cast_datetime_map(Map.get(params, field)) do
-      {:ok, naive} -> Map.put(params, field, to_utc(naive))
+      {:ok, naive} -> Map.put(params, field, to_utc(naive, timezone))
       {:error, _error} -> params
     end
   end
@@ -57,9 +57,5 @@ defmodule IkvnWeb.ServerTime do
       {int, ""} -> int
       _ -> nil
     end
-  end
-
-  defp default_timezone do
-    Application.get_env(:ikvn, IkvnWeb.ServerTime)[:default_timezone]
   end
 end

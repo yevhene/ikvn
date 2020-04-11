@@ -6,6 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
       element,
       spellChecker: false,
       minHeight: "100px"
-    })
+    });
   }
 });

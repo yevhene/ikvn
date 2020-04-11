@@ -26,7 +26,7 @@
   <div class="form-group">
     <%= label f, :started_at, gettext("Start"), class: "control-label" %>
     <br />
-    <%= server_datetime_select f, :started_at, class: "form-control" %>
+    <%= user_datetime_select f, :started_at, @browser_timezone, class: "form-control" %>
     <br />
     <%= error_tag f, :started_at %>
   </div>
