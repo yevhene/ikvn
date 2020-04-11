@@ -1,4 +1,4 @@
-defmodule IkvnWeb.GravatarHelpers do
+defmodule IkvnWeb.Helpers.Gravatar do
   import Exgravatar
 
   def gravatar(email, opts \\ [])

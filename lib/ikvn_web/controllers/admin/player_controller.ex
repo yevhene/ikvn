@@ -1,6 +1,5 @@
 defmodule IkvnWeb.Admin.PlayerController do
   use IkvnWeb, :controller
-
   alias Ikvn.Game
 
   plug :load_resource when action in [:delete]

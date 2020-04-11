@@ -1,8 +1,6 @@
 defmodule IkvnWeb.Admin.StaffView do
   use IkvnWeb, :view
-
-  import IkvnWeb.BadgeHelpers
-
+  import IkvnWeb.Helpers.Badge
   alias Ikvn.Game.Participation
 
   def judged_badge(%Participation{duties: duties}) do

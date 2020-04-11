@@ -1,8 +1,6 @@
 defmodule Ikvn.Metrics.Submission do
   use Ecto.Schema
-
-  alias Ikvn.Game.Participation
-  alias Ikvn.Game.Tour
+  alias Ikvn.Game.{Participation, Tour}
 
   @primary_key false
   schema "submissions" do

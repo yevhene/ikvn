@@ -1,9 +1,11 @@
-defmodule IkvnWeb.ErrorHelpers do
+defmodule IkvnWeb.Helpers.Error do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
 
   use Phoenix.HTML
+  import Phoenix.Controller
+  import Plug.Conn
 
   @doc """
   Generates tag for inlined form input errors.
@@ -42,6 +44,28 @@ defmodule IkvnWeb.ErrorHelpers do
       Gettext.dngettext(IkvnWeb.Gettext, "errors", msg, msg, count, opts)
     else
       Gettext.dgettext(IkvnWeb.Gettext, "errors", msg, opts)
+    end
+  end
+
+  def fetch_errors(%Ecto.Changeset{errors: errors}) do
+    errors
+    |> Keyword.values
+    |> Enum.map(&translate_error/1)
+    |> Enum.join(", ")
+  end
+
+  def error_response(conn, status) do
+    format = conn.private.phoenix_format
+
+    case format do
+      "html" ->
+        conn
+        |> put_status(status)
+        |> put_view(IkvnWeb.ErrorView)
+        |> render("404.html")
+      _ ->
+        conn
+        |> send_resp(status, "")
     end
   end
 end

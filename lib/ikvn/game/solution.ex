@@ -1,11 +1,7 @@
 defmodule Ikvn.Game.Solution do
   use Ecto.Schema
   import Ecto.Changeset
-
-  alias Ikvn.Game.Mark
-  alias Ikvn.Game.Participation
-  alias Ikvn.Game.Solution
-  alias Ikvn.Game.Task
+  alias Ikvn.Game.{Mark, Participation, Solution, Task}
   alias Ikvn.Metrics.Score
 
   schema "solutions" do

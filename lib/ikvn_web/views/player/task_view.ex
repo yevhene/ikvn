@@ -1,8 +1,6 @@
 defmodule IkvnWeb.Player.TaskView do
   use IkvnWeb, :view
-
-  import IkvnWeb.MarkdownHelpers
-
+  import IkvnWeb.Helpers.Markdown
   alias Ikvn.Game
   alias Ikvn.Game.Task
 

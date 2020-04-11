@@ -1,16 +1,9 @@
 defmodule Ikvn.Game.Participation do
   use Ecto.Schema
   import Ecto.Changeset
-
   alias Ikvn.Account.User
-  alias Ikvn.Game.Mark
-  alias Ikvn.Game.Participation
-  alias Ikvn.Game.Role
-  alias Ikvn.Game.Solution
-  alias Ikvn.Game.Tournament
-  alias Ikvn.Metrics.Duty
-  alias Ikvn.Metrics.Score
-  alias Ikvn.Metrics.Submission
+  alias Ikvn.Game.{Mark, Participation, Role, Solution, Tournament}
+  alias Ikvn.Metrics.{Duty, Score, Submission}
 
   schema "participations" do
     field :role, Role

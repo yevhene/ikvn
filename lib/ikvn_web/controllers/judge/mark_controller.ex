@@ -1,9 +1,7 @@
 defmodule IkvnWeb.Judge.MarkController do
   use IkvnWeb, :controller
-
-  import Ikvn.Utils.Validation
-
   alias Ikvn.Game
+  alias IkvnWeb.Helpers
 
   plug :load_parent_resources
   plug :load_resource
@@ -17,7 +15,7 @@ defmodule IkvnWeb.Judge.MarkController do
         conn
         |> put_flash(:error, gettext(
           "Can't apply mark. Reason: %{reason}",
-          reason: fetch_errors(changeset)
+          reason: Helpers.Error.fetch_errors(changeset)
         ))
         |> redirect_back()
     end

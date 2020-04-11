@@ -1,6 +1,5 @@
 defmodule IkvnWeb.Player.SolutionController do
   use IkvnWeb, :controller
-
   alias Ikvn.Game
   alias Ikvn.Game.Solution
 

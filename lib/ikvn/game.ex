@@ -2,17 +2,10 @@ defmodule Ikvn.Game do
   import Ecto.Query, warn: false
   import Ecto.Changeset
   import IkvnWeb.Gettext
-
   alias Ikvn.Account
   alias Ikvn.Account.User
-  alias Ikvn.Game.Mark
-  alias Ikvn.Game.Participation
-  alias Ikvn.Game.Solution
-  alias Ikvn.Game.Task
-  alias Ikvn.Game.Tour
-  alias Ikvn.Game.Tournament
-  alias Ikvn.Metrics.Duty
-  alias Ikvn.Metrics.Submission
+  alias Ikvn.Game.{Mark, Participation, Solution, Task, Tour, Tournament}
+  alias Ikvn.Metrics.{Duty, Submission}
   alias Ikvn.Repo
 
   def get_tournament(id), do: Repo.get(Tournament, id)

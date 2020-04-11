@@ -1,9 +1,7 @@
 defmodule Ikvn.Account.Link do
   use Ecto.Schema
   import Ecto.Changeset
-
-  alias Ikvn.Account.Link
-  alias Ikvn.Account.User
+  alias Ikvn.Account.{Link, User}
 
   schema "links" do
     field :uid, :string

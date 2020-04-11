@@ -1,10 +1,7 @@
 defmodule IkvnWeb.Tournament.DigestView do
   use IkvnWeb, :view
-
-  import IkvnWeb.MarkdownHelpers
-
-  alias Ikvn.Game.Task
-  alias Ikvn.Game.Tour
+  import IkvnWeb.Helpers.Markdown
+  alias Ikvn.Game.{Task, Tour}
 
   def title(%Tour{title: title}) do
     title || gettext("Tour")

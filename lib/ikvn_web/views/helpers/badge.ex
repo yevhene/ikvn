@@ -1,4 +1,4 @@
-defmodule IkvnWeb.BadgeHelpers do
+defmodule IkvnWeb.Helpers.Badge do
   import Phoenix.HTML.Tag
 
   def badge(nil), do: ""

@@ -1,4 +1,4 @@
-defmodule IkvnWeb.MarkdownHelpers do
+defmodule IkvnWeb.Helpers.Markdown do
   import Phoenix.HTML, only: [raw: 1]
   import Earmark
 

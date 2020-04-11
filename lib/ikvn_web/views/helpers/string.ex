@@ -1,4 +1,4 @@
-defmodule IkvnWeb.StringHelpers do
+defmodule IkvnWeb.Helpers.String do
   def truncate(stringt, opts \\ []) do
     truncate_at = opts[:truncate_at] || 255
     separator   = opts[:separator] || " "

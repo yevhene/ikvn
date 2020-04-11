@@ -1,4 +1,4 @@
-defmodule IkvnWeb.FormHelpers do
+defmodule IkvnWeb.Helpers.Form do
   import Phoenix.HTML.Tag
 
   def submit_data(text, opts \\ [])

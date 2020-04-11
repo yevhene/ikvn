@@ -1,9 +1,6 @@
 defmodule Ikvn.Metrics.Duty do
   use Ecto.Schema
-
-  alias Ikvn.Game.Participation
-  alias Ikvn.Game.Task
-  alias Ikvn.Game.Tour
+  alias Ikvn.Game.{Participation, Task, Tour}
 
   @primary_key false
   schema "duties" do

@@ -1,7 +1,6 @@
-defmodule IkvnWeb.StatusHelpers do
+defmodule IkvnWeb.Helpers.Status do
   import Phoenix.HTML.Tag
   import IkvnWeb.Gettext
-
   alias Ikvn.Game
   alias Ikvn.Game.Tour
 

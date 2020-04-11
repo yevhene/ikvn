@@ -1,13 +1,10 @@
 defmodule Ikvn.Account do
   import Ecto.Query, warn: false
   import IkvnWeb.Gettext
-
-  require Logger
-
-  alias Ikvn.Account.Link
-  alias Ikvn.Account.User
+  alias Ikvn.Account.{Link, User}
   alias Ikvn.Repo
   alias Ikvn.Utils.MapUtils
+  require Logger
 
   def find_user(nickname), do: Repo.get_by(User, nickname: nickname)
 

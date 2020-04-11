@@ -2,11 +2,8 @@ defmodule Ikvn.Game.Tournament do
   use Ecto.Schema
   import Ecto.Changeset
   import Ikvn.Utils.Validation
-
   alias Ikvn.Account.User
-  alias Ikvn.Game.Participation
-  alias Ikvn.Game.Tour
-  alias Ikvn.Game.Tournament
+  alias Ikvn.Game.{Participation, Tour, Tournament}
 
   schema "tournaments" do
     field :name, :string

@@ -1,6 +1,5 @@
 defmodule IkvnWeb.Player.ParticipationController do
   use IkvnWeb, :controller
-
   alias Ikvn.Game
 
   def create(conn, _params) do

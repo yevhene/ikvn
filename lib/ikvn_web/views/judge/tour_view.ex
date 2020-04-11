@@ -1,10 +1,6 @@
 defmodule IkvnWeb.Judge.TourView do
   use IkvnWeb, :view
-
-  import IkvnWeb.MarkdownHelpers
-  import IkvnWeb.DateTimeHelpers
-  import IkvnWeb.StatusHelpers
-
+  import IkvnWeb.Helpers.{Markdown, DateTime, Status}
   alias Ikvn.Game
   alias Ikvn.Game.Tour
 

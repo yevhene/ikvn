@@ -1,11 +1,8 @@
 defmodule IkvnWeb.AuthController do
   use IkvnWeb, :controller
-
-  require Logger
-
   import IkvnWeb.Guardian.Plug, only: [sign_in: 2]
-
   alias Ikvn.Account
+  require Logger
 
   def callback(%{assigns: %{ueberauth_failure: failure}} = conn, params) do
     Logger.error inspect(failure)

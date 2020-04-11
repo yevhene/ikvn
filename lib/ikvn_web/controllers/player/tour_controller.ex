@@ -1,6 +1,5 @@
 defmodule IkvnWeb.Player.TourController do
   use IkvnWeb, :controller
-
   alias Ikvn.Game
 
   def index(conn, _params) do

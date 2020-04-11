@@ -1,6 +1,5 @@
 defmodule IkvnWeb.Admin.TaskController do
   use IkvnWeb, :controller
-
   alias Ikvn.Game
   alias Ikvn.Game.Task
 

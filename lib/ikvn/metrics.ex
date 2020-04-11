@@ -1,11 +1,6 @@
 defmodule Ikvn.Metrics do
   import Ecto.Query, warn: false
-
-  alias Ikvn.Game.Participation
-  alias Ikvn.Game.Solution
-  alias Ikvn.Game.Task
-  alias Ikvn.Game.Tour
-  alias Ikvn.Game.Tournament
+  alias Ikvn.Game.{Participation, Solution, Task, Tour, Tournament}
   alias Ikvn.Metrics.Score
   alias Ikvn.Repo
 

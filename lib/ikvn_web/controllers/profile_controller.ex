@@ -1,6 +1,5 @@
 defmodule IkvnWeb.ProfileController do
   use IkvnWeb, :controller
-
   alias Ikvn.Account
 
   def show(conn, _params) do

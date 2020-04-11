@@ -1,9 +1,7 @@
 defmodule IkvnWeb.Admin.StaffController do
   use IkvnWeb, :controller
-
-  import Ikvn.Utils.Validation
-
   alias Ikvn.Game
+  alias IkvnWeb.Helpers
 
   plug :load_resource when action in [:delete]
 
@@ -23,7 +21,7 @@ defmodule IkvnWeb.Admin.StaffController do
         conn
         |> put_flash(:error, gettext(
           "User can't be added to staff. Reason: %{reason}",
-          reason: fetch_errors(changeset)
+          reason: Helpers.Error.fetch_errors(changeset)
         ))
       {:error, error} ->
         conn

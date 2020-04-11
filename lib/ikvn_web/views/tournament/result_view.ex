@@ -3,31 +3,39 @@ defmodule IkvnWeb.Tournament.ResultView do
 
   def render_results_table_head(tours) do
     [
-      content_tag(:tr, [
-        content_tag(:th, ""),
-        content_tag(:th, "")
-      ] ++ (
-        Enum.map(tours, fn tour ->
-          content_tag(:th, tour.title, colspan: Enum.count(tour.tasks) + 1)
-        end)
-      ) ++ [
-        content_tag(:th, raw("&Sigma;"), class: "table-danger", rowspan: 2)
-      ]),
-      content_tag(:tr, [
-        content_tag(:th, "#"),
-        content_tag(:th, gettext "Nickname")
-      ] ++ (
-        tours
-        |> Enum.map(&(Enum.with_index(&1.tasks, 1)))
-        |> Enum.flat_map(fn tasks ->
-          Enum.map(tasks, fn {_ , index} ->
-            content_tag(:th, index)
-          end) ++ [
-            content_tag(:th, raw("&Sigma;"), class: "table-warning")
-          ]
-        end)
-      ))
+      table_head_top_row(tours),
+      table_head_bottom_row(tours)
     ]
+  end
+
+  defp table_head_top_row(tours) do
+    content_tag(:tr, [
+      content_tag(:th, ""),
+      content_tag(:th, "")
+    ] ++ (
+      Enum.map(tours, fn tour ->
+        content_tag(:th, tour.title, colspan: Enum.count(tour.tasks) + 1)
+      end)
+    ) ++ [
+      content_tag(:th, raw("&Sigma;"), class: "table-danger", rowspan: 2)
+    ])
+  end
+
+  defp table_head_bottom_row(tours) do
+    content_tag(:tr, [
+      content_tag(:th, "#"),
+      content_tag(:th, gettext "Nickname")
+    ] ++ (
+      tours
+      |> Enum.map(&(Enum.with_index(&1.tasks, 1)))
+      |> Enum.flat_map(fn tasks ->
+        Enum.map(tasks, fn {_ , index} ->
+          content_tag(:th, index)
+        end) ++ [
+          content_tag(:th, raw("&Sigma;"), class: "table-warning")
+        ]
+      end)
+    ))
   end
 
   def render_results_table_row(result) do
@@ -47,5 +55,5 @@ defmodule IkvnWeb.Tournament.ResultView do
     ])
   end
 
-  def float_to_string(float), do: :erlang.float_to_binary(float, [decimals: 1])
+  defp float_to_string(float), do: :erlang.float_to_binary(float, [decimals: 1])
 end

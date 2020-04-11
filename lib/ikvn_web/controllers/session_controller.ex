@@ -1,6 +1,5 @@
 defmodule IkvnWeb.SessionController do
   use IkvnWeb, :controller
-
   import IkvnWeb.Guardian.Plug, only: [sign_out: 1]
 
   def delete(conn, _params) do

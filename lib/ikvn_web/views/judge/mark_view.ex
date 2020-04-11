@@ -1,8 +1,6 @@
 defmodule IkvnWeb.Judge.MarkView do
   use IkvnWeb, :view
-
-  import IkvnWeb.FormHelpers
-
+  import IkvnWeb.Helpers.Form
   alias Ikvn.Game
   alias Ikvn.Game.Mark
 

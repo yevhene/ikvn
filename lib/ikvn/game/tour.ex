@@ -1,10 +1,7 @@
 defmodule Ikvn.Game.Tour do
   use Ecto.Schema
   import Ecto.Changeset
-
-  alias Ikvn.Game.Task
-  alias Ikvn.Game.Tour
-  alias Ikvn.Game.Tournament
+  alias Ikvn.Game.{Task, Tour, Tournament}
 
   schema "tours" do
     field :title, :string

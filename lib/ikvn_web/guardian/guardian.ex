@@ -1,6 +1,5 @@
 defmodule IkvnWeb.Guardian do
   use Guardian, otp_app: :ikvn
-
   alias Ikvn.Account.User
   alias Ikvn.Repo
 

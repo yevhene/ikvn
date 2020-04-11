@@ -1,6 +1,5 @@
 defmodule IkvnWeb.Admin.TourController do
   use IkvnWeb, :controller
-
   alias Ikvn.Game
   alias Ikvn.Game.Tour
 

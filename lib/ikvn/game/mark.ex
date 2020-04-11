@@ -1,10 +1,7 @@
 defmodule Ikvn.Game.Mark do
   use Ecto.Schema
   import Ecto.Changeset
-
-  alias Ikvn.Game.Mark
-  alias Ikvn.Game.Participation
-  alias Ikvn.Game.Solution
+  alias Ikvn.Game.{Mark, Participation, Solution}
 
   schema "marks" do
     field :value, :integer

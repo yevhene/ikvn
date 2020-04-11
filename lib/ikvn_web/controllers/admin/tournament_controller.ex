@@ -1,6 +1,5 @@
 defmodule IkvnWeb.Admin.TournamentController do
   use IkvnWeb, :controller
-
   alias Ikvn.Game
   alias Ikvn.Game.Tournament
 

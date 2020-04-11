@@ -1,11 +1,6 @@
 defmodule Ikvn.Metrics.Score do
   use Ecto.Schema
-
-  alias Ikvn.Game.Participation
-  alias Ikvn.Game.Solution
-  alias Ikvn.Game.Task
-  alias Ikvn.Game.Tour
-  alias Ikvn.Game.Tournament
+  alias Ikvn.Game.{Participation, Solution, Task, Tour, Tournament}
 
   @primary_key false
   schema "scores" do

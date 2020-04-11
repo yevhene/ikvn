@@ -1,6 +1,5 @@
-defmodule IkvnWeb.NavigationHelpers do
-  import Phoenix.HTML.Link
-  import Phoenix.HTML.Tag
+defmodule IkvnWeb.Helpers.Navigation do
+  import Phoenix.HTML.{Link, Tag}
   import IkvnWeb.Gettext
 
   def nav_item(conn, text, path, opts \\ []) do

@@ -3,7 +3,6 @@ defmodule IkvnWeb.Guardian.ErrorHandler do
   import Phoenix.Controller, only: [put_flash: 3, redirect: 2]
   import Plug.Conn, only: [halt: 1, send_resp: 3]
   import IkvnWeb.Guardian.Plug, only: [sign_out: 1]
-
   require Logger
 
   def auth_error(conn, details, _opts) do

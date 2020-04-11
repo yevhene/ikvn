@@ -2,9 +2,7 @@ defmodule Ikvn.Account.User do
   use Ecto.Schema
   import Ecto.Changeset
   import Ikvn.Utils.Validation
-
-  alias Ikvn.Account.Link
-  alias Ikvn.Account.User
+  alias Ikvn.Account.{Link, User}
   alias Ikvn.Game.Participation
 
   schema "users" do
@@ -29,6 +27,7 @@ defmodule Ikvn.Account.User do
     |> cast(attrs, [:nickname, :email, :name])
     |> trim([:nickname, :email])
     |> validate_required([:nickname, :email])
+    |> validate_format(:email, ~r/@/)
     |> forbid_change(:nickname)
     |> unique_constraint(:nickname)
   end

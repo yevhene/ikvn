@@ -1,6 +1,5 @@
 defmodule IkvnWeb.Tournament.ResultController do
   use IkvnWeb, :controller
-
   alias Ikvn.Metrics
 
   def show(conn, _params) do

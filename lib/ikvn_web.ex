@@ -42,7 +42,7 @@ defmodule IkvnWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import IkvnWeb.ErrorHelpers
+      import IkvnWeb.Helpers.Error
       import IkvnWeb.Gettext
       import IkvnWeb.UserTime
       alias IkvnWeb.Router.Helpers, as: Routes

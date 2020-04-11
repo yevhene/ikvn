@@ -1,4 +1,4 @@
-defmodule IkvnWeb.RenderHelpers do
+defmodule IkvnWeb.Helpers.Render do
   import Phoenix.View, only: [render: 3]
 
   def render_many_with_index(collection, view, template, assigns \\ %{}) do

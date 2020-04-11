@@ -1,6 +1,6 @@
-defmodule IkvnWeb.DateTimeHelpers do
-  alias Phoenix.HTML.Form
+defmodule IkvnWeb.Helpers.DateTime do
   import IkvnWeb.UserTime
+  alias Phoenix.HTML.Form
 
   def datetime(%DateTime{} = dt, timezone) do
     dt
