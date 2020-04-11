@@ -23,4 +23,5 @@
   <%= render_many(judged(@solutions), IkvnWeb.Judge.SolutionView, "_solution.html", assigns) %>
 </div>
 
+<hr />
 <span><%= link gettext("Back"), to: Routes.judge_tournament_tour_path(@conn, :show, @tournament, @tour) %></span>

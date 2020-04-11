@@ -6,4 +6,4 @@
 <div><%= markdown @tournament.description %></div>
 
 <hr />
-<span><%= link gettext("Back"), to: Routes.tournament_path(@conn, :index) %></span>
+<span><%= link gettext("Back"), to: Routes.tournament_path(@conn, :show, @tournament) %></span>

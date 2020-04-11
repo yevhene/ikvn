@@ -14,5 +14,4 @@
 </div>
 
 <hr />
-
 <span><%= link gettext("Back"), to: Routes.judge_tournament_tour_path(@conn, :index, @tournament) %></span>

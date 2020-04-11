@@ -5,3 +5,6 @@
 <hr />
 
 <%= render "_actions.html", assigns %>
+
+<hr />
+<span><%= link gettext("Back"), to: "/" %></span>
