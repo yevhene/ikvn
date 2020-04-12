@@ -46,10 +46,13 @@ defmodule Ikvn.Metrics do
       tasks = result_tasks(participation, tour.tasks)
       %{
         tasks: tasks,
-        total: tasks |> Enum.sum |> Float.round(1)
+        total: tasks |> Enum.sum |> to_float |> Float.round(1)
       }
     end)
   end
+
+  defp to_float(int) when is_integer(int), do: int / 1
+  defp to_float(any), do: any
 
   defp result_tasks(%Participation{} = participation, tasks) do
     tasks

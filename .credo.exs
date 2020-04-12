@@ -124,11 +124,13 @@
         {Credo.Check.Readability.TrailingWhiteSpace, []},
         {Credo.Check.Readability.UnnecessaryAliasExpansion, []},
         {Credo.Check.Readability.VariableNames, []},
+        {Credo.Check.Readability.WithCustomTaggedTuple, []},
 
         #
         ## Refactoring Opportunities
         #
         {Credo.Check.Refactor.ABCSize, []},
+        {Credo.Check.Refactor.AppendSingleItem, []},
         {Credo.Check.Refactor.CondStatements, []},
         {Credo.Check.Refactor.CyclomaticComplexity, []},
         {Credo.Check.Refactor.DoubleBooleanNegation, []},
@@ -185,8 +187,6 @@
         {Credo.Check.Readability.MultiAlias, false},
         {Credo.Check.Readability.SinglePipe, false},
         {Credo.Check.Readability.Specs, false},
-        {Credo.Check.Readability.WithCustomTaggedTuple, false},
-        {Credo.Check.Refactor.AppendSingleItem, false},
         {Credo.Check.Refactor.ModuleDependencies, false}
         #
         # Custom checks can be created using `mix credo.gen.check`.
