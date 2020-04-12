@@ -46,7 +46,7 @@ defmodule Ikvn.Metrics do
       tasks = result_tasks(participation, tour.tasks)
       %{
         tasks: tasks,
-        total: Enum.sum(tasks) |> Float.round(1)
+        total: tasks |> Enum.sum |> Float.round(1)
       }
     end)
   end

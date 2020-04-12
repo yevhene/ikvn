@@ -1,12 +1,8 @@
 defmodule IkvnWeb.Judge.TaskView do
   use IkvnWeb, :view
-  import IkvnWeb.Helpers.Markdown
+  import IkvnWeb.Helpers.{Markdown, Title}
   alias Ikvn.Game
   alias Ikvn.Game.Task
-
-  def title(%Task{title: title}) do
-    title || gettext("Task")
-  end
 
   def not_judged_badge(%Task{} = task) do
     duty = Enum.at(task.duties, 0)

@@ -18,7 +18,7 @@ defmodule Ikvn.Game do
   end
 
   def list_public_tournaments(%User{id: user_id}) do
-    list_public_tournaments(nil)
+    list_public_tournaments()
     |> Repo.preload([participations:
       from(p in Participation, where: p.user_id == ^user_id)
     ])

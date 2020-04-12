@@ -8,7 +8,8 @@ defmodule Ikvn.Judge do
   def list_tasks(
     %Tour{} = tour, %Participation{role: role} = participation
   ) when role == :admin or role == :judge do
-    Game.list_tasks(tour)
+    tour
+    |> Game.list_tasks
     |> Repo.preload([duties:
       from(d in Duty, where: d.participation_id == ^participation.id)
     ])

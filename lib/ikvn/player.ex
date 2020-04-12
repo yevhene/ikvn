@@ -7,7 +7,8 @@ defmodule Ikvn.Player do
   def list_tasks(%Tour{} = tour, %Participation{
     id: participation_id, role: :player
   }) do
-    Game.list_tasks(tour)
+    tour
+    |> Game.list_tasks
     |> Repo.preload([solutions:
       from(s in Solution,
         where: s.participation_id == ^participation_id,

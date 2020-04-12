@@ -101,7 +101,12 @@
         {Credo.Check.Readability.FunctionNames, []},
         {Credo.Check.Readability.LargeNumbers, []},
         {Credo.Check.Readability.MaxLineLength, [
-          priority: :low, max_length: 80
+          priority: :high,
+          max_length: 80,
+          ignore_definitions: false,
+          ignore_heredocs: false,
+          ignore_strings: false,
+          ignore_urls: false
         ]},
         {Credo.Check.Readability.ModuleAttributeNames, []},
         {Credo.Check.Readability.ModuleDoc, false},
@@ -135,6 +140,7 @@
         {Credo.Check.Refactor.NegatedConditionsWithElse, []},
         {Credo.Check.Refactor.NegatedIsNil, []},
         {Credo.Check.Refactor.Nesting, []},
+        {Credo.Check.Refactor.PipeChainStart, []},
         {Credo.Check.Refactor.UnlessWithElse, []},
         {Credo.Check.Refactor.WithClauses, []},
 
@@ -181,8 +187,7 @@
         {Credo.Check.Readability.Specs, false},
         {Credo.Check.Readability.WithCustomTaggedTuple, false},
         {Credo.Check.Refactor.AppendSingleItem, false},
-        {Credo.Check.Refactor.ModuleDependencies, false},
-        {Credo.Check.Refactor.PipeChainStart, false}
+        {Credo.Check.Refactor.ModuleDependencies, false}
         #
         # Custom checks can be created using `mix credo.gen.check`.
         #

@@ -67,7 +67,8 @@ defmodule Ikvn.Admin do
   end
 
   def list_players(%Tournament{} = tournament) do
-    list_participations(tournament, [:player])
+    tournament
+    |> list_participations([:player])
     |> Repo.preload([submissions:
       from(s in Submission,
         join: t in Tour, on: s.tour_id == t.id,
@@ -77,7 +78,8 @@ defmodule Ikvn.Admin do
   end
 
   def list_staff(%Tournament{} = tournament) do
-    list_participations(tournament, [:admin, :judge])
+    tournament
+    |> list_participations([:admin, :judge])
     |> Repo.preload([duties:
       from(d in Duty,
         join: t in Tour, on: d.tour_id == t.id,

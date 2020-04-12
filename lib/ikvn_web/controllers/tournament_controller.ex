@@ -4,10 +4,11 @@ defmodule IkvnWeb.TournamentController do
   alias Ikvn.Game
 
   def index(conn, _params) do
-    {active_tournaments, finished_tournaments} = Game.list_public_tournaments(
-      Map.get(conn.assigns, :current_user)
-    )
-    |> Enum.split_with(&Game.tournament_is_active?/1)
+    {active_tournaments, finished_tournaments} =
+      conn.assigns
+        |> Map.get(:current_user)
+        |> Game.list_public_tournaments
+        |> Enum.split_with(&Game.tournament_is_active?/1)
 
     future_tournaments = Admin.list_future_tournaments(
       conn.assigns.current_user

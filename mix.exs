@@ -66,7 +66,7 @@ defmodule Ikvn.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"],
-      localize: ["gettext.extract", "gettext.merge priv/gettext"]
+      localize: ["gettext.extract --merge --no-fuzzy"]
     ]
   end
 end

@@ -14,14 +14,20 @@ defmodule IkvnWeb.Admin.PlayerController do
     case Admin.delete_participation(conn.assigns.staff) do
       {:ok, _staff} ->
         conn
-        |> put_flash(:info, gettext("User successfully removed from tournament"))
+        |> put_flash(:info, gettext(
+          "Player successfully removed from tournament"
+        ))
+        |> redirect(to: Routes.admin_tournament_player_path(
+          conn, :index, conn.assigns.tournament)
+        )
       {:error, %Ecto.Changeset{}} ->
         conn
-        |> put_flash(:error, gettext("User can't be removed from staff"))
+        |> put_flash(:error, gettext("Player can't be removed from tournament"))
+        |> redirect(to: Routes.admin_tournament_player_path(
+          conn, :index, conn.assigns.tournament)
+        )
     end
-    |> redirect(to:
-      Routes.admin_tournament_player_path(conn, :index, conn.assigns.tournament)
-    )
+
   end
 
   defp load_resource(conn, _opts) do
