@@ -6,7 +6,7 @@ defmodule IkvnWeb.Admin.TaskController do
   plug :load_resource when action in [:edit, :update, :delete]
 
   def new(conn, _params) do
-    changeset = Admin.change_task(%Task{})
+    changeset = Admin.change_task(%Task{order: 0})
     render(conn, "new.html", changeset: changeset)
   end
 

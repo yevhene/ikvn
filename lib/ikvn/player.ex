@@ -17,7 +17,7 @@ defmodule Ikvn.Player do
 
   def create_player_participation(attrs \\ %{}) do
     %Participation{}
-    |> Participation.changeset(Map.put(attrs, :role, :player))
+    |> Participation.changeset(Map.put(attrs, "role", :player))
     |> Repo.insert()
   end
 

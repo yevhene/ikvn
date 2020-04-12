@@ -3,8 +3,7 @@ defmodule Ikvn.Repo.Migrations.UpdateTournamentsFinishedAtNullTrue do
 
   def change do
     alter table(:tournaments) do
-      modify :finished_at, :utc_datetime, null: true,
-        from: [:utc_datetime, null: false]
+      modify :finished_at, :utc_datetime, null: true
     end
   end
 end

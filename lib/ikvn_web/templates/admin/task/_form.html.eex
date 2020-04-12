@@ -18,6 +18,12 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :hint, gettext("Hint"), class: "control-label" %>
+    <%= textarea f, :hint, class: "form-control markdown-editor" %>
+    <%= error_tag f, :hint %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :order, gettext("Order"), class: "control-label" %>
     <%= number_input f, :order, class: "form-control" %>
     <%= error_tag f, :order %>

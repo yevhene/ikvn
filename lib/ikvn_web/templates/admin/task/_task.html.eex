@@ -5,8 +5,17 @@
       <%= render "_actions.html", assigns %>
     </h5>
   </div>
+
   <div class="card-body">
     <%= markdown @task.description %>
   </div>
+
+  <%= if @task.hint != nil do %>
+    <hr />
+
+    <div class="card-body">
+      <%= markdown @task.hint %>
+    </div>
+  <% end %>
 </div>
 <br />
