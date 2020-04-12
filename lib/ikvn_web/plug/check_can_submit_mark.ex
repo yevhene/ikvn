@@ -30,7 +30,7 @@ defmodule IkvnWeb.Plug.CheckCanSubmitMark do
         |> halt()
       _ ->
         conn
-        |> send_resp(403, "")
+        |> send_resp(:forbidden, "")
         |> halt()
     end
   end

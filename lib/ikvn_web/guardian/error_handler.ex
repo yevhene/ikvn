@@ -20,7 +20,7 @@ defmodule IkvnWeb.Guardian.ErrorHandler do
       _ ->
         conn
         |> sign_out
-        |> send_resp(403, "")
+        |> send_resp(:forbidden, "")
         |> halt()
     end
   end

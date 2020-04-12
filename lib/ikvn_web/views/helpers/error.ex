@@ -6,6 +6,7 @@ defmodule IkvnWeb.Helpers.Error do
   use Phoenix.HTML
   import Phoenix.Controller
   import Plug.Conn
+  import Plug.Conn.Status
 
   @doc """
   Generates tag for inlined form input errors.
@@ -62,7 +63,7 @@ defmodule IkvnWeb.Helpers.Error do
         conn
         |> put_status(status)
         |> put_view(IkvnWeb.ErrorView)
-        |> render("404.html")
+        |> render("#{code(status)}.html")
       _ ->
         conn
         |> send_resp(status, "")
