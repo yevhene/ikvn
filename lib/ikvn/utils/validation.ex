@@ -2,7 +2,20 @@ defmodule Ikvn.Utils.Validation do
   import IkvnWeb.Gettext
   import Ecto.Changeset
 
-  def forbid_change(changeset, field) when is_atom(field) do
+  def validate_datetime_after(changeset, field, after_field) do
+    value = get_field(changeset, field)
+    after_value = get_field(changeset, after_field)
+
+    if DateTime.compare(value, after_value) == :lt do
+      add_error(changeset, field, gettext(
+        "Must be consistent with other dates"
+      ))
+    else
+      changeset
+    end
+  end
+
+  def forbid_change(changeset, field) do
     validate_change(changeset, field, fn (current_field, _value) ->
       with %{data: data} <- changeset,
            current_value <- Map.get(data, current_field) do

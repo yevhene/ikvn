@@ -1,6 +1,7 @@
 defmodule Ikvn.Game.Tour do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ikvn.Utils.Validation
   alias Ikvn.Game.{Task, Tour, Tournament}
 
   schema "tours" do
@@ -26,6 +27,8 @@ defmodule Ikvn.Game.Tour do
     |> validate_required([
       :started_at, :finished_at, :results_at
     ])
+    |> validate_datetime_after(:finished_at, :started_at)
+    |> validate_datetime_after(:results_at, :finished_at)
     |> foreign_key_constraint(:tournament_id)
   end
 end
