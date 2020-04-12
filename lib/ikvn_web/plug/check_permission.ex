@@ -1,8 +1,7 @@
 defmodule IkvnWeb.Plug.CheckPermission do
-  import IkvnWeb.Gettext
+  import IkvnWeb.{Gettext, Permissions}
   import Phoenix.Controller
   import Plug.Conn
-  import IkvnWeb.Permissions
 
   def init(opts), do: opts
 

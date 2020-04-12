@@ -1,7 +1,6 @@
 defmodule IkvnWeb.Judge.MarkController do
   use IkvnWeb, :controller
-  alias Ikvn.Game
-  alias Ikvn.Judge
+  alias Ikvn.{Game, Judge}
   alias IkvnWeb.Helpers
 
   plug :load_parent_resources

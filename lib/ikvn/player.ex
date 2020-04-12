@@ -1,8 +1,7 @@
 defmodule Ikvn.Player do
   import Ecto.Query, warn: false
-  alias Ikvn.Game
+  alias Ikvn.{Game, Repo}
   alias Ikvn.Game.{Participation, Solution, Task, Tour}
-  alias Ikvn.Repo
 
   def list_tasks(%Tour{} = tour, %Participation{
     id: participation_id, role: :player

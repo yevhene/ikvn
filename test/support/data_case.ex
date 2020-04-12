@@ -23,8 +23,7 @@ defmodule Ikvn.DataCase do
       alias Ikvn.Repo
 
       import Ecto
-      import Ecto.Changeset
-      import Ecto.Query
+      import Ecto.{Changeset, Query}
       import Ikvn.DataCase
     end
   end

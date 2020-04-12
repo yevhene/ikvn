@@ -22,8 +22,7 @@ defmodule IkvnWeb do
       use Phoenix.Controller, namespace: IkvnWeb
 
       import Plug.Conn
-      import IkvnWeb.Gettext
-      import IkvnWeb.UserTime
+      import IkvnWeb.{Gettext, UserTime}
       alias IkvnWeb.Router.Helpers, as: Routes
     end
   end
@@ -43,8 +42,7 @@ defmodule IkvnWeb do
       use Phoenix.HTML
 
       import IkvnWeb.Helpers.Error
-      import IkvnWeb.Gettext
-      import IkvnWeb.UserTime
+      import IkvnWeb.{Gettext, UserTime}
       alias IkvnWeb.Router.Helpers, as: Routes
     end
   end

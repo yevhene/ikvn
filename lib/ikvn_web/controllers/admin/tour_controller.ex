@@ -1,7 +1,6 @@
 defmodule IkvnWeb.Admin.TourController do
   use IkvnWeb, :controller
-  alias Ikvn.Admin
-  alias Ikvn.Game
+  alias Ikvn.{Admin, Game}
   alias Ikvn.Game.Tour
 
   plug :load_resource when action in [:show, :edit, :update, :delete]

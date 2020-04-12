@@ -1,9 +1,7 @@
 defmodule IkvnWeb.Admin.StaffController do
   use IkvnWeb, :controller
-  alias Ikvn.Account
+  alias Ikvn.{Account, Admin, Game}
   alias Ikvn.Account.User
-  alias Ikvn.Admin
-  alias Ikvn.Game
   alias IkvnWeb.Helpers
 
   plug :load_resource when action in [:delete]

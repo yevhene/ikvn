@@ -1,7 +1,6 @@
 defmodule IkvnWeb.Judge.TaskController do
   use IkvnWeb, :controller
-  alias Ikvn.Game
-  alias Ikvn.Judge
+  alias Ikvn.{Game, Judge}
 
   plug :load_resource
 

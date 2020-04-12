@@ -1,7 +1,6 @@
 defmodule IkvnWeb.Helpers.Title do
   import IkvnWeb.Gettext
-  alias Ikvn.Game.Task
-  alias Ikvn.Game.Tour
+  alias Ikvn.Game.{Task, Tour}
 
   def title(%Tour{title: title}) do
     title || gettext("Tour")

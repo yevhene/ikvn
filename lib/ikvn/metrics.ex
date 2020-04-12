@@ -51,9 +51,6 @@ defmodule Ikvn.Metrics do
     end)
   end
 
-  defp to_float(int) when is_integer(int), do: int / 1
-  defp to_float(any), do: any
-
   defp result_tasks(%Participation{} = participation, tasks) do
     tasks
     |> Enum.map(fn task ->
@@ -63,10 +60,13 @@ defmodule Ikvn.Metrics do
       if score == nil do
         0.0
       else
-        score.value
+        to_float(score.value)
       end
     end)
   end
+
+  defp to_float(int) when is_integer(int), do: int / 1
+  defp to_float(any), do: any
 
   defp add_result_place(results) do
     results

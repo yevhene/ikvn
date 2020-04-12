@@ -1,8 +1,7 @@
 defmodule IkvnWeb.Player.SolutionController do
   use IkvnWeb, :controller
-  alias Ikvn.Game
+  alias Ikvn.{Game, Player}
   alias Ikvn.Game.Solution
-  alias Ikvn.Player
 
   plug :load_parent_resource
   plug :load_resource when action in [:edit, :update]

@@ -1,9 +1,8 @@
 defmodule Ikvn.Judge do
   import Ecto.Query, warn: false
-  alias Ikvn.Game
+  alias Ikvn.{Game, Repo}
   alias Ikvn.Game.{Mark, Participation, Solution, Task, Tour}
   alias Ikvn.Metrics.Duty
-  alias Ikvn.Repo
 
   def list_tasks(
     %Tour{} = tour, %Participation{role: role} = participation

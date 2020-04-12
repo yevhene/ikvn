@@ -1,7 +1,6 @@
 defmodule IkvnWeb.Player.TourController do
   use IkvnWeb, :controller
-  alias Ikvn.Game
-  alias Ikvn.Player
+  alias Ikvn.{Game, Player}
 
   def index(conn, _params) do
     tours = Game.list_tours(conn.assigns.tournament)

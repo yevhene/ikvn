@@ -3,10 +3,9 @@ defmodule Ikvn.Admin do
   import Ecto.Changeset
 
   alias Ikvn.Account.User
-  alias Ikvn.Game
+  alias Ikvn.{Game, Repo}
   alias Ikvn.Game.{Participation, Task, Tour, Tournament}
   alias Ikvn.Metrics.{Duty, Submission}
-  alias Ikvn.Repo
 
   def list_future_tournaments(nil), do: []
 

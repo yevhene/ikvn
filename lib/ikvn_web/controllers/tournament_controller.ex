@@ -1,7 +1,6 @@
 defmodule IkvnWeb.TournamentController do
   use IkvnWeb, :controller
-  alias Ikvn.Admin
-  alias Ikvn.Game
+  alias Ikvn.{Admin, Game}
 
   def index(conn, _params) do
     {active_tournaments, finished_tournaments} =

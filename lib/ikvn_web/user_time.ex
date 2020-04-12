@@ -1,8 +1,7 @@
 defmodule IkvnWeb.UserTime do
   def from_utc(datetime, timezone)
   def from_utc(%DateTime{} = datetime, timezone) do
-    datetime
-    |> DateTime.shift_zone!(timezone)
+    DateTime.shift_zone!(datetime, timezone)
   end
   def from_utc(nil, _), do: nil
 
