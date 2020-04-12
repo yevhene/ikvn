@@ -1,6 +1,7 @@
 defmodule IkvnWeb.Judge.TourController do
   use IkvnWeb, :controller
   alias Ikvn.Game
+  alias Ikvn.Judge
 
   def index(conn, _params) do
     tours = Game.list_tours(conn.assigns.tournament)
@@ -8,7 +9,7 @@ defmodule IkvnWeb.Judge.TourController do
   end
 
   def show(conn, _params) do
-    tasks = Game.list_tasks(conn.assigns.tour, conn.assigns.participation)
+    tasks = Judge.list_tasks(conn.assigns.tour, conn.assigns.participation)
     render(conn, "show.html", tasks: tasks)
   end
 end

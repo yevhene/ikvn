@@ -1,6 +1,7 @@
 defmodule IkvnWeb.Player.ParticipationController do
   use IkvnWeb, :controller
   alias Ikvn.Game
+  alias Ikvn.Player
 
   def create(conn, _params) do
     tournament = conn.assigns.tournament
@@ -9,7 +10,7 @@ defmodule IkvnWeb.Player.ParticipationController do
       |> put_flash(:error, gettext "Tournament is finished")
       |> redirect(to: Routes.tournament_path(conn, :index))
     else
-      case Game.create_participation(participation_params(conn)) do
+      case Player.create_player_participation(participation_params(conn)) do
         {:ok, _participation} ->
           conn
           |> put_flash(:info, gettext "You participate now")

@@ -1,5 +1,6 @@
 defmodule IkvnWeb.Admin.TourController do
   use IkvnWeb, :controller
+  alias Ikvn.Admin
   alias Ikvn.Game
   alias Ikvn.Game.Tour
 
@@ -11,7 +12,7 @@ defmodule IkvnWeb.Admin.TourController do
   end
 
   def new(conn, _params) do
-    changeset = Game.change_tour(%Tour{
+    changeset = Admin.change_tour(%Tour{
       started_at: DateTime.utc_now,
       finished_at: DateTime.utc_now,
       results_at: DateTime.utc_now
@@ -22,7 +23,7 @@ defmodule IkvnWeb.Admin.TourController do
   def create(conn, %{"tour" => params}) do
     tournament = conn.assigns.tournament
 
-    case Game.create_tour(tour_params(conn, params)) do
+    case Admin.create_tour(tour_params(conn, params)) do
       {:ok, _tour} ->
         conn
         |> put_flash(:info, gettext "Tour created successfully")
@@ -40,7 +41,7 @@ defmodule IkvnWeb.Admin.TourController do
   end
 
   def edit(conn, _params) do
-    changeset = Game.change_tour(conn.assigns.tour)
+    changeset = Admin.change_tour(conn.assigns.tour)
     render(conn, "edit.html", changeset: changeset)
   end
 
@@ -48,7 +49,7 @@ defmodule IkvnWeb.Admin.TourController do
     tournament = conn.assigns.tournament
     tour = conn.assigns.tour
 
-    case Game.update_tour(tour, tour_params(conn, params)) do
+    case Admin.update_tour(tour, tour_params(conn, params)) do
       {:ok, _tour} ->
         conn
         |> put_flash(:info, gettext "Tour updated successfully")
@@ -64,7 +65,7 @@ defmodule IkvnWeb.Admin.TourController do
     tournament = conn.assigns.tournament
     tour = conn.assigns.tour
 
-    case Game.delete_tour(tour) do
+    case Admin.delete_tour(tour) do
       {:ok, _tour} ->
         conn
         |> put_flash(:info, gettext "Tour deleted successfully")

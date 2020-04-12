@@ -1,11 +1,7 @@
 defmodule Ikvn.Game do
   import Ecto.Query, warn: false
-  import Ecto.Changeset
-  import IkvnWeb.Gettext
-  alias Ikvn.Account
   alias Ikvn.Account.User
-  alias Ikvn.Game.{Mark, Participation, Solution, Task, Tour, Tournament}
-  alias Ikvn.Metrics.{Duty, Submission}
+  alias Ikvn.Game.{Participation, Task, Tour, Tournament}
   alias Ikvn.Repo
 
   def get_tournament(id), do: Repo.get(Tournament, id)
@@ -28,131 +24,12 @@ defmodule Ikvn.Game do
     ])
   end
 
-  def list_future_tournaments(nil), do: []
-
-  def list_future_tournaments(%User{} = user) do
-    now = DateTime.utc_now
-
-    Tournament
-    |> where([t], t.started_at > ^now)
-    |> join(:inner, [t], p in Participation, on:
-      t.id == p.tournament_id and
-      p.user_id == ^user.id and
-      p.role in ["admin", "judge"]
-    )
-    |> order_by(:started_at)
-    |> Repo.all
-    |> Repo.preload(:creator)
-  end
-
-  def change_tournament(%Tournament{} = tournament) do
-    Tournament.changeset(tournament, %{})
-  end
-
-  def create_tournament(attrs \\ %{}) do
-    %Tournament{}
-    |> Tournament.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  def update_tournament(%Tournament{} = tournament, attrs) do
-    tournament
-    |> Tournament.changeset(attrs)
-    |> Repo.update()
-  end
-
-  def delete_tournament(%Tournament{} = tournament) do
-    tournament
-    |> change
-    |> no_assoc_constraint(:tours)
-    |> Repo.delete()
-  end
-
-  def finish_tournament(%Tournament{} = tournament) do
-    now = DateTime.utc_now
-
-    tournament
-    |> Tournament.changeset(%{finished_at: now})
-    |> Repo.update()
-  end
-
-  def create_creator_participation(%Tournament{
-    id: id, creator_id: creator_id
-  }) do
-    create_participation(%{
-      tournament_id: id,
-      user_id: creator_id,
-      role: :admin
-    })
-  end
-
-  def list_players(%Tournament{} = tournament) do
-    list_participations(tournament, [:player])
-    |> Repo.preload([submissions:
-      from(s in Submission,
-        join: t in Tour, on: s.tour_id == t.id,
-        order_by: t.started_at
-      )
-    ])
-  end
-
-  def list_staff(%Tournament{} = tournament) do
-    list_participations(tournament, [:admin, :judge])
-    |> Repo.preload([duties:
-      from(d in Duty,
-        join: t in Tour, on: d.tour_id == t.id,
-        group_by: [d.participation_id, t.id],
-        select: %{
-          participation_id: d.participation_id,
-          tour_id: t.id,
-          all: sum(d.all),
-          done: sum(d.done),
-          left: sum(d.left)
-        },
-        order_by: t.started_at
-      )
-    ])
-  end
-
-  def list_participations(%Tournament{id: id}, roles) do
-    Participation
-    |> where([p],
-      p.tournament_id == ^id and p.role in ^roles
-    )
-    |> order_by(:inserted_at)
-    |> Repo.all
-    |> Repo.preload(:user)
-  end
-
-  def create_staff(nickname, role, tournament) do
-    case Account.find_user(nickname) do
-      %User{} = user ->
-        create_participation(%{
-          tournament_id: tournament.id,
-          user_id: user.id,
-          role: role
-        })
-      _ ->
-        {:error, gettext(
-          "User \"%{nickname}\" is not exist", nickname: nickname
-        )}
-    end
-  end
-
   def get_participation!(id), do: Repo.get(Participation, id)
 
   def create_participation(attrs \\ %{}) do
     %Participation{}
     |> Participation.changeset(attrs)
     |> Repo.insert()
-  end
-
-  def delete_participation(%Participation{} = participation) do
-    participation
-    |> change
-    |> no_assoc_constraint(:solutions)
-    |> no_assoc_constraint(:marks)
-    |> Repo.delete()
   end
 
   def get_user_participation(
@@ -164,6 +41,8 @@ defmodule Ikvn.Game do
 
   def get_user_participation(_, _), do: nil
 
+  def get_solution!(id), do: Repo.get!(Solution, id)
+
   def get_tour!(id), do: Repo.get!(Tour, id)
 
   def get_tour(id), do: Repo.get(Tour, id)
@@ -173,29 +52,6 @@ defmodule Ikvn.Game do
     |> where([t], t.tournament_id == ^tournament_id)
     |> order_by(:started_at)
     |> Repo.all
-  end
-
-  def change_tour(%Tour{} = tour) do
-    Tour.changeset(tour, %{})
-  end
-
-  def create_tour(attrs \\ %{}) do
-    %Tour{}
-    |> Tour.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  def update_tour(%Tour{} = tour, attrs) do
-    tour
-    |> Tour.changeset(attrs)
-    |> Repo.update()
-  end
-
-  def delete_tour(%Tour{} = tour) do
-    tour
-    |> change
-    |> no_assoc_constraint(:tasks)
-    |> Repo.delete()
   end
 
   def tournament_is_future?(%Tournament{started_at: started_at}) do
@@ -267,110 +123,5 @@ defmodule Ikvn.Game do
     |> where([t], t.tour_id == ^tour_id)
     |> order_by([asc: :order, asc: :inserted_at])
     |> Repo.all
-  end
-
-  def list_tasks(
-    %Tour{} = tour, %Participation{role: role} = participation
-  ) when role == :admin or role == :judge do
-    list_tasks(tour)
-    |> Repo.preload([duties:
-      from(d in Duty, where: d.participation_id == ^participation.id)
-    ])
-  end
-
-  def list_tasks(%Tour{} = tour, %Participation{
-    id: participation_id, role: :player
-  }) do
-    list_tasks(tour)
-    |> Repo.preload([solutions:
-      from(s in Solution,
-        where: s.participation_id == ^participation_id,
-        preload: [:score])
-    ])
-  end
-
-  def change_task(%Task{} = task) do
-    Task.changeset(task, %{})
-  end
-
-  def create_task(attrs \\ %{}) do
-    %Task{}
-    |> Task.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  def update_task(%Task{} = task, attrs) do
-    task
-    |> Task.changeset(attrs)
-    |> Repo.update()
-  end
-
-  def delete_task(%Task{} = task) do
-    task
-    |> change
-    |> no_assoc_constraint(:solutions)
-    |> Repo.delete()
-  end
-
-  def list_solutions(
-    %Task{} = task, %Participation{role: role} = participation
-  ) when role == :admin or role == :judge do
-    Solution
-    |> where([s], s.task_id == ^task.id)
-    |> order_by(fragment("md5(inserted_at::text) ASC"))
-    |> Repo.all
-    |> Repo.preload([[participation: :user], [marks:
-      from(m in Mark, where: m.participation_id == ^participation.id)
-    ]])
-  end
-
-  def get_solution!(id), do: Repo.get!(Solution, id)
-
-  def get_solution(%Task{id: task_id}, %Participation{id: participation_id}) do
-    Solution
-    |> where([s],
-      s.task_id == ^task_id and
-      s.participation_id == ^participation_id
-    )
-    |> Repo.one
-  end
-
-  def change_solution(%Solution{} = solution) do
-    Solution.changeset(solution, %{})
-  end
-
-  def create_solution(attrs \\ %{}) do
-    %Solution{}
-    |> Solution.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  def update_solution(%Solution{} = solution, attrs) do
-    solution
-    |> Solution.changeset(attrs)
-    |> Repo.update()
-  end
-
-  def get_mark(
-    %Solution{id: solution_id}, %Participation{id: participation_id}
-  ) do
-    Mark
-    |> Repo.get_by(solution_id: solution_id, participation_id: participation_id)
-  end
-
-  def change_mark(%Mark{} = mark) do
-    Mark.changeset(mark, %{})
-  end
-
-  def create_mark(attrs \\ %{}) do
-    %Mark{}
-    |> Mark.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  def update_mark(%Mark{} = mark, attrs) do
-    mark
-    |> Mark.changeset(attrs)
-    |> Repo.update()
   end
 end

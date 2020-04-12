@@ -2,12 +2,13 @@ defmodule IkvnWeb.Player.SolutionController do
   use IkvnWeb, :controller
   alias Ikvn.Game
   alias Ikvn.Game.Solution
+  alias Ikvn.Player
 
   plug :load_parent_resource
   plug :load_resource when action in [:edit, :update]
 
   def new(conn, _params) do
-    changeset = Game.change_solution(%Solution{})
+    changeset = Player.change_solution(%Solution{})
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -15,7 +16,7 @@ defmodule IkvnWeb.Player.SolutionController do
     tournament = conn.assigns.tournament
     tour = conn.assigns.tour
 
-    case Game.create_solution(solution_params(conn, params)) do
+    case Player.create_solution(solution_params(conn, params)) do
       {:ok, _solution} ->
         conn
         |> put_flash(:info, gettext "Solution created successfully")
@@ -28,7 +29,7 @@ defmodule IkvnWeb.Player.SolutionController do
   end
 
   def edit(conn, _params) do
-    changeset = Game.change_solution(conn.assigns.solution)
+    changeset = Player.change_solution(conn.assigns.solution)
     render(conn, "edit.html", changeset: changeset)
   end
 
@@ -37,7 +38,7 @@ defmodule IkvnWeb.Player.SolutionController do
     tour = conn.assigns.tour
     solution = conn.assigns.solution
 
-    case Game.update_solution(solution, solution_params(conn, params)) do
+    case Player.update_solution(solution, solution_params(conn, params)) do
       {:ok, _solution} ->
         conn
         |> put_flash(:info, gettext "Solution updated successfully")
@@ -55,7 +56,9 @@ defmodule IkvnWeb.Player.SolutionController do
   end
 
   defp load_resource(conn, _opts) do
-    solution = Game.get_solution(conn.assigns.task, conn.assigns.participation)
+    solution = Player.get_solution(
+      conn.assigns.task, conn.assigns.participation
+    )
     assign(conn, :solution, solution)
   end
 

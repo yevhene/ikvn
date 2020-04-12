@@ -1,6 +1,7 @@
 defmodule IkvnWeb.Judge.MarkController do
   use IkvnWeb, :controller
   alias Ikvn.Game
+  alias Ikvn.Judge
   alias IkvnWeb.Helpers
 
   plug :load_parent_resources
@@ -33,9 +34,9 @@ defmodule IkvnWeb.Judge.MarkController do
   defp apply_mark(conn, params) do
     mark = conn.assigns.mark
     if mark do
-      Game.update_mark(mark, %{value: params["value"]})
+      Judge.update_mark(mark, %{value: params["value"]})
     else
-      Game.create_mark(%{
+      Judge.create_mark(%{
         participation_id: conn.assigns.participation.id,
         solution_id: conn.assigns.solution.id,
         value: params["value"]
@@ -53,7 +54,7 @@ defmodule IkvnWeb.Judge.MarkController do
   end
 
   defp load_resource(conn, _opts) do
-    mark = Game.get_mark(conn.assigns.solution, conn.assigns.participation)
+    mark = Judge.get_mark(conn.assigns.solution, conn.assigns.participation)
     assign(conn, :mark, mark)
   end
 end

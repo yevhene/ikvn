@@ -1,12 +1,13 @@
 defmodule IkvnWeb.Admin.TaskController do
   use IkvnWeb, :controller
+  alias Ikvn.Admin
   alias Ikvn.Game
   alias Ikvn.Game.Task
 
   plug :load_resource when action in [:edit, :update, :delete]
 
   def new(conn, _params) do
-    changeset = Game.change_task(%Task{})
+    changeset = Admin.change_task(%Task{})
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -14,7 +15,7 @@ defmodule IkvnWeb.Admin.TaskController do
     tournament = conn.assigns.tournament
     tour = conn.assigns.tour
 
-    case Game.create_task(task_params(conn, params)) do
+    case Admin.create_task(task_params(conn, params)) do
       {:ok, _task} ->
         conn
         |> put_flash(:info, gettext "Task created successfully")
@@ -28,7 +29,7 @@ defmodule IkvnWeb.Admin.TaskController do
 
   def edit(conn, _params) do
     task = conn.assigns.task
-    changeset = Game.change_task(task)
+    changeset = Admin.change_task(task)
     render(conn, "edit.html", task: task, changeset: changeset)
   end
 
@@ -37,7 +38,7 @@ defmodule IkvnWeb.Admin.TaskController do
     tour = conn.assigns.tour
     task = conn.assigns.task
 
-    case Game.update_task(task, task_params(conn, params)) do
+    case Admin.update_task(task, task_params(conn, params)) do
       {:ok, _task} ->
         conn
         |> put_flash(:info, gettext "Task updated successfully")
@@ -54,7 +55,7 @@ defmodule IkvnWeb.Admin.TaskController do
     tour = conn.assigns.tour
     task = conn.assigns.task
 
-    case Game.delete_task(task) do
+    case Admin.delete_task(task) do
       {:ok, _task} ->
         conn
         |> put_flash(:info, gettext "Task deleted successfully")

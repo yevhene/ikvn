@@ -1,11 +1,12 @@
 defmodule IkvnWeb.Judge.TaskController do
   use IkvnWeb, :controller
   alias Ikvn.Game
+  alias Ikvn.Judge
 
   plug :load_resource
 
   def show(conn, _params) do
-    {not_judged_solution, judged_solutions} = Game.list_solutions(
+    {not_judged_solution, judged_solutions} = Judge.list_solutions(
       conn.assigns.task, conn.assigns.participation
     )
     |> Enum.split_with(&(Enum.empty?(&1.marks)))

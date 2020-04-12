@@ -24,12 +24,12 @@ defmodule Ikvn.Game.Participation do
   def changeset(%Participation{} = participation, attrs) do
     participation
     |> cast(attrs, [:role, :tournament_id, :user_id])
-    |> validate_required([:tournament_id, :user_id])
+    |> validate_required([:role, :tournament_id, :user_id])
+    |> validate_inclusion(:role, Role.__valid_values__())
     |> unique_constraint(:tournament_id,
       name: :participations_user_id_tournament_id_index
     )
     |> foreign_key_constraint(:tournament_id)
     |> foreign_key_constraint(:user_id)
-    |> validate_inclusion(:role, Role.__valid_values__())
   end
 end

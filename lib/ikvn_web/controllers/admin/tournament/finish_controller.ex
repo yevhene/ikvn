@@ -1,11 +1,11 @@
 defmodule IkvnWeb.Admin.Tournament.FinishController do
   use IkvnWeb, :controller
-  alias Ikvn.Game
+  alias Ikvn.Admin
 
   def create(conn, _params) do
     tournament = conn.assigns.tournament
 
-    case Game.finish_tournament(tournament) do
+    case Admin.finish_tournament(tournament) do
       {:ok, _tournament} ->
         conn
         |> put_flash(:info, gettext "Tournament finished")

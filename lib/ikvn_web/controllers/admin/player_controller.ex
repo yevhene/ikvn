@@ -1,16 +1,17 @@
 defmodule IkvnWeb.Admin.PlayerController do
   use IkvnWeb, :controller
+  alias Ikvn.Admin
   alias Ikvn.Game
 
   plug :load_resource when action in [:delete]
 
   def index(conn, _params) do
-    players = Game.list_players(conn.assigns.tournament)
+    players = Admin.list_players(conn.assigns.tournament)
     render(conn, "index.html", players: players)
   end
 
   def delete(conn, _params) do
-    case Game.delete_participation(conn.assigns.staff) do
+    case Admin.delete_participation(conn.assigns.staff) do
       {:ok, _staff} ->
         conn
         |> put_flash(:info, gettext("User successfully removed from tournament"))
