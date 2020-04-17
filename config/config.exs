@@ -7,15 +7,14 @@
 # General application configuration
 use Mix.Config
 
-get_env = fn (name) ->
+get_env = fn name ->
   System.get_env(name) || raise "environment variable #{name} is missing"
 end
 
 config :ikvn,
   ecto_repos: [Ikvn.Repo]
 
-config :ikvn, Ikvn.Repo,
-  migration_timestamps: [type: :utc_datetime]
+config :ikvn, Ikvn.Repo, migration_timestamps: [type: :utc_datetime]
 
 # Configures the endpoint
 config :ikvn, IkvnWeb.Endpoint,
@@ -40,7 +39,7 @@ config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_secret: get_env.("FACEBOOK_CLIENT_SECRET")
 
 config :ikvn, IkvnWeb.Guardian,
-  issuer: "Ikvn.#{Mix.env}",
+  issuer: "Ikvn.#{Mix.env()}",
   secret_key: get_env.("GUARDIAN_SECRET_KEY")
 
 # Use Jason for JSON parsing in Phoenix

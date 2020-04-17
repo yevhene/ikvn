@@ -9,16 +9,18 @@ defmodule IkvnWeb.Tournament.ResultView do
   end
 
   defp table_head_top_row(tours) do
-    content_tag(:tr, Enum.concat([
-      [
-        content_tag(:th, ""),
-        content_tag(:th, "")
-      ],
-      tours_cells(tours),
-      [
-        content_tag(:th, raw("&Sigma;"), class: "table-danger", rowspan: 2)
-      ]
-    ]))
+    content_tag(:tr) do
+      Enum.concat([
+        [
+          content_tag(:th, ""),
+          content_tag(:th, "")
+        ],
+        tours_cells(tours),
+        [
+          content_tag(:th, raw("&Sigma;"), class: "table-danger", rowspan: 2)
+        ]
+      ])
+    end
   end
 
   defp tours_cells(tours) do
@@ -28,21 +30,23 @@ defmodule IkvnWeb.Tournament.ResultView do
   end
 
   defp table_head_bottom_row(tours) do
-    content_tag(:tr, Enum.concat([
-      [
-        content_tag(:th, "#"),
-        content_tag(:th, gettext "Nickname")
-      ],
-      tasks_cells(tours)
-    ]))
+    content_tag(:tr) do
+      Enum.concat([
+        [
+          content_tag(:th, "#"),
+          content_tag(:th, gettext("Nickname"))
+        ],
+        tasks_cells(tours)
+      ])
+    end
   end
 
   defp tasks_cells(tours) do
     tours
-    |> Enum.map(&(Enum.with_index(&1.tasks, 1)))
+    |> Enum.map(&Enum.with_index(&1.tasks, 1))
     |> Enum.flat_map(fn tasks ->
       Enum.concat([
-        Enum.map(tasks, fn {_ , index} ->
+        Enum.map(tasks, fn {_, index} ->
           content_tag(:th, index)
         end),
         [
@@ -53,16 +57,18 @@ defmodule IkvnWeb.Tournament.ResultView do
   end
 
   def render_results_table_row(result) do
-    content_tag(:tr, do: Enum.concat([
-      [
-        content_tag(:td, result.place),
-        content_tag(:td, result.nickname)
-      ],
-      result_cells(result),
-      [
-        content_tag(:th, float_to_string(result.total), class: "table-danger")
-      ]
-    ]))
+    content_tag(:tr) do
+      Enum.concat([
+        [
+          content_tag(:td, result.place),
+          content_tag(:td, result.nickname)
+        ],
+        result_cells(result),
+        [
+          content_tag(:th, float_to_string(result.total), class: "table-danger")
+        ]
+      ])
+    end
   end
 
   defp result_cells(result) do
@@ -78,5 +84,5 @@ defmodule IkvnWeb.Tournament.ResultView do
     end)
   end
 
-  defp float_to_string(float), do: :erlang.float_to_binary(float, [decimals: 1])
+  defp float_to_string(float), do: :erlang.float_to_binary(float, decimals: 1)
 end

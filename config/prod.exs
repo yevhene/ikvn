@@ -1,6 +1,6 @@
 use Mix.Config
 
-get_env = fn (name) ->
+get_env = fn name ->
   System.get_env(name) || raise "environment variable #{name} is missing"
 end
 
@@ -29,10 +29,12 @@ config :ikvn, Ikvn.Repo,
 
 config :ueberauth, Ueberauth,
   providers: [
-    facebook: {Ueberauth.Strategy.Facebook, [
-      default_scope: "email",
-      callback_url: "https://ikvn.rocks/auth/facebook/callback"
-    ]}
+    facebook:
+      {Ueberauth.Strategy.Facebook,
+       [
+         default_scope: "email",
+         callback_url: "https://ikvn.rocks/auth/facebook/callback"
+       ]}
   ]
 
 # Do not print debug messages in production

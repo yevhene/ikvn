@@ -17,16 +17,27 @@ defmodule IkvnWeb.Admin.StaffController do
     case create_staff(nickname, role, tournament) do
       {:ok, _participation} ->
         conn
-        |> put_flash(:info, gettext "User successfully added to staff")
-        |> redirect(to: Routes.admin_tournament_staff_path(
-          conn, :index, tournament
-        ))
+        |> put_flash(:info, gettext("User successfully added to staff"))
+        |> redirect(
+          to:
+            Routes.admin_tournament_staff_path(
+              conn,
+              :index,
+              tournament
+            )
+        )
+
       {:error, error} ->
         conn
         |> put_flash(:error, error)
-        |> redirect(to: Routes.admin_tournament_staff_path(
-          conn, :index, tournament
-        ))
+        |> redirect(
+          to:
+            Routes.admin_tournament_staff_path(
+              conn,
+              :index,
+              tournament
+            )
+        )
     end
   end
 
@@ -37,15 +48,26 @@ defmodule IkvnWeb.Admin.StaffController do
       {:ok, _staff} ->
         conn
         |> put_flash(:info, gettext("User successfully removed from staff"))
-        |> redirect(to: Routes.admin_tournament_staff_path(
-          conn, :index, tournament
-        ))
+        |> redirect(
+          to:
+            Routes.admin_tournament_staff_path(
+              conn,
+              :index,
+              tournament
+            )
+        )
+
       {:error, error} ->
         conn
         |> put_flash(:error, error)
-        |> redirect(to: Routes.admin_tournament_staff_path(
-          conn, :index, tournament
-        ))
+        |> redirect(
+          to:
+            Routes.admin_tournament_staff_path(
+              conn,
+              :index,
+              tournament
+            )
+        )
     end
   end
 
@@ -58,21 +80,27 @@ defmodule IkvnWeb.Admin.StaffController do
     case Account.find_user(nickname) do
       %User{} = user ->
         case Game.create_participation(%{
-          tournament_id: tournament.id,
-          user_id: user.id,
-          role: role
-        }) do
-          {:ok, _participation} = success -> success
+               tournament_id: tournament.id,
+               user_id: user.id,
+               role: role
+             }) do
+          {:ok, _participation} = success ->
+            success
+
           {:error, %Ecto.Changeset{} = changeset} ->
-            {:error, gettext(
-              "User can't be added to staff. Reason: %{reason}",
-              reason: Helpers.Error.fetch_errors(changeset)
-            )}
-          end
+            {:error,
+             gettext(
+               "User can't be added to staff. Reason: %{reason}",
+               reason: Helpers.Error.fetch_errors(changeset)
+             )}
+        end
+
       _ ->
-        {:error, gettext(
-          "User \"%{nickname}\" is not exist", nickname: nickname
-        )}
+        {:error,
+         gettext(
+           "User \"%{nickname}\" is not exist",
+           nickname: nickname
+         )}
     end
   end
 
@@ -81,7 +109,9 @@ defmodule IkvnWeb.Admin.StaffController do
       {:error, gettext("Can't remove the creator from staff")}
     else
       case Admin.delete_participation(staff) do
-        {:ok, _staff} = success -> success
+        {:ok, _staff} = success ->
+          success
+
         {:error, %Ecto.Changeset{}} ->
           {:error, gettext("User can't be removed from staff")}
       end

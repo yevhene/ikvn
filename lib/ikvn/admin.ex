@@ -10,17 +10,18 @@ defmodule Ikvn.Admin do
   def list_future_tournaments(nil), do: []
 
   def list_future_tournaments(%User{} = user) do
-    now = DateTime.utc_now
+    now = DateTime.utc_now()
 
     Tournament
     |> where([t], t.started_at > ^now)
-    |> join(:inner, [t], p in Participation, on:
-      t.id == p.tournament_id and
-      p.user_id == ^user.id and
-      p.role in ["admin", "judge"]
+    |> join(:inner, [t], p in Participation,
+      on:
+        t.id == p.tournament_id and
+          p.user_id == ^user.id and
+          p.role in ["admin", "judge"]
     )
     |> order_by(:started_at)
-    |> Repo.all
+    |> Repo.all()
     |> Repo.preload(:creator)
   end
 
@@ -48,7 +49,7 @@ defmodule Ikvn.Admin do
   end
 
   def finish_tournament(%Tournament{} = tournament) do
-    now = DateTime.utc_now
+    now = DateTime.utc_now()
 
     tournament
     |> Tournament.changeset(%{finished_at: now})
@@ -56,8 +57,9 @@ defmodule Ikvn.Admin do
   end
 
   def create_creator_participation(%Tournament{
-    id: id, creator_id: creator_id
-  }) do
+        id: id,
+        creator_id: creator_id
+      }) do
     Game.create_participation(%{
       tournament_id: id,
       user_id: creator_id,
@@ -68,40 +70,45 @@ defmodule Ikvn.Admin do
   def list_players(%Tournament{} = tournament) do
     tournament
     |> list_participations([:player])
-    |> Repo.preload([submissions:
-      from(s in Submission,
-        join: t in Tour, on: s.tour_id == t.id,
-        order_by: t.started_at
-      )
-    ])
+    |> Repo.preload(
+      submissions:
+        from(s in Submission,
+          join: t in Tour,
+          on: s.tour_id == t.id,
+          order_by: t.started_at
+        )
+    )
   end
 
   def list_staff(%Tournament{} = tournament) do
     tournament
     |> list_participations([:admin, :judge])
-    |> Repo.preload([duties:
-      from(d in Duty,
-        join: t in Tour, on: d.tour_id == t.id,
-        group_by: [d.participation_id, t.id],
-        select: %{
-          participation_id: d.participation_id,
-          tour_id: t.id,
-          all: sum(d.all),
-          done: sum(d.done),
-          left: sum(d.left)
-        },
-        order_by: t.started_at
-      )
-    ])
+    |> Repo.preload(
+      duties:
+        from(d in Duty,
+          join: t in Tour,
+          on: d.tour_id == t.id,
+          group_by: [d.participation_id, t.id],
+          select: %{
+            participation_id: d.participation_id,
+            tour_id: t.id,
+            all: sum(d.all),
+            done: sum(d.done),
+            left: sum(d.left)
+          },
+          order_by: t.started_at
+        )
+    )
   end
 
   def list_participations(%Tournament{id: id}, roles) do
     Participation
-    |> where([p],
+    |> where(
+      [p],
       p.tournament_id == ^id and p.role in ^roles
     )
     |> order_by(:inserted_at)
-    |> Repo.all
+    |> Repo.all()
     |> Repo.preload(:user)
   end
 

@@ -23,8 +23,7 @@ defmodule Ikvn.Account do
     data = auth |> MapUtils.map_from_struct()
 
     with {:ok, user, link} <- user_from_auth(auth),
-         {:ok, _link} <- update_link_data(link, data)
-    do
+         {:ok, _link} <- update_link_data(link, data) do
       {:ok, user}
     else
       _ -> {:error, gettext("Authentication failed")}
@@ -50,28 +49,38 @@ defmodule Ikvn.Account do
   end
 
   defp user_from_auth(%{
-    uid: uid, provider: provider, extra: %{raw_info: %{user: user}}
-  }) do
-    case  Link |> Repo.get_by(uid: uid) |> Repo.preload(:user) do
-      %Link{} = link -> {:ok, link.user, link}
+         uid: uid,
+         provider: provider,
+         extra: %{raw_info: %{user: user}}
+       }) do
+    case Link |> Repo.get_by(uid: uid) |> Repo.preload(:user) do
+      %Link{} = link ->
+        {:ok, link.user, link}
+
       _ ->
         try do
-          {:ok, result} = Repo.transaction(fn ->
-            {:ok, user} = create_user(%{
-              email: user["email"],
-              name: user["name"]
-            })
-            {:ok, link} = create_link(%{
-              uid: uid,
-              provider: to_string(provider),
-              user_id: user.id
-             })
-            {:ok, user, link}
-          end)
+          {:ok, result} =
+            Repo.transaction(fn ->
+              {:ok, user} =
+                create_user(%{
+                  email: user["email"],
+                  name: user["name"]
+                })
+
+              {:ok, link} =
+                create_link(%{
+                  uid: uid,
+                  provider: to_string(provider),
+                  user_id: user.id
+                })
+
+              {:ok, user, link}
+            end)
+
           result
         rescue
           e ->
-            Logger.error inspect(e)
+            Logger.error(inspect(e))
             {:error, e}
         end
     end

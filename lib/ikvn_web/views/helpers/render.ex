@@ -4,12 +4,15 @@ defmodule IkvnWeb.Helpers.Render do
   def render_many_with_index(collection, view, template, assigns \\ %{}) do
     assigns = to_map(assigns)
     resource_name = get_resource_name(assigns, view)
+
     collection
     |> Enum.with_index()
     |> Enum.map(fn {resource, index} ->
-      current_assigns = assigns
-      |> Map.put(resource_name, resource)
-      |> Map.put_new(:index, index)
+      current_assigns =
+        assigns
+        |> Map.put(resource_name, resource)
+        |> Map.put_new(:index, index)
+
       render(view, template, current_assigns)
     end)
   end

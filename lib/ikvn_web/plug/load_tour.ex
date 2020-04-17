@@ -7,6 +7,7 @@ defmodule IkvnWeb.Plug.LoadTour do
 
   def call(conn, _opts) do
     tour = Game.get_tour(tour_id(conn))
+
     if Game.tour_is_available?(tour, conn.assigns.current_role) do
       conn
       |> assign(:tour, tour)

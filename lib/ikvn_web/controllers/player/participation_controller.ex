@@ -4,21 +4,23 @@ defmodule IkvnWeb.Player.ParticipationController do
 
   def create(conn, _params) do
     tournament = conn.assigns.tournament
+
     if Game.tournament_is_finished?(tournament) do
       conn
-      |> put_flash(:error, gettext "Tournament is finished")
+      |> put_flash(:error, gettext("Tournament is finished"))
       |> redirect(to: Routes.tournament_path(conn, :index))
     else
       case Player.create_player_participation(participation_params(conn)) do
         {:ok, _participation} ->
           conn
-          |> put_flash(:info, gettext "You participate now")
-          |> redirect(to:
-            Routes.player_tournament_tour_path(conn, :index, tournament)
+          |> put_flash(:info, gettext("You participate now"))
+          |> redirect(
+            to: Routes.player_tournament_tour_path(conn, :index, tournament)
           )
+
         {:error, _} ->
           conn
-          |> put_flash(:error, gettext "Participation failed. Contact Admin")
+          |> put_flash(:error, gettext("Participation failed. Contact Admin"))
           |> redirect(to: Routes.tournament_path(conn, :index))
       end
     end

@@ -8,8 +8,7 @@ defmodule Ikvn.Repo.Migrations.CreateTours do
       add :started_at, :utc_datetime, null: false
       add :finished_at, :utc_datetime, null: false
       add :results_at, :utc_datetime, null: false
-      add :tournament_id, references(:tournaments, on_delete: :delete_all),
-        null: false
+      add :tournament_id, references(:tournaments, on_delete: :delete_all), null: false
 
       timestamps(type: :utc_datetime)
     end

@@ -5,10 +5,10 @@ defmodule IkvnWeb.AuthController do
   require Logger
 
   def callback(%{assigns: %{ueberauth_failure: failure}} = conn, params) do
-    Logger.error inspect(failure)
+    Logger.error(inspect(failure))
 
     conn
-    |> put_flash(:error, gettext "Failed to authenticate")
+    |> put_flash(:error, gettext("Failed to authenticate"))
     |> redirect(to: params["state"] || "/")
   end
 
@@ -16,9 +16,10 @@ defmodule IkvnWeb.AuthController do
     case Account.authenticate(oauth) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, gettext "Successfully authenticated")
+        |> put_flash(:info, gettext("Successfully authenticated"))
         |> sign_in(user)
         |> redirect(to: params["state"] || "/")
+
       {:error, reason} ->
         conn
         |> put_flash(

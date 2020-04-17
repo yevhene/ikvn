@@ -17,10 +17,11 @@ defmodule IkvnWeb.Admin.TaskController do
     case Admin.create_task(task_params(conn, params)) do
       {:ok, _task} ->
         conn
-        |> put_flash(:info, gettext "Task created successfully")
-        |> redirect(to:
-          Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
+        |> put_flash(:info, gettext("Task created successfully"))
+        |> redirect(
+          to: Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
         )
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -40,10 +41,11 @@ defmodule IkvnWeb.Admin.TaskController do
     case Admin.update_task(task, task_params(conn, params)) do
       {:ok, _task} ->
         conn
-        |> put_flash(:info, gettext "Task updated successfully")
-        |> redirect(to:
-          Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
+        |> put_flash(:info, gettext("Task updated successfully"))
+        |> redirect(
+          to: Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
         )
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", task: task, changeset: changeset)
     end
@@ -57,15 +59,16 @@ defmodule IkvnWeb.Admin.TaskController do
     case Admin.delete_task(task) do
       {:ok, _task} ->
         conn
-        |> put_flash(:info, gettext "Task deleted successfully")
-        |> redirect(to:
-          Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
+        |> put_flash(:info, gettext("Task deleted successfully"))
+        |> redirect(
+          to: Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
         )
+
       {:error, %Ecto.Changeset{} = _changeset} ->
         conn
-        |> put_flash(:error, gettext "Task can't be deleted")
-        |> redirect(to:
-          Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
+        |> put_flash(:error, gettext("Task can't be deleted"))
+        |> redirect(
+          to: Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
         )
     end
   end
@@ -78,7 +81,7 @@ defmodule IkvnWeb.Admin.TaskController do
   defp task_params(conn, params) do
     params
     |> Map.merge(%{
-      "tour_id" => conn.assigns.tour.id,
+      "tour_id" => conn.assigns.tour.id
     })
   end
 end

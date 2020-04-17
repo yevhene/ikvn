@@ -4,15 +4,18 @@ defmodule Ikvn.Player do
   alias Ikvn.Game.{Participation, Solution, Task, Tour}
 
   def list_tasks(%Tour{} = tour, %Participation{
-    id: participation_id, role: :player
-  }) do
+        id: participation_id,
+        role: :player
+      }) do
     tour
-    |> Game.list_tasks
-    |> Repo.preload([solutions:
-      from(s in Solution,
-        where: s.participation_id == ^participation_id,
-        preload: [:score])
-    ])
+    |> Game.list_tasks()
+    |> Repo.preload(
+      solutions:
+        from(s in Solution,
+          where: s.participation_id == ^participation_id,
+          preload: [:score]
+        )
+    )
   end
 
   def create_player_participation(attrs \\ %{}) do
@@ -23,11 +26,12 @@ defmodule Ikvn.Player do
 
   def get_solution(%Task{id: task_id}, %Participation{id: participation_id}) do
     Solution
-    |> where([s],
+    |> where(
+      [s],
       s.task_id == ^task_id and
-      s.participation_id == ^participation_id
+        s.participation_id == ^participation_id
     )
-    |> Repo.one
+    |> Repo.one()
   end
 
   def change_solution(%Solution{} = solution) do

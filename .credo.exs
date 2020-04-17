@@ -81,11 +81,12 @@
         # You can customize the priority of any check
         # Priority values are: `low, normal, high, higher`
         #
-        {Credo.Check.Design.AliasUsage, [
-          priority: :low,
-          if_nested_deeper_than: 2,
-          if_called_more_often_than: 0
-        ]},
+        {Credo.Check.Design.AliasUsage,
+         [
+           priority: :low,
+           if_nested_deeper_than: 2,
+           if_called_more_often_than: 0
+         ]},
         {Credo.Check.Design.DuplicatedCode, [mass_threshold: 21]},
         # You can also customize the exit_status of each check.
         # If you don't want TODO comments to cause `mix credo` to fail, just
@@ -100,14 +101,15 @@
         {Credo.Check.Readability.AliasOrder, []},
         {Credo.Check.Readability.FunctionNames, []},
         {Credo.Check.Readability.LargeNumbers, []},
-        {Credo.Check.Readability.MaxLineLength, [
-          priority: :high,
-          max_length: 80,
-          ignore_definitions: false,
-          ignore_heredocs: false,
-          ignore_strings: false,
-          ignore_urls: false
-        ]},
+        {Credo.Check.Readability.MaxLineLength,
+         [
+           priority: :high,
+           max_length: 80,
+           ignore_definitions: false,
+           ignore_heredocs: false,
+           ignore_strings: false,
+           ignore_urls: false
+         ]},
         {Credo.Check.Readability.ModuleAttributeNames, []},
         {Credo.Check.Readability.ModuleDoc, false},
         {Credo.Check.Readability.ModuleNames, []},

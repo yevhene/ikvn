@@ -50,7 +50,7 @@ defmodule IkvnWeb.Helpers.Error do
 
   def fetch_errors(%Ecto.Changeset{errors: errors}) do
     errors
-    |> Keyword.values
+    |> Keyword.values()
     |> Enum.map(&translate_error/1)
     |> Enum.join(", ")
   end
@@ -64,6 +64,7 @@ defmodule IkvnWeb.Helpers.Error do
         |> put_status(status)
         |> put_view(IkvnWeb.ErrorView)
         |> render("#{code(status)}.html")
+
       _ ->
         conn
         |> send_resp(status, "")

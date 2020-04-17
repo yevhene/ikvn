@@ -19,9 +19,10 @@ defmodule IkvnWeb.Plug.CheckPermission do
     case format do
       "html" ->
         conn
-        |> put_flash(:error, gettext "You have no permission to do this")
+        |> put_flash(:error, gettext("You have no permission to do this"))
         |> redirect(to: "/")
         |> halt()
+
       _ ->
         conn
         |> send_resp(:forbidden, "")

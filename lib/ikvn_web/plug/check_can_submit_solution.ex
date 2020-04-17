@@ -21,13 +21,18 @@ defmodule IkvnWeb.Plug.CheckCanSubmitSolution do
     case format do
       "html" ->
         conn
-        |> put_flash(:error, gettext "Tour is finished")
-        |> redirect(to:
-          Routes.player_tournament_tour_path(
-            conn, :show, conn.assigns.tournament, conn.assigns.tour
-          )
+        |> put_flash(:error, gettext("Tour is finished"))
+        |> redirect(
+          to:
+            Routes.player_tournament_tour_path(
+              conn,
+              :show,
+              conn.assigns.tournament,
+              conn.assigns.tour
+            )
         )
         |> halt()
+
       _ ->
         conn
         |> send_resp(:forbidden, "")

@@ -11,27 +11,36 @@ defmodule IkvnWeb.Judge.MarkController do
       {:ok, _mark} ->
         conn
         |> redirect_back()
+
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
-        |> put_flash(:error, gettext(
-          "Can't apply mark. Reason: %{reason}",
-          reason: Helpers.Error.fetch_errors(changeset)
-        ))
+        |> put_flash(
+          :error,
+          gettext(
+            "Can't apply mark. Reason: %{reason}",
+            reason: Helpers.Error.fetch_errors(changeset)
+          )
+        )
         |> redirect_back()
     end
   end
 
   defp redirect_back(conn) do
-    redirect(conn, to:
-      Routes.judge_tournament_tour_task_path(
-        conn, :show,
-        conn.assigns.tournament, conn.assigns.tour, conn.assigns.task
-      )
+    redirect(conn,
+      to:
+        Routes.judge_tournament_tour_task_path(
+          conn,
+          :show,
+          conn.assigns.tournament,
+          conn.assigns.tour,
+          conn.assigns.task
+        )
     )
   end
 
   defp apply_mark(conn, params) do
     mark = conn.assigns.mark
+
     if mark do
       Judge.update_mark(mark, %{value: params["value"]})
     else

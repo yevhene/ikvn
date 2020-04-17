@@ -20,7 +20,8 @@ defmodule Ikvn.Game.Mark do
     |> cast(attrs, [:value, :participation_id, :solution_id])
     |> validate_required([:value, :participation_id, :solution_id])
     |> validate_number(:value,
-      greater_than_or_equal_to: min(), less_than_or_equal_to: max()
+      greater_than_or_equal_to: min(),
+      less_than_or_equal_to: max()
     )
     |> foreign_key_constraint(:participation_id)
     |> foreign_key_constraint(:solution_id)

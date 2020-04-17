@@ -12,8 +12,7 @@ defmodule Ikvn.Repo.Migrations.CreateLinks do
       timestamps(type: :utc_datetime)
     end
 
-    create unique_index(:links, [:uid, :provider],
-      name: :links_uid_provider_index)
+    create unique_index(:links, [:uid, :provider], name: :links_uid_provider_index)
     create index(:links, [:user_id])
   end
 end

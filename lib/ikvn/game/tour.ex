@@ -21,11 +21,17 @@ defmodule Ikvn.Game.Tour do
   def changeset(%Tour{} = user, attrs) do
     user
     |> cast(attrs, [
-      :title, :description, :started_at, :finished_at,
-      :results_at, :tournament_id
+      :title,
+      :description,
+      :started_at,
+      :finished_at,
+      :results_at,
+      :tournament_id
     ])
     |> validate_required([
-      :started_at, :finished_at, :results_at
+      :started_at,
+      :finished_at,
+      :results_at
     ])
     |> validate_datetime_after(:finished_at, :started_at)
     |> validate_datetime_after(:results_at, :finished_at)

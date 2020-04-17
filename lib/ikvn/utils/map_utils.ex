@@ -17,6 +17,7 @@ defmodule Ikvn.Utils.MapUtils do
 
   def dig(%{} = map, [key | rest]) do
     value = Map.get(map, key)
+
     if rest != [] && is_map(value) do
       dig(value, rest)
     else

@@ -7,7 +7,7 @@ defmodule IkvnWeb.Guardian.ErrorHandler do
 
   def auth_error(conn, details, _opts) do
     format = conn.private.phoenix_format
-    Logger.error inspect(details)
+    Logger.error(inspect(details))
 
     case format do
       "html" ->

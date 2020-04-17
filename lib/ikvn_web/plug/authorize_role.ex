@@ -6,7 +6,6 @@ defmodule IkvnWeb.Plug.AuthorizeRole do
   def init(opts), do: opts
 
   def call(conn, opts) do
-
     if is_accessible?(conn, opts) do
       conn |> assign(:current_role, opts[:role])
     else
@@ -26,9 +25,10 @@ defmodule IkvnWeb.Plug.AuthorizeRole do
     case format do
       "html" ->
         conn
-        |> put_flash(:error, gettext "You are not authrorized to do that")
+        |> put_flash(:error, gettext("You are not authrorized to do that"))
         |> redirect(to: "/")
         |> halt()
+
       _ ->
         conn
         |> send_resp(:forbidden, "")

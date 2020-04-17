@@ -18,10 +18,11 @@ defmodule IkvnWeb.Player.SolutionController do
     case Player.create_solution(solution_params(conn, params)) do
       {:ok, _solution} ->
         conn
-        |> put_flash(:info, gettext "Solution created successfully")
-        |> redirect(to:
-          Routes.player_tournament_tour_path(conn, :show, tournament, tour)
+        |> put_flash(:info, gettext("Solution created successfully"))
+        |> redirect(
+          to: Routes.player_tournament_tour_path(conn, :show, tournament, tour)
         )
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -40,10 +41,11 @@ defmodule IkvnWeb.Player.SolutionController do
     case Player.update_solution(solution, solution_params(conn, params)) do
       {:ok, _solution} ->
         conn
-        |> put_flash(:info, gettext "Solution updated successfully")
-        |> redirect(to:
-          Routes.player_tournament_tour_path(conn, :show, tournament, tour)
+        |> put_flash(:info, gettext("Solution updated successfully"))
+        |> redirect(
+          to: Routes.player_tournament_tour_path(conn, :show, tournament, tour)
         )
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", solution: solution, changeset: changeset)
     end
@@ -55,9 +57,12 @@ defmodule IkvnWeb.Player.SolutionController do
   end
 
   defp load_resource(conn, _opts) do
-    solution = Player.get_solution(
-      conn.assigns.task, conn.assigns.participation
-    )
+    solution =
+      Player.get_solution(
+        conn.assigns.task,
+        conn.assigns.participation
+      )
+
     assign(conn, :solution, solution)
   end
 

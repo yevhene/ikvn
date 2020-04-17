@@ -5,7 +5,7 @@ defmodule IkvnWeb.SessionController do
   def delete(conn, _params) do
     conn
     |> sign_out
-    |> put_flash(:info, gettext "Signed out")
+    |> put_flash(:info, gettext("Signed out"))
     |> redirect(to: "/")
   end
 end

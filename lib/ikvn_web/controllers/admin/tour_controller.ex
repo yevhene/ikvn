@@ -11,11 +11,13 @@ defmodule IkvnWeb.Admin.TourController do
   end
 
   def new(conn, _params) do
-    changeset = Admin.change_tour(%Tour{
-      started_at: DateTime.utc_now,
-      finished_at: DateTime.utc_now,
-      results_at: DateTime.utc_now
-    })
+    changeset =
+      Admin.change_tour(%Tour{
+        started_at: DateTime.utc_now(),
+        finished_at: DateTime.utc_now(),
+        results_at: DateTime.utc_now()
+      })
+
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -25,10 +27,11 @@ defmodule IkvnWeb.Admin.TourController do
     case Admin.create_tour(tour_params(conn, params)) do
       {:ok, _tour} ->
         conn
-        |> put_flash(:info, gettext "Tour created successfully")
-        |> redirect(to:
-          Routes.admin_tournament_tour_path(conn, :index, tournament)
+        |> put_flash(:info, gettext("Tour created successfully"))
+        |> redirect(
+          to: Routes.admin_tournament_tour_path(conn, :index, tournament)
         )
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -51,10 +54,11 @@ defmodule IkvnWeb.Admin.TourController do
     case Admin.update_tour(tour, tour_params(conn, params)) do
       {:ok, _tour} ->
         conn
-        |> put_flash(:info, gettext "Tour updated successfully")
-        |> redirect(to:
-          Routes.admin_tournament_tour_path(conn, :index, tournament)
+        |> put_flash(:info, gettext("Tour updated successfully"))
+        |> redirect(
+          to: Routes.admin_tournament_tour_path(conn, :index, tournament)
         )
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", tour: tour, changeset: changeset)
     end
@@ -67,15 +71,16 @@ defmodule IkvnWeb.Admin.TourController do
     case Admin.delete_tour(tour) do
       {:ok, _tour} ->
         conn
-        |> put_flash(:info, gettext "Tour deleted successfully")
-        |> redirect(to:
-          Routes.admin_tournament_tour_path(conn, :index, tournament)
+        |> put_flash(:info, gettext("Tour deleted successfully"))
+        |> redirect(
+          to: Routes.admin_tournament_tour_path(conn, :index, tournament)
         )
+
       {:error, %Ecto.Changeset{} = _changeset} ->
         conn
-        |> put_flash(:error, gettext "Tour can't be deleted")
-        |> redirect(to:
-          Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
+        |> put_flash(:error, gettext("Tour can't be deleted"))
+        |> redirect(
+          to: Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
         )
     end
   end
@@ -88,10 +93,11 @@ defmodule IkvnWeb.Admin.TourController do
   defp tour_params(conn, params) do
     params
     |> cast_datetime_params(
-      ["started_at", "finished_at", "results_at"], conn.assigns.browser_timezone
+      ["started_at", "finished_at", "results_at"],
+      conn.assigns.browser_timezone
     )
     |> Map.merge(%{
-      "tournament_id" => conn.assigns.tournament.id,
+      "tournament_id" => conn.assigns.tournament.id
     })
   end
 end

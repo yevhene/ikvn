@@ -11,17 +11,20 @@ defmodule IkvnWeb.Helpers.Form do
     {form_opts, opts} = Keyword.pop(opts, :form, [])
 
     form_tag(to, Keyword.put(form_opts, :method, method)) do
-      Enum.map(data, fn {k, v} ->
-        tag :input, type: :hidden, name: k, value: v
-      end)
-      ++
-      content_tag :button, Keyword.put(opts, :type, :submit) do
-        block_option
-      end
+      Enum.concat(
+        Enum.map(data, fn {k, v} ->
+          tag(:input, type: :hidden, name: k, value: v)
+        end),
+        [
+          content_tag :button, Keyword.put(opts, :type, :submit) do
+            block_option
+          end
+        ]
+      )
     end
   end
 
   def submit_data(text, opts) do
-    submit_data opts, do: text
+    submit_data(opts, do: text)
   end
 end

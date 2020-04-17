@@ -29,6 +29,6 @@ defmodule IkvnWeb.Judge.MarkView do
   end
 
   def mark_range do
-    (Mark.min())..(Mark.max())
+    Mark.min()..Mark.max()
   end
 end

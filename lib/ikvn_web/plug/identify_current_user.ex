@@ -8,6 +8,7 @@ defmodule IkvnWeb.Plug.IdentifyCurrentUser do
 
   def call(conn, _opts) do
     current_user = conn.assigns.current_user
+
     if user_should_fill_profile?(current_user) do
       conn |> error_response
     else
@@ -20,9 +21,10 @@ defmodule IkvnWeb.Plug.IdentifyCurrentUser do
       "html" ->
         conn
         |> clear_flash()
-        |> put_flash(:info, gettext "Please fill your profile")
+        |> put_flash(:info, gettext("Please fill your profile"))
         |> redirect(to: Routes.profile_path(conn, :edit))
         |> halt()
+
       _ ->
         conn
         |> send_resp(:forbidden, "")
@@ -31,6 +33,6 @@ defmodule IkvnWeb.Plug.IdentifyCurrentUser do
   end
 
   defp user_should_fill_profile?(user) do
-    user && (!user.nickname)
+    user && !user.nickname
   end
 end

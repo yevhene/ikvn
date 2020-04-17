@@ -6,22 +6,28 @@ defmodule IkvnWeb.Router do
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
-    plug :put_secure_browser_headers, %{"Content-Security-Policy" => """
-      default-src 'none'; \
-      script-src 'self' 'unsafe-eval'; \
-      connect-src 'self'; \
-      frame-src 'self'; \
-      img-src *; \
-      style-src 'self' 'unsafe-inline'; \
-    """}
+
+    plug :put_secure_browser_headers, %{
+      "Content-Security-Policy" => """
+        default-src 'none'; \
+        script-src 'self' 'unsafe-eval'; \
+        connect-src 'self'; \
+        frame-src 'self'; \
+        img-src *; \
+        style-src 'self' 'unsafe-inline'; \
+      """
+    }
+
     plug IkvnWeb.Plug.BrowserTimezone, default: "Europe/Kiev"
   end
 
   pipeline :guardian do
     plug Ueberauth
+
     plug Guardian.Plug.Pipeline,
       module: IkvnWeb.Guardian,
       error_handler: IkvnWeb.Guardian.ErrorHandler
+
     plug Guardian.Plug.VerifySession
     plug Guardian.Plug.LoadResource, allow_blank: true
     plug IkvnWeb.Plug.CurrentUser
@@ -62,7 +68,9 @@ defmodule IkvnWeb.Router do
 
   pipeline :judge do
     plug IkvnWeb.Plug.AuthorizeRole,
-      role: :judge, accessible_by: [:admin, :judge]
+      role: :judge,
+      accessible_by: [:admin, :judge]
+
     plug :put_layout, {IkvnWeb.LayoutView, "judge.html"}
   end
 
@@ -75,8 +83,7 @@ defmodule IkvnWeb.Router do
   scope "/", IkvnWeb do
     pipe_through [:browser, :guardian, :require_login, :identify]
 
-    resources "/profile", ProfileController,
-      only: [:show], singleton: true
+    resources "/profile", ProfileController, only: [:show], singleton: true
 
     # Not yet an admin
     scope "/admin", Admin, as: :admin do
@@ -89,16 +96,18 @@ defmodule IkvnWeb.Router do
     scope "/admin", Admin, as: :admin do
       pipe_through [:tournament, :admin]
 
-      resources "/tournaments", TournamentController, only: [
-        :show, :edit, :update, :delete
-      ] do
+      resources "/tournaments", TournamentController,
+        only: [
+          :show,
+          :edit,
+          :update,
+          :delete
+        ] do
         resources "/finish", Tournament.FinishController, only: [:create]
 
-        resources "/staff", StaffController,
-          only: [:index, :create, :delete]
+        resources "/staff", StaffController, only: [:index, :create, :delete]
 
-        resources "/players", PlayerController,
-          only: [:index, :delete]
+        resources "/players", PlayerController, only: [:index, :delete]
 
         resources "/tours", TourController do
           scope "/" do
@@ -126,7 +135,8 @@ defmodule IkvnWeb.Router do
                 pipe_through [:can_submit_mark]
 
                 resources "/marks", MarkController,
-                  only: [:create], singleton: true
+                  only: [:create],
+                  singleton: true
               end
             end
           end
@@ -140,7 +150,8 @@ defmodule IkvnWeb.Router do
 
       scope "/tournaments/:tournament_id", as: :tournament do
         resources "/participation", ParticipationController,
-          only: [:create], singleton: true
+          only: [:create],
+          singleton: true
       end
     end
 
@@ -159,7 +170,8 @@ defmodule IkvnWeb.Router do
               pipe_through [:can_submit_solution]
 
               resources "/solution", SolutionController,
-                only: [:new, :create, :edit, :update], singleton: true
+                only: [:new, :create, :edit, :update],
+                singleton: true
             end
           end
         end
@@ -171,11 +183,11 @@ defmodule IkvnWeb.Router do
   scope "/", IkvnWeb do
     pipe_through [:browser, :guardian, :require_login]
 
-    resources "/session", SessionController,
-      only: [:delete], singleton: true
+    resources "/session", SessionController, only: [:delete], singleton: true
 
     resources "/profile", ProfileController,
-      only: [:edit, :update], singleton: true
+      only: [:edit, :update],
+      singleton: true
   end
 
   # Public pages

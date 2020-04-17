@@ -8,7 +8,7 @@ defmodule IkvnWeb.Judge.TaskController do
     {not_judged_solution, judged_solutions} =
       conn.assigns.task
       |> Judge.list_solutions(conn.assigns.participation)
-      |> Enum.split_with(&(Enum.empty?(&1.marks)))
+      |> Enum.split_with(&Enum.empty?(&1.marks))
 
     render(conn, "show.html",
       not_judged_solution: not_judged_solution,

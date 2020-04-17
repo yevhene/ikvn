@@ -1,14 +1,16 @@
 defmodule IkvnWeb.Helpers.String do
   def truncate(stringt, opts \\ []) do
     truncate_at = opts[:truncate_at] || 255
-    separator   = opts[:separator] || " "
-    omission    = opts[:omission] || "..."
+    separator = opts[:separator] || " "
+    omission = opts[:omission] || "..."
 
     cond do
       not String.valid?(stringt) ->
         stringt
+
       String.length(stringt) < truncate_at ->
         stringt
+
       true ->
         total_length = truncate_at - String.length(omission)
 
