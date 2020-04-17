@@ -1,7 +1,7 @@
 defmodule Ikvn.Game do
   import Ecto.Query, warn: false
   alias Ikvn.Account.User
-  alias Ikvn.Game.{Participation, Task, Tour, Tournament}
+  alias Ikvn.Game.{Participation, Solution, Task, Tour, Tournament}
   alias Ikvn.Repo
 
   def get_tournament(id), do: Repo.get(Tournament, id)
