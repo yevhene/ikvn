@@ -3,6 +3,8 @@ use Mix.Config
 # Configure your database
 config :ikvn, Ikvn.Repo,
   database: "ikvn_test",
+  username: "postgres",
+  password: "postgres",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 

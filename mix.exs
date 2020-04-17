@@ -52,8 +52,8 @@ defmodule Ikvn.MixProject do
       {:edeliver, ">= 1.6.0"},
       {:distillery, "~> 2.0", warn_missing: false},
       {:html_sanitize_ex, "~> 1.3.0"},
-      {:credo, "~> 1.2", only: :dev, runtime: false},
-      {:sobelow, "~> 0.10", only: :dev},
+      {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.10", only: [:dev, :test], runtime: false},
       {:mix_audit, "~> 0.1", only: [:dev, :test], runtime: false}
     ]
   end

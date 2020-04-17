@@ -1,0 +1,112 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/app
+    docker:
+      - image: circleci/elixir:1.10.2
+        environment:
+          MIX_ENV: test
+      - image: circleci/postgres:10.12
+        environment:
+          POSTGRES_DB: ikvn_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+    steps:
+      - run:
+          name: Add yarn key
+          command: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+      - run:
+          name: Add yarn PPA
+          command: echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+      - run:
+          name: Update Apt cache
+          command: sudo apt -qq update
+      - run:
+          name: Install Apt deps
+          command: sudo apt install -y build-essential nodejs yarn
+
+      - checkout
+
+      - restore_cache:
+          keys:
+            - deps-v1-{{ checksum "mix.lock" }}
+            - deps-v1-
+
+      - run:
+          name: Hex
+          command: mix local.hex --force
+      - run:
+          name: Rebar
+          command: mix local.rebar --force
+      - run:
+          name: Deps
+          command: mix deps.get
+
+      - restore_cache:
+          keys:
+            - build-v1-{{ .Branch }}
+            - build-v1-
+      - run:
+          name: Compile
+          command: mix compile
+      - run:
+          name: Compile Test
+          command: MIX_ENV=test mix compile
+      - save_cache:
+          key: build-v1-{{ .Branch }}
+          paths:
+            - _build
+
+      - save_cache:
+          key: deps-v1-{{ checksum "mix.lock" }}
+          paths:
+            - deps
+            - /root/.hex
+            - /root/.cache/rebar3
+            - /root/.mix
+
+
+      - restore_cache:
+          keys:
+            - node-modules-{{ checksum "assets/yarn.lock" }}
+            - node-modules-
+      - run:
+          name: Assets Deps
+          working_directory: assets
+          command: yarn install --pure-lockfile --non-interactive --no-progress --verbose
+      - save_cache:
+          key: node-modules-{{ checksum "assets/yarn.lock" }}
+          paths:
+            - assets/node_modules
+            - ~/.cache/yarn
+
+      - run:
+          name: Webpack Build
+          working_directory: ~/app/assets
+          command: yarn deploy
+
+      - run:
+          name: Assets Digest
+          command: mix phx.digest
+
+      - run:
+          name: Lint
+          command: mix credo
+
+      - run:
+          name: Security
+          command: mix sobelow --config
+
+      - run:
+          name: Formatting
+          command: mix format --check-formatted
+
+      - run:
+          name: Setup DB
+          command: mix ecto.setup
+
+      - run:
+          name: Run Tests
+          command: mix test
+
+      - store_test_results:
+          path: tmp
