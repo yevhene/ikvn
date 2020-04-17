@@ -6,7 +6,14 @@ defmodule IkvnWeb.Router do
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug :put_secure_browser_headers, %{"Content-Security-Policy" => """
+      default-src 'none'; \
+      script-src 'self' 'unsafe-eval'; \
+      connect-src 'self'; \
+      frame-src 'self'; \
+      img-src *; \
+      style-src 'self' 'unsafe-inline'; \
+    """}
     plug IkvnWeb.Plug.BrowserTimezone, default: "Europe/Kiev"
   end
 

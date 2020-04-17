@@ -45,13 +45,16 @@ defmodule Ikvn.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:ueberauth_facebook, "~> 0.8"},
       {:guardian, "~> 2.0"},
-      {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
       {:exgravatar, "~> 2.0"},
       {:earmark, "~> 1.4.3"},
       {:ecto_enum, "~> 1.4"},
       {:tzdata, "~> 1.0.3"},
       {:edeliver, ">= 1.6.0"},
-      {:distillery, "~> 2.0", warn_missing: false}
+      {:distillery, "~> 2.0", warn_missing: false},
+      {:html_sanitize_ex, "~> 1.3.0"},
+      {:credo, "~> 1.2", only: :dev, runtime: false},
+      {:sobelow, "~> 0.10", only: :dev},
+      {:mix_audit, "~> 0.1", only: [:dev, :test], runtime: false}
     ]
   end
 

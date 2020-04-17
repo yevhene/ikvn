@@ -1,12 +1,16 @@
 defmodule IkvnWeb.Helpers.Markdown do
-  import Phoenix.HTML, only: [raw: 1]
+  import HtmlSanitizeEx
   import Earmark
 
   def markdown(nil), do: nil
 
   def markdown(text) do
+    {:safe, sanitized_html(text)}
+  end
+
+  defp sanitized_html(text) do
     text
     |> as_html!
-    |> raw
+    |> markdown_html
   end
 end
