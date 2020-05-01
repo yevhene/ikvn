@@ -3,8 +3,9 @@ defmodule IkvnWeb.Player.SolutionController do
   alias Ikvn.{Game, Player}
   alias Ikvn.Game.Solution
 
-  plug :load_parent_resource
+  plug :load, resources: [:tour, :task]
   plug :load_resource when action in [:edit, :update]
+  plug :check_tour_is_active
 
   def new(conn, _params) do
     changeset = Player.change_solution(%Solution{})
@@ -51,11 +52,6 @@ defmodule IkvnWeb.Player.SolutionController do
     end
   end
 
-  defp load_parent_resource(conn, _opts) do
-    task = Game.get_task!(conn.params["task_id"])
-    assign(conn, :task, task)
-  end
-
   defp load_resource(conn, _opts) do
     solution =
       Player.get_solution(
@@ -72,5 +68,24 @@ defmodule IkvnWeb.Player.SolutionController do
       "participation_id" => conn.assigns.participation.id,
       "task_id" => conn.assigns.task.id
     })
+  end
+
+  defp check_tour_is_active(conn, _opts) do
+    if Game.tour_is_active?(conn.assigns.tour) do
+      conn
+    else
+      conn
+      |> put_flash(:error, gettext("Tour is finished"))
+      |> redirect(
+        to:
+          Routes.player_tournament_tour_path(
+            conn,
+            :show,
+            conn.assigns.tournament,
+            conn.assigns.tour
+          )
+      )
+      |> halt()
+    end
   end
 end

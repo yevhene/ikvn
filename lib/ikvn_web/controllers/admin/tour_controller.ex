@@ -3,7 +3,7 @@ defmodule IkvnWeb.Admin.TourController do
   alias Ikvn.{Admin, Game}
   alias Ikvn.Game.Tour
 
-  plug :load_resource when action in [:show, :edit, :update, :delete]
+  plug :load_tour when action in [:show, :edit, :update, :delete]
 
   def index(conn, _params) do
     tours = Game.list_tours(conn.assigns.tournament)
@@ -83,11 +83,6 @@ defmodule IkvnWeb.Admin.TourController do
           to: Routes.admin_tournament_tour_path(conn, :show, tournament, tour)
         )
     end
-  end
-
-  defp load_resource(conn, _opts) do
-    tour = Game.get_tour!(conn.params["id"])
-    assign(conn, :tour, tour)
   end
 
   defp tour_params(conn, params) do

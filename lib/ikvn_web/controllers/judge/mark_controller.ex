@@ -3,8 +3,9 @@ defmodule IkvnWeb.Judge.MarkController do
   alias Ikvn.{Game, Judge}
   alias IkvnWeb.Helpers
 
-  plug :load_parent_resources
+  plug :load, resources: [:tour, :task, :solution]
   plug :load_resource
+  plug :check_tour_is_judging
 
   def create(conn, params) do
     case apply_mark(conn, params) do
@@ -52,17 +53,27 @@ defmodule IkvnWeb.Judge.MarkController do
     end
   end
 
-  defp load_parent_resources(conn, _opts) do
-    task = Game.get_task!(conn.params["task_id"])
-    solution = Game.get_solution!(conn.params["solution_id"])
-
-    conn
-    |> assign(:task, task)
-    |> assign(:solution, solution)
-  end
-
   defp load_resource(conn, _opts) do
     mark = Judge.get_mark(conn.assigns.solution, conn.assigns.participation)
     assign(conn, :mark, mark)
+  end
+
+  def check_tour_is_judging(conn, _opts) do
+    if Game.tour_is_judging?(conn.assigns.tour) do
+      conn
+    else
+      conn
+      |> put_flash(:error, gettext("Judging is finished"))
+      |> redirect(
+        to:
+          Routes.judge_tournament_tour_path(
+            conn,
+            :show,
+            conn.assigns.tournament,
+            conn.assigns.tour
+          )
+      )
+      |> halt()
+    end
   end
 end

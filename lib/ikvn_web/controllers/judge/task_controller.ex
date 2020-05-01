@@ -1,8 +1,8 @@
 defmodule IkvnWeb.Judge.TaskController do
   use IkvnWeb, :controller
-  alias Ikvn.{Game, Judge}
+  alias Ikvn.Judge
 
-  plug :load_resource
+  plug :load, resources: [:tour, :task]
 
   def show(conn, _params) do
     {not_judged_solution, judged_solutions} =
@@ -14,10 +14,5 @@ defmodule IkvnWeb.Judge.TaskController do
       not_judged_solution: not_judged_solution,
       judged_solutions: judged_solutions
     )
-  end
-
-  defp load_resource(conn, _opts) do
-    task = Game.get_task!(conn.params["id"])
-    assign(conn, :task, task)
   end
 end

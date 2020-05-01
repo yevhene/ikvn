@@ -4,7 +4,7 @@ defmodule Ikvn.Game do
   alias Ikvn.Game.{Participation, Solution, Task, Tour, Tournament}
   alias Ikvn.Repo
 
-  def get_tournament(id), do: Repo.get(Tournament, id)
+  def get_tournament!(id), do: Repo.get!(Tournament, id)
 
   def list_public_tournaments(user \\ nil)
 
@@ -45,8 +45,6 @@ defmodule Ikvn.Game do
   def get_solution!(id), do: Repo.get!(Solution, id)
 
   def get_tour!(id), do: Repo.get!(Tour, id)
-
-  def get_tour(id), do: Repo.get(Tour, id)
 
   def list_tours(%Tournament{id: tournament_id}) do
     Tour

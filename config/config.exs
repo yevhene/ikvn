@@ -29,6 +29,17 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :ikvn,
+  content_security_policy: """
+    default-src 'none'; \
+    script-src 'self' 'unsafe-eval' 'unsafe-inline'; \
+    connect-src 'self'; \
+    frame-src 'self'; \
+    font-src 'self' data:; \
+    img-src * data:; \
+    style-src 'self' 'unsafe-inline'; \
+  """
+
 config :ueberauth, Ueberauth,
   providers: [
     facebook: {Ueberauth.Strategy.Facebook, [default_scope: "email"]}
