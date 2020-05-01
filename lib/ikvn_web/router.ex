@@ -1,5 +1,6 @@
 defmodule IkvnWeb.Router do
   use IkvnWeb, :router
+  import Phoenix.LiveDashboard.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -10,10 +11,11 @@ defmodule IkvnWeb.Router do
     plug :put_secure_browser_headers, %{
       "Content-Security-Policy" => """
         default-src 'none'; \
-        script-src 'self' 'unsafe-eval'; \
+        script-src 'self' 'unsafe-eval' 'unsafe-inline'; \
         connect-src 'self'; \
         frame-src 'self'; \
-        img-src *; \
+        font-src 'self' data:; \
+        img-src * data:; \
         style-src 'self' 'unsafe-inline'; \
       """
     }
@@ -43,6 +45,16 @@ defmodule IkvnWeb.Router do
 
   pipeline :can_create_tournament do
     plug IkvnWeb.Plug.CheckPermission, permission: :create_tournament
+  end
+
+  pipeline :can_open_dashboard do
+    plug IkvnWeb.Plug.CheckPermission, permission: :open_dashboard
+  end
+
+  pipeline :request_logger do
+    plug Phoenix.LiveDashboard.RequestLogger,
+      param_key: "request_logger",
+      cookie_key: "request_logger"
   end
 
   pipeline :can_submit_solution do
@@ -77,6 +89,13 @@ defmodule IkvnWeb.Router do
   pipeline :player do
     plug IkvnWeb.Plug.AuthorizeRole, role: :player
     plug :put_layout, {IkvnWeb.LayoutView, "player.html"}
+  end
+
+  # Live dashboard
+  scope "/" do
+    pipe_through [:browser, :guardian, :can_open_dashboard, :request_logger]
+
+    live_dashboard "/dashboard", metrics: IkvnWeb.Telemetry
   end
 
   # Private pages

@@ -166,7 +166,7 @@ msgstr "Турнір успішно оновлено"
 #, elixir-format
 #: lib/ikvn_web/plug/check_permission.ex:22
 msgid "You have no permission to do this"
-msgstr "У вас не має дозволу робити це"
+msgstr "У вас немає дозволу робити це"
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/player/_actions.html.eex:3

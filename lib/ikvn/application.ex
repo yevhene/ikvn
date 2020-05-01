@@ -12,6 +12,8 @@ defmodule Ikvn.Application do
       Ikvn.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: Ikvn.PubSub},
+      # Telemetry
+      IkvnWeb.Telemetry,
       # Start the endpoint when the application starts
       IkvnWeb.Endpoint
       # Starts a worker by calling: Ikvn.Worker.start_link(arg)

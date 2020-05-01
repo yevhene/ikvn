@@ -20,7 +20,9 @@ defmodule Ikvn.MixProject do
   def application do
     [
       mod: {Ikvn.Application, []},
-      extra_applications: [:logger, :runtime_tools, :ueberauth_facebook]
+      extra_applications: [
+        :logger, :runtime_tools, :ueberauth_facebook, :os_mon
+      ]
     ]
   end
 
@@ -54,7 +56,10 @@ defmodule Ikvn.MixProject do
       {:html_sanitize_ex, "~> 1.3.0"},
       {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
       {:sobelow, "~> 0.10", only: [:dev, :test], runtime: false},
-      {:mix_audit, "~> 0.1", only: [:dev, :test], runtime: false}
+      {:mix_audit, "~> 0.1", only: [:dev, :test], runtime: false},
+      {:phoenix_live_dashboard, "~> 0.2"},
+      {:telemetry_poller, "~> 0.5"},
+      {:telemetry_metrics, "~> 0.4"}
     ]
   end
 
