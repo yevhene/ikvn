@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     new Editor({
       element,
       spellChecker: false,
-      minHeight: "100px"
+      minHeight: "100px",
+      autoDownloadFontAwesome: false
     });
   }
 });
