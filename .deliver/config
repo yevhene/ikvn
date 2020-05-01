@@ -21,7 +21,7 @@ pre_erlang_clean_compile() {
     set -e # fail if any command fails
 
     cd '$BUILD_AT/assets' # go to the build directory on the build host
-    npm install $SILENCE
+    yarn $SILENCE
   "
 
   status "Assets: Building Webpack"
@@ -30,7 +30,7 @@ pre_erlang_clean_compile() {
     set -e # fail if any command fails
 
     cd '$BUILD_AT/assets' # go to the build directory on the build host
-    node_modules/.bin/webpack --mode production --silent
+    node_modules/.bin/webpack --mode production $SILENCE
   "
 
   status "Assets: Running phoenix.digest" # log output prepended with "----->"

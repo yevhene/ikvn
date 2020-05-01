@@ -12,6 +12,11 @@ mix deps.get
 mix ecto.setup
 ```
 
+### Assets
+```
+cd ./assets && yarn
+```
+
 ### Environment variables
 
 #### All environments
