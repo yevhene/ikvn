@@ -21,6 +21,10 @@ defmodule IkvnWeb.Router do
     }
 
     plug IkvnWeb.Plug.BrowserTimezone, default: "Europe/Kiev"
+
+    plug Phoenix.LiveDashboard.RequestLogger,
+      param_key: "request_logger",
+      cookie_key: "request_logger"
   end
 
   pipeline :guardian do
@@ -49,12 +53,6 @@ defmodule IkvnWeb.Router do
 
   pipeline :can_open_dashboard do
     plug IkvnWeb.Plug.CheckPermission, permission: :open_dashboard
-  end
-
-  pipeline :request_logger do
-    plug Phoenix.LiveDashboard.RequestLogger,
-      param_key: "request_logger",
-      cookie_key: "request_logger"
   end
 
   pipeline :can_submit_solution do
@@ -93,7 +91,7 @@ defmodule IkvnWeb.Router do
 
   # Live dashboard
   scope "/" do
-    pipe_through [:browser, :guardian, :can_open_dashboard, :request_logger]
+    pipe_through [:browser, :guardian, :can_open_dashboard]
 
     live_dashboard "/dashboard", metrics: IkvnWeb.Telemetry
   end
