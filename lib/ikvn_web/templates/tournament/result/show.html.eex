@@ -8,7 +8,9 @@
       <%= render_results_table_head @tours %>
     </thead>
     <tbody>
-      <%= Enum.map(@results, &render_results_table_row/1) %>
+      <%= for result <- @results do %>
+        <%= render_results_table_row(result) %>
+      <% end %>
     </tbody>
   </table>
 <% end %>

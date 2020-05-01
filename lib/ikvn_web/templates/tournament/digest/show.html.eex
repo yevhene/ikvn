@@ -1,9 +1,9 @@
 <%= render IkvnWeb.TournamentView, "_header.html", assigns %>
 
-<%= Enum.map(@digest, fn tour -> %>
+<%= for tour <- @digest do %>
   <h4><%= title(tour) %></h4>
 
-  <%= Enum.map(tour.tasks, fn task -> %>
+  <%= for task <- tour.tasks do %>
     <div class="card">
       <div class="card-header">
         <h5 class="mb-0">
@@ -13,7 +13,7 @@
       <div class="card-body">
         <%= markdown task.description %>
       </div>
-      <%= Enum.map(task.solutions, fn solution -> %>
+      <%= for solution <- task.solutions do %>
         <hr />
         <div class="card-body">
           <%= markdown solution.content %>
@@ -25,11 +25,11 @@
             </span>
           </div>
         </div>
-      <% end) %>
+      <% end %>
     </div>
     <br />
-  <% end) %>
-<% end) %>
+  <% end %>
+<% end %>
 
 <hr />
 <span><%= link gettext("Back"), to: Routes.tournament_path(@conn, :show, @tournament) %></span>
