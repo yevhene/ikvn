@@ -101,6 +101,10 @@ jobs:
           command: mix format --check-formatted
 
       - run:
+          name: Dependencies
+          command: mix hex.outdated
+
+      - run:
           name: Setup DB
           command: mix ecto.setup
 
