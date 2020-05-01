@@ -21,7 +21,7 @@ config :ikvn, IkvnWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: get_env.("SECRET_KEY_BASE"),
   render_errors: [view: IkvnWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Ikvn.PubSub, adapter: Phoenix.PubSub.PG2],
+  pubsub_server: Ikvn.PubSub,
   live_view: [signing_salt: "IRjcjGKn"]
 
 # Configures Elixir's Logger

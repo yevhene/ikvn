@@ -1,3 +1,3 @@
 <%= base_layout assigns do %>
-  <%= render @view_module, @view_template, assigns %>
+  <%= @inner_content %>
 <% end %>
