@@ -21,7 +21,10 @@ defmodule Ikvn.MixProject do
     [
       mod: {Ikvn.Application, []},
       extra_applications: [
-        :logger, :runtime_tools, :ueberauth_facebook, :os_mon
+        :logger,
+        :runtime_tools,
+        :ueberauth_facebook,
+        :os_mon
       ]
     ]
   end
