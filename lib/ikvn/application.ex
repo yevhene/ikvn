@@ -10,6 +10,8 @@ defmodule Ikvn.Application do
     children = [
       # Start the Ecto repository
       Ikvn.Repo,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Ikvn.PubSub},
       # Start the endpoint when the application starts
       IkvnWeb.Endpoint
       # Starts a worker by calling: Ikvn.Worker.start_link(arg)
