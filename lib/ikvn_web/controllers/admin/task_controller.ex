@@ -3,6 +3,7 @@ defmodule IkvnWeb.Admin.TaskController do
   alias Ikvn.{Admin, Game}
   alias Ikvn.Game.Task
 
+  plug :load_tour
   plug :load_resource when action in [:edit, :update, :delete]
 
   def new(conn, _params) do

@@ -23,6 +23,7 @@ defmodule IkvnWeb do
 
       import Plug.Conn
       import IkvnWeb.{Gettext, UserTime}
+      import IkvnWeb.GamePlugs
       alias IkvnWeb.Router.Helpers, as: Routes
     end
   end

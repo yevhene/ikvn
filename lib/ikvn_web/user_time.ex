@@ -1,4 +1,11 @@
 defmodule IkvnWeb.UserTime do
+  import Plug.Conn, only: [assign: 3]
+
+  def browser_timezone(conn, opts) do
+    browser_timezone = conn.req_cookies["browser_timezone"] || opts[:default]
+    assign(conn, :browser_timezone, browser_timezone)
+  end
+
   def from_utc(datetime, timezone)
 
   def from_utc(%DateTime{} = datetime, timezone) do

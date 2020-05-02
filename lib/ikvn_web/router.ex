@@ -1,6 +1,9 @@
 defmodule IkvnWeb.Router do
   use IkvnWeb, :router
   import Phoenix.LiveDashboard.Router
+  import IkvnWeb.AuthPlugs
+  import IkvnWeb.GamePlugs
+  import IkvnWeb.UserTime, only: [browser_timezone: 2]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -9,18 +12,11 @@ defmodule IkvnWeb.Router do
     plug :protect_from_forgery
 
     plug :put_secure_browser_headers, %{
-      "Content-Security-Policy" => """
-        default-src 'none'; \
-        script-src 'self' 'unsafe-eval' 'unsafe-inline'; \
-        connect-src 'self'; \
-        frame-src 'self'; \
-        font-src 'self' data:; \
-        img-src * data:; \
-        style-src 'self' 'unsafe-inline'; \
-      """
+      "Content-Security-Policy" =>
+        Application.get_env(:ikvn, :content_security_policy)
     }
 
-    plug IkvnWeb.Plug.BrowserTimezone, default: "Europe/Kiev"
+    plug :browser_timezone, default: "Europe/Kiev"
 
     plug Phoenix.LiveDashboard.RequestLogger,
       param_key: "request_logger",
@@ -36,57 +32,7 @@ defmodule IkvnWeb.Router do
 
     plug Guardian.Plug.VerifySession
     plug Guardian.Plug.LoadResource, allow_blank: true
-    plug IkvnWeb.Plug.CurrentUser
-  end
-
-  pipeline :identify do
-    plug IkvnWeb.Plug.IdentifyCurrentUser
-  end
-
-  pipeline :require_login do
-    plug Guardian.Plug.EnsureAuthenticated
-  end
-
-  pipeline :can_create_tournament do
-    plug IkvnWeb.Plug.CheckPermission, permission: :create_tournament
-  end
-
-  pipeline :can_open_dashboard do
-    plug IkvnWeb.Plug.CheckPermission, permission: :open_dashboard
-  end
-
-  pipeline :can_submit_solution do
-    plug IkvnWeb.Plug.CheckCanSubmitSolution
-  end
-
-  pipeline :can_submit_mark do
-    plug IkvnWeb.Plug.CheckCanSubmitMark
-  end
-
-  pipeline :tournament do
-    plug IkvnWeb.Plug.LoadTournament
-  end
-
-  pipeline :tour do
-    plug IkvnWeb.Plug.LoadTour
-  end
-
-  pipeline :admin do
-    plug IkvnWeb.Plug.AuthorizeRole, role: :admin
-    plug :put_layout, {IkvnWeb.LayoutView, "admin.html"}
-  end
-
-  pipeline :judge do
-    plug IkvnWeb.Plug.AuthorizeRole,
-      role: :judge,
-      accessible_by: [:admin, :judge]
-
-    plug :put_layout, {IkvnWeb.LayoutView, "judge.html"}
-  end
-
-  pipeline :player do
-    plug IkvnWeb.Plug.AuthorizeRole, role: :player
-    plug :put_layout, {IkvnWeb.LayoutView, "player.html"}
+    plug :current_user
   end
 
   # Live dashboard
@@ -98,28 +44,23 @@ defmodule IkvnWeb.Router do
 
   # Private pages
   scope "/", IkvnWeb do
-    pipe_through [:browser, :guardian, :require_login, :identify]
+    pipe_through [:browser, :guardian, :authenticate, :identify]
 
     resources "/profile", ProfileController, only: [:show], singleton: true
 
     # Not yet an admin
     scope "/admin", Admin, as: :admin do
-      pipe_through [:can_create_tournament]
+      pipe_through :can_create_tournament
 
       resources "/tournaments", TournamentController, only: [:new, :create]
     end
 
     # Tournament admin
     scope "/admin", Admin, as: :admin do
-      pipe_through [:tournament, :admin]
+      pipe_through :admin
 
       resources "/tournaments", TournamentController,
-        only: [
-          :show,
-          :edit,
-          :update,
-          :delete
-        ] do
+        only: [:show, :edit, :update, :delete] do
         resources "/finish", Tournament.FinishController, only: [:create]
 
         resources "/staff", StaffController, only: [:index, :create, :delete]
@@ -127,34 +68,22 @@ defmodule IkvnWeb.Router do
         resources "/players", PlayerController, only: [:index, :delete]
 
         resources "/tours", TourController do
-          scope "/" do
-            pipe_through [:tour]
-
-            resources "/tasks", TaskController, except: [:index, :show]
-          end
+          resources "/tasks", TaskController, except: [:index, :show]
         end
       end
     end
 
     # Tournament judge
     scope "/judge", Judge, as: :judge do
-      pipe_through [:tournament, :judge]
+      pipe_through :judge
 
       scope "/tournaments/:tournament_id", as: :tournament do
-        resources "/tours", TourController, only: [:index]
-
-        scope "/" do
-          pipe_through [:tour]
-
-          resources "/tours", TourController, only: [:show] do
-            resources "/tasks", TaskController, only: [:show] do
-              scope "/solutions/:solution_id", as: :solution do
-                pipe_through [:can_submit_mark]
-
-                resources "/marks", MarkController,
-                  only: [:create],
-                  singleton: true
-              end
+        resources "/tours", TourController, only: [:index, :show] do
+          resources "/tasks", TaskController, only: [:show] do
+            scope "/solutions/:solution_id", as: :solution do
+              resources "/marks", MarkController,
+                only: [:create],
+                singleton: true
             end
           end
         end
@@ -163,8 +92,6 @@ defmodule IkvnWeb.Router do
 
     # Not yet a player
     scope "/player", Player, as: :player do
-      pipe_through [:tournament]
-
       scope "/tournaments/:tournament_id", as: :tournament do
         resources "/participation", ParticipationController,
           only: [:create],
@@ -174,22 +101,14 @@ defmodule IkvnWeb.Router do
 
     # Tournament player
     scope "/player", Player, as: :player do
-      pipe_through [:tournament, :player]
+      pipe_through :player
 
       scope "/tournaments/:tournament_id", as: :tournament do
-        resources "/tours", TourController, only: [:index]
-
-        scope "/" do
-          pipe_through [:tour]
-
-          resources "/tours", TourController, only: [:show] do
-            scope "/tasks/:task_id", as: :task do
-              pipe_through [:can_submit_solution]
-
-              resources "/solution", SolutionController,
-                only: [:new, :create, :edit, :update],
-                singleton: true
-            end
+        resources "/tours", TourController, only: [:index, :show] do
+          scope "/tasks/:task_id", as: :task do
+            resources "/solution", SolutionController,
+              only: [:new, :create, :edit, :update],
+              singleton: true
           end
         end
       end
@@ -198,7 +117,7 @@ defmodule IkvnWeb.Router do
 
   # Pages for authenticated but not identified user
   scope "/", IkvnWeb do
-    pipe_through [:browser, :guardian, :require_login]
+    pipe_through [:browser, :guardian, :authenticate]
 
     resources "/session", SessionController, only: [:delete], singleton: true
 
@@ -213,12 +132,8 @@ defmodule IkvnWeb.Router do
 
     resources "/", TournamentController, only: [:index]
 
-    scope "/" do
-      pipe_through [:tournament]
-
-      resources "/tournaments", TournamentController, only: [:show]
-
-      scope "/tournaments/:tournament_id", Tournament, as: :tournament do
+    resources "/tournaments", TournamentController, only: [:show] do
+      scope "/", Tournament do
         resources "/results", ResultController, only: [:show], singleton: true
 
         resources "/digest", DigestController, only: [:show], singleton: true

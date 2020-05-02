@@ -2,6 +2,8 @@ defmodule IkvnWeb.Player.TourController do
   use IkvnWeb, :controller
   alias Ikvn.{Game, Player}
 
+  plug :load_tour when action in [:show]
+
   def index(conn, _params) do
     tours = Game.list_tours(conn.assigns.tournament)
     render(conn, "index.html", tours: tours)

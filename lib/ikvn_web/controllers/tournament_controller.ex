@@ -2,6 +2,8 @@ defmodule IkvnWeb.TournamentController do
   use IkvnWeb, :controller
   alias Ikvn.{Admin, Game}
 
+  plug :load_tournament when action in [:show]
+
   def index(conn, _params) do
     {active_tournaments, finished_tournaments} =
       conn.assigns

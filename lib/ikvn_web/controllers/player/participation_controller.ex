@@ -2,6 +2,8 @@ defmodule IkvnWeb.Player.ParticipationController do
   use IkvnWeb, :controller
   alias Ikvn.{Game, Player}
 
+  plug :load_tournament
+
   def create(conn, _params) do
     tournament = conn.assigns.tournament
 

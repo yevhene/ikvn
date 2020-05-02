@@ -21,7 +21,7 @@ msgstr ""
 #: lib/ikvn_web/templates/player/solution/edit.html.eex:6 lib/ikvn_web/templates/player/solution/new.html.eex:6
 #: lib/ikvn_web/templates/player/tour/index.html.eex:12 lib/ikvn_web/templates/player/tour/show.html.eex:17
 #: lib/ikvn_web/templates/profile/edit.html.eex:6 lib/ikvn_web/templates/profile/show.html.eex:17
-#: lib/ikvn_web/templates/tournament/digest/show.html.eex:35 lib/ikvn_web/templates/tournament/result/show.html.eex:17
+#: lib/ikvn_web/templates/tournament/digest/show.html.eex:35 lib/ikvn_web/templates/tournament/result/show.html.eex:19
 #: lib/ikvn_web/templates/tournament/show.html.eex:10
 msgid "Back"
 msgstr "Назад"
@@ -40,7 +40,7 @@ msgstr "Не вдалося аутентифікувати"
 #: lib/ikvn_web/templates/admin/player/index.html.eex:5
 #: lib/ikvn_web/templates/admin/staff/index.html.eex:6 lib/ikvn_web/templates/admin/staff/index.html.eex:26
 #: lib/ikvn_web/templates/profile/_form.html.eex:9 lib/ikvn_web/templates/profile/show.html.eex:5
-#: lib/ikvn_web/views/tournament/result_view.ex:34
+#: lib/ikvn_web/views/tournament/result_view.ex:37
 msgid "Nickname"
 msgstr "Прізвисько"
 
@@ -52,7 +52,7 @@ msgid "Oops, something went wrong! Please check the errors below."
 msgstr "Не вдалося зберегти, через помилки, що описані нижче"
 
 #, elixir-format
-#: lib/ikvn_web/plug/identify_current_user.ex:23
+#: lib/ikvn_web/plugs/auth_plugs.ex:28
 msgid "Please fill your profile"
 msgstr "Будь ласка заповніть ваш профіль"
 
@@ -63,7 +63,7 @@ msgid "Profile"
 msgstr "Профіль"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/profile_controller.ex:21
+#: lib/ikvn_web/controllers/profile_controller.ex:22
 msgid "Profile updated successfully"
 msgstr "Профіль оновлено"
 
@@ -95,12 +95,12 @@ msgid "Successfully authenticated"
 msgstr "Успішно аутентифіковано"
 
 #, elixir-format
-#: lib/ikvn/account.ex:30 lib/ikvn_web/guardian/error_handler.ex:16
+#: lib/ikvn/account.ex:29 lib/ikvn_web/guardian/error_handler.ex:16
 msgid "Authentication failed"
 msgstr "Не вдалося аутентифікувати"
 
 #, elixir-format
-#: lib/ikvn/utils/validation.ex:23
+#: lib/ikvn/utils/validation.ex:25
 msgid "You cannot change this field"
 msgstr "Це поле не може бути змінене"
 
@@ -138,7 +138,7 @@ msgid "Unknown"
 msgstr "Невідомий"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/auth_controller.ex:26
+#: lib/ikvn_web/controllers/auth_controller.ex:27
 msgid "Error: %{reason}"
 msgstr "Помилка: %{reason}"
 
@@ -154,19 +154,14 @@ msgid "New Tournament"
 msgstr "Новий Турнір"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tournament_controller.ex:19
+#: lib/ikvn_web/controllers/admin/tournament_controller.ex:22
 msgid "Tournament created successfully"
 msgstr "Турнір успішно створено"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tournament_controller.ex:41
+#: lib/ikvn_web/controllers/admin/tournament_controller.ex:45
 msgid "Tournament updated successfully"
 msgstr "Турнір успішно оновлено"
-
-#, elixir-format
-#: lib/ikvn_web/plug/check_permission.ex:22
-msgid "You have no permission to do this"
-msgstr "У вас немає дозволу робити це"
 
 #, elixir-format
 #: lib/ikvn_web/templates/admin/player/_actions.html.eex:3
@@ -247,7 +242,7 @@ msgid "Staff"
 msgstr "Персонал"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:73
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:100
 msgid "User \"%{nickname}\" is not exist"
 msgstr "Користувач \"%{nickname}\" не існує"
 
@@ -272,7 +267,7 @@ msgid "User successfully added to staff"
 msgstr "Користувач успішно доданий до штату"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:67
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:92
 msgid "User can't be added to staff. Reason: %{reason}"
 msgstr "Користувача неможливо додати до штату. Бо: %{reason}"
 
@@ -287,12 +282,7 @@ msgid "Tournament \"%{tournament}\""
 msgstr "Турнір \"%{tournament}\""
 
 #, elixir-format
-#: lib/ikvn_web/plug/authorize_role.ex:29
-msgid "You are not authrorized to do that"
-msgstr "Вам не дозволено робити це"
-
-#, elixir-format
-#: lib/ikvn_web/controllers/player/participation_controller.ex:21
+#: lib/ikvn_web/controllers/player/participation_controller.ex:25
 msgid "Participation failed. Contact Admin"
 msgstr "Участь відхилено. Зконтактуйте з Адміністратором"
 
@@ -326,22 +316,22 @@ msgid "Title"
 msgstr "Назва"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tour_controller.ex:76
+#: lib/ikvn_web/controllers/admin/tour_controller.ex:81
 msgid "Tour can't be deleted"
 msgstr "Тур не можна видалити"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tour_controller.ex:28
+#: lib/ikvn_web/controllers/admin/tour_controller.ex:30
 msgid "Tour created successfully"
 msgstr "Тур успішно створено"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tour_controller.ex:70
+#: lib/ikvn_web/controllers/admin/tour_controller.ex:74
 msgid "Tour deleted successfully"
 msgstr "Тур успішно видалено"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tour_controller.ex:54
+#: lib/ikvn_web/controllers/admin/tour_controller.ex:57
 msgid "Tour updated successfully"
 msgstr "Тур успішно оновлено"
 
@@ -378,22 +368,22 @@ msgid "Task"
 msgstr "Завдання"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/task_controller.ex:66
+#: lib/ikvn_web/controllers/admin/task_controller.ex:70
 msgid "Task can't be deleted"
 msgstr "Завдання не можна видалити"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/task_controller.ex:20
+#: lib/ikvn_web/controllers/admin/task_controller.ex:21
 msgid "Task created successfully"
 msgstr "Завдання успішно створено"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/task_controller.ex:60
+#: lib/ikvn_web/controllers/admin/task_controller.ex:63
 msgid "Task deleted successfully"
 msgstr "Завдання успішно видалено"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/task_controller.ex:43
+#: lib/ikvn_web/controllers/admin/task_controller.ex:45
 msgid "Task updated successfully"
 msgstr "Завдання успішно оновлено"
 
@@ -414,17 +404,17 @@ msgid "future"
 msgstr "планується"
 
 #, elixir-format
-#: lib/ikvn_web/views/helpers/status.ex:14
+#: lib/ikvn_web/views/helpers/status.ex:16
 msgid "judging"
 msgstr "оцінюється"
 
 #, elixir-format
-#: lib/ikvn_web/views/helpers/status.ex:16
+#: lib/ikvn_web/views/helpers/status.ex:19
 msgid "finished"
 msgstr "завершено"
 
 #, elixir-format
-#: lib/ikvn_web/views/helpers/status.ex:12
+#: lib/ikvn_web/views/helpers/status.ex:13
 msgid "started"
 msgstr "розпочато"
 
@@ -434,12 +424,12 @@ msgid "Content"
 msgstr "Вміст"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/player/solution_controller.ex:21
+#: lib/ikvn_web/controllers/player/solution_controller.ex:22
 msgid "Solution created successfully"
 msgstr "Рішення успішно подано"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/player/solution_controller.ex:43
+#: lib/ikvn_web/controllers/player/solution_controller.ex:45
 msgid "Solution updated successfully"
 msgstr "Рішення успішно оновлено"
 
@@ -454,7 +444,7 @@ msgid "Change Solution"
 msgstr "Змінити рішення"
 
 #, elixir-format
-#: lib/ikvn_web/plug/check_can_submit_solution.ex:24
+#: lib/ikvn_web/controllers/player/solution_controller.ex:78
 msgid "Tour is finished"
 msgstr "Тур завершено"
 
@@ -480,7 +470,7 @@ msgid "Already judged solutions"
 msgstr "Оцінені рішення"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/judge/mark_controller.ex:16
+#: lib/ikvn_web/controllers/judge/mark_controller.ex:20
 msgid "Can't apply mark. Reason: %{reason}"
 msgstr "Не можливо поставити оцінку. Причина: %{reason}"
 
@@ -490,12 +480,12 @@ msgid "Not judged solutions"
 msgstr "Не оцінені рішення"
 
 #, elixir-format
-#: lib/ikvn_web/plug/check_can_submit_mark.ex:24
+#: lib/ikvn_web/controllers/judge/mark_controller.ex:66
 msgid "Judging is finished"
 msgstr "Оцінювання завершено"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/player/participation_controller.ex:15
+#: lib/ikvn_web/controllers/player/participation_controller.ex:18
 msgid "You participate now"
 msgstr "Ви берете участь"
 
@@ -507,32 +497,32 @@ msgid "Enter"
 msgstr "Ввійти"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tournament_controller.ex:58
+#: lib/ikvn_web/controllers/admin/tournament_controller.ex:64
 msgid "Tournament can't be deleted"
 msgstr "Турнір не можна видалити"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tournament_controller.ex:54
+#: lib/ikvn_web/controllers/admin/tournament_controller.ex:59
 msgid "Tournament deleted successfully"
 msgstr "Турнір успішно видалено"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:81
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:109
 msgid "Can't remove the creator from staff"
 msgstr "Неможливо видалити того хто створив турнір зі штату"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:86
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:116
 msgid "User can't be removed from staff"
 msgstr "Користувача неможливо видалити з штату"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/staff_controller.ex:39
+#: lib/ikvn_web/controllers/admin/staff_controller.ex:50
 msgid "User successfully removed from staff"
 msgstr "Користувач успішно видалений зі штату"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/player/participation_controller.ex:9
+#: lib/ikvn_web/controllers/player/participation_controller.ex:12
 msgid "Tournament is finished"
 msgstr "Турнір завершено"
 
@@ -553,7 +543,7 @@ msgid "No results yet"
 msgstr "Поки немає результатів"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/tournament/finish_controller.ex:15
+#: lib/ikvn_web/controllers/admin/tournament/finish_controller.ex:16
 msgid "Can't finish tournament"
 msgstr "Неможливо завершити Турнір"
 
@@ -579,12 +569,12 @@ msgid "Tournament"
 msgstr "Турнір"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/player_controller.ex:24
+#: lib/ikvn_web/controllers/admin/player_controller.ex:33
 msgid "Player can't be removed from tournament"
 msgstr "Гравця неможливо видалити з турніру"
 
 #, elixir-format
-#: lib/ikvn_web/controllers/admin/player_controller.ex:16
+#: lib/ikvn_web/controllers/admin/player_controller.ex:18
 msgid "Player successfully removed from tournament"
 msgstr "Гравець успішно видалений з турніру"
 
@@ -594,6 +584,6 @@ msgid "Hint"
 msgstr "Підказка"
 
 #, elixir-format
-#: lib/ikvn/utils/validation.ex:10
+#: lib/ikvn/utils/validation.ex:13
 msgid "Must be consistent with other dates"
 msgstr "Має бути узгоджене з іншими датами"
